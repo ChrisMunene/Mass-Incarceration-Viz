@@ -12,13 +12,27 @@ body {
 
 .page-header {
     text-align: right;
-    color: white;
     padding: 25px 150px 0px 25px;
     position: absolute;
     bottom: 0px;
     right: 0px;
     left: 0px;
 }
+
+.page-credits {
+    text-align: left;
+    padding: 25px 150px 0px 25px;
+    position: absolute;
+    top: 0px;
+}
+
+.column-image{
+    max-width: 100%;
+}
+.content{
+    margin:30px;
+}
+
 
 .white-text {
     color: white;

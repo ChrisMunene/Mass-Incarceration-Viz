@@ -9,4 +9,5 @@ function createVis(error, us, data) {
 	let dataObj = _.keyBy(data, 'yfips');
     let choropleth = new Choropleth("choropleth", {'us':us, 'prisonData':dataObj});
 
+
 }
