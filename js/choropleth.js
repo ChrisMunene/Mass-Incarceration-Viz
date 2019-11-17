@@ -39,7 +39,6 @@ Choropleth.prototype.initVis = function () {
         .append("g")
         .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
-    let test = topojson.feature(vis.us, vis.us.objects.counties).features
     vis.svg.append("g")
         .attr("class", "county")
         .selectAll("path")
