@@ -9,14 +9,30 @@ body {
     background-repeat: no-repeat;
 }
 
+.carousel-control-next, .carousel-control-prev {
+    width: 5%;
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+    filter: invert(100%);
+}
 
 .page-header {
     text-align: right;
     padding: 25px 150px 0px 25px;
     position: absolute;
-    bottom: 0px;
+    top: 0px;
     right: 0px;
     left: 0px;
+}
+
+.jumbotron{
+    margin-bottom: 2em;
+    margin-left: 2em;
+    margin-right: 2em;
+    margin-top: 10em;
+
 }
 
 .page-credits {
@@ -26,11 +42,39 @@ body {
     top: 0px;
 }
 
-.column-image{
+.us-circle {
+    stroke: darkred;
+    stroke-width: 3px;
+}
+.state-circles {
+    stroke: darkred;
+    stroke-width: 3px;
+}
+
+.tool-tip {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 5px;
+}
+
+
+.other-circles {
+    stroke: darkslateblue;
+    stroke-width: 3px;
+}
+
+.legend-circle {
+    fill: none;
+    stroke: darkgrey;
+    stroke-width: 3px;
+}
+
+
+.column-image {
     max-width: 100%;
 }
-.content{
-    margin:30px;
+
+.content {
+    margin: 30px;
 }
 
 
@@ -43,11 +87,15 @@ body {
     text-align: right;
     left: 10px;
     bottom: 0px;
+    font-size: 30pt;
 }
+
 
 .scroll-down-right {
     position: absolute;
     text-align: right;
     right: 10px;
     bottom: 0px;
+    font-size: 30pt;
+
 }

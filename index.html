@@ -16,6 +16,11 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<div class="page-credits">
+    <h4>Innovative View -> Dot Matrix of Incarcerated Population</h4>
+</div>
+
+
 <div id="fullpage">
     <div class="section active" id="section0">
         <div class="page-header white-text">
@@ -29,22 +34,55 @@
             <h5>Shruthi Venkata</h5>
             <h5>Simon Warchol</h5>
         </div>
+        <div class="jumbotron">
+            <p>The United States Incarcerates more than any other country</p>
+            <p>Shruthi please add some more text here and stats</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.</p>
+        </div>
         <h3 class="scroll-down-left lead white-text">↓</h3>
         <h3 class="scroll-down-right lead white-text">↓</h3>
 
     </div>
     <div class="section" id="section1">
-        <div class="page-credits">
-            <h4>Innovative View -> Dot Matrix of Incarcerated Population</h4>
-        </div>
-        <div class="row">
-            <div class="col content">
-                <img src="img/Dot-Chart-Example.png">
-            </div>
-        </div>
+        <!--        <button type="button" id="cartogram-button" class="btn btn-primary">Cartogram</button>-->
+        <h1>Worldwide Incarceration Totals and Rates</h1>
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="row">
+                    <div class="col" id="simon">
+                    </div>
+                    <!--                <img src="img/Dot-Chart-Example.png">-->
 
+                    <div class="col" id="others">
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" role="button">
+                <span class="carousel-control-prev-icon black" aria-hidden="true" onclick="nextSlideSimon()"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" role="button">
+                <span class="carousel-control-next-icon" aria-hidden="true" onclick="nextSlideSimon()"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
     </div>
     <div class="section" id="section2">
+        <h1>Choropleth where Color is Prison Rate</h1>
         <div id="choropleth"></div>
     </div>
     <div class="section" id="section3">
@@ -52,9 +90,26 @@
             <div class="col content">
                 <h4>The School to Prison Pipeline</h4>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vel eros donec ac odio tempor. Lorem dolor sed viverra ipsum nunc aliquet bibendum enim. Risus quis varius quam quisque id diam vel quam elementum. Sollicitudin ac orci phasellus egestas tellus rutrum tellus. Ultricies mi quis hendrerit dolor magna eget est lorem ipsum. Ut aliquam purus sit amet luctus venenatis. Feugiat in ante metus dictum at tempor commodo ullamcorper a. Nibh mauris cursus mattis molestie a iaculis at erat. Lobortis feugiat vivamus at augue eget arcu dictum varius duis. Pulvinar elementum integer enim neque volutpat ac tincidunt. Mattis vulputate enim nulla aliquet porttitor. Mi tempus imperdiet nulla malesuada pellentesque elit eget gravida cum. Lobortis scelerisque fermentum dui faucibus in ornare. Semper feugiat nibh sed pulvinar proin gravida. Velit dignissim sodales ut eu sem integer. Tempus urna et pharetra pharetra massa massa ultricies mi quis.
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Vel eros donec ac odio tempor. Lorem dolor sed viverra ipsum nunc aliquet
+                    bibendum enim. Risus quis varius quam quisque id diam vel quam elementum. Sollicitudin ac orci
+                    phasellus egestas tellus rutrum tellus. Ultricies mi quis hendrerit dolor magna eget est lorem
+                    ipsum. Ut aliquam purus sit amet luctus venenatis. Feugiat in ante metus dictum at tempor commodo
+                    ullamcorper a. Nibh mauris cursus mattis molestie a iaculis at erat. Lobortis feugiat vivamus at
+                    augue eget arcu dictum varius duis. Pulvinar elementum integer enim neque volutpat ac tincidunt.
+                    Mattis vulputate enim nulla aliquet porttitor. Mi tempus imperdiet nulla malesuada pellentesque elit
+                    eget gravida cum. Lobortis scelerisque fermentum dui faucibus in ornare. Semper feugiat nibh sed
+                    pulvinar proin gravida. Velit dignissim sodales ut eu sem integer. Tempus urna et pharetra pharetra
+                    massa massa ultricies mi quis.
 
-                    Nibh venenatis cras sed felis eget. Sagittis id consectetur purus ut faucibus. Cras semper auctor neque vitae tempus quam pellentesque. Est ultricies integer quis auctor elit sed vulputate mi. Faucibus vitae aliquet nec ullamcorper sit amet. Vel risus commodo viverra maecenas accumsan. Amet justo donec enim diam. Nisl vel pretium lectus quam id leo in vitae. Venenatis a condimentum vitae sapien pellentesque habitant morbi tristique senectus. Lorem dolor sed viverra ipsum nunc. Quisque id diam vel quam elementum pulvinar etiam non quam. Sapien eget mi proin sed libero. Integer vitae justo eget magna fermentum iaculis eu non. Commodo viverra maecenas accumsan lacus vel facilisis volutpat est. Pulvinar elementum integer enim neque volutpat.</p>
+                    Nibh venenatis cras sed felis eget. Sagittis id consectetur purus ut faucibus. Cras semper auctor
+                    neque vitae tempus quam pellentesque. Est ultricies integer quis auctor elit sed vulputate mi.
+                    Faucibus vitae aliquet nec ullamcorper sit amet. Vel risus commodo viverra maecenas accumsan. Amet
+                    justo donec enim diam. Nisl vel pretium lectus quam id leo in vitae. Venenatis a condimentum vitae
+                    sapien pellentesque habitant morbi tristique senectus. Lorem dolor sed viverra ipsum nunc. Quisque
+                    id diam vel quam elementum pulvinar etiam non quam. Sapien eget mi proin sed libero. Integer vitae
+                    justo eget magna fermentum iaculis eu non. Commodo viverra maecenas accumsan lacus vel facilisis
+                    volutpat est. Pulvinar elementum integer enim neque volutpat.</p>
 
 
             </div>
@@ -69,9 +124,26 @@
             <div class="col content">
                 <h4>The School to Prison Pipeline</h4>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vel eros donec ac odio tempor. Lorem dolor sed viverra ipsum nunc aliquet bibendum enim. Risus quis varius quam quisque id diam vel quam elementum. Sollicitudin ac orci phasellus egestas tellus rutrum tellus. Ultricies mi quis hendrerit dolor magna eget est lorem ipsum. Ut aliquam purus sit amet luctus venenatis. Feugiat in ante metus dictum at tempor commodo ullamcorper a. Nibh mauris cursus mattis molestie a iaculis at erat. Lobortis feugiat vivamus at augue eget arcu dictum varius duis. Pulvinar elementum integer enim neque volutpat ac tincidunt. Mattis vulputate enim nulla aliquet porttitor. Mi tempus imperdiet nulla malesuada pellentesque elit eget gravida cum. Lobortis scelerisque fermentum dui faucibus in ornare. Semper feugiat nibh sed pulvinar proin gravida. Velit dignissim sodales ut eu sem integer. Tempus urna et pharetra pharetra massa massa ultricies mi quis.
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Vel eros donec ac odio tempor. Lorem dolor sed viverra ipsum nunc aliquet
+                    bibendum enim. Risus quis varius quam quisque id diam vel quam elementum. Sollicitudin ac orci
+                    phasellus egestas tellus rutrum tellus. Ultricies mi quis hendrerit dolor magna eget est lorem
+                    ipsum. Ut aliquam purus sit amet luctus venenatis. Feugiat in ante metus dictum at tempor commodo
+                    ullamcorper a. Nibh mauris cursus mattis molestie a iaculis at erat. Lobortis feugiat vivamus at
+                    augue eget arcu dictum varius duis. Pulvinar elementum integer enim neque volutpat ac tincidunt.
+                    Mattis vulputate enim nulla aliquet porttitor. Mi tempus imperdiet nulla malesuada pellentesque elit
+                    eget gravida cum. Lobortis scelerisque fermentum dui faucibus in ornare. Semper feugiat nibh sed
+                    pulvinar proin gravida. Velit dignissim sodales ut eu sem integer. Tempus urna et pharetra pharetra
+                    massa massa ultricies mi quis.
 
-                    Nibh venenatis cras sed felis eget. Sagittis id consectetur purus ut faucibus. Cras semper auctor neque vitae tempus quam pellentesque. Est ultricies integer quis auctor elit sed vulputate mi. Faucibus vitae aliquet nec ullamcorper sit amet. Vel risus commodo viverra maecenas accumsan. Amet justo donec enim diam. Nisl vel pretium lectus quam id leo in vitae. Venenatis a condimentum vitae sapien pellentesque habitant morbi tristique senectus. Lorem dolor sed viverra ipsum nunc. Quisque id diam vel quam elementum pulvinar etiam non quam. Sapien eget mi proin sed libero. Integer vitae justo eget magna fermentum iaculis eu non. Commodo viverra maecenas accumsan lacus vel facilisis volutpat est. Pulvinar elementum integer enim neque volutpat.</p>
+                    Nibh venenatis cras sed felis eget. Sagittis id consectetur purus ut faucibus. Cras semper auctor
+                    neque vitae tempus quam pellentesque. Est ultricies integer quis auctor elit sed vulputate mi.
+                    Faucibus vitae aliquet nec ullamcorper sit amet. Vel risus commodo viverra maecenas accumsan. Amet
+                    justo donec enim diam. Nisl vel pretium lectus quam id leo in vitae. Venenatis a condimentum vitae
+                    sapien pellentesque habitant morbi tristique senectus. Lorem dolor sed viverra ipsum nunc. Quisque
+                    id diam vel quam elementum pulvinar etiam non quam. Sapien eget mi proin sed libero. Integer vitae
+                    justo eget magna fermentum iaculis eu non. Commodo viverra maecenas accumsan lacus vel facilisis
+                    volutpat est. Pulvinar elementum integer enim neque volutpat.</p>
 
 
             </div>
@@ -111,7 +183,7 @@
 
 <script src="js/choropleth.js"></script>
 <script src="js/cartogram.js"></script>
-
+<script src="js/cartogram.js"></script>
 
 
 <script src="js/main.js"></script>

@@ -1,37 +1,289 @@
-Cartogram = function (_parentElement, _data, _eventHandler) {
-    this.parentElement = _parentElement;
-    let {us, prisonData} = _data;
-    this.us = us;
-    this.prisonData = prisonData;
-    this.eventHandler = _eventHandler;
+/*
+ * CountVis - Object constructor function
+ * @param _parentElement 	-- the HTML element in which to draw the visualization
+ * @param _data						-- the actual data: perDayData
+ */
+
+Simon = function (_parentElements, _data, _eventHandler) {
+    this.parentElements = _parentElements;
+    this.data = _data;
+    //this.eventHandler =
+    this.stage = 0;
+    this.zeroData = _.cloneDeep(this.data);
+    _.each(this.zeroData.world, country => {
+        if (country['Title'] == 'United States of America') {
+            country['Prison Population Total'] = 0
+        }
+    });
+
+
     this.initVis();
 }
 
 
-Cartogram.prototype.initVis = function () {
+/*
+ * Initialize visualization (static content, e.g. SVG area or axes)
+ */
+
+Simon.prototype.initVis = function () {
+
     const vis = this;
 
     vis.margin = {top: 40, right: 0, bottom: 60, left: 60};
 
+    vis.colorScale = d3.scaleSequential(d3.interpolateReds)
+        .domain([0, 800]);
 
-    vis.width = 1200 - vis.margin.left - vis.margin.right;
-    vis.height = 600 - vis.margin.top - vis.margin.bottom;
 
-    vis.svg = d3.select("#" + vis.parentElement).append("svg")
+
+    vis.width = 1000 - vis.margin.left - vis.margin.right,
+        vis.height = 800 - vis.margin.top - vis.margin.bottom;
+
+    // SVG drawing area
+    vis.svg = d3.select("#" + vis.parentElements[0]).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
         .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
         .append("g")
         .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
+    vis.otherSvg = d3.select("#" + vis.parentElements[1]).append("svg")
+        .attr("width", vis.width + vis.margin.left + vis.margin.right - 660)
+        .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
-    let radius = d3.scaleSqrt().range([0, 45]).clamp(true)
-    let randomizer = d3.randomNormal(0.5, 0.2)
-    let color = d3.scaleLinear();
+    vis.usCircle = vis.svg.append("g")
+        .attr("class", "us-circle-group")
+        .attr("transform", "translate(" + '300' + "," + '300' + ")");
 
-    var neighbors = topojson.neighbors(vis.us.objects.states.geometries),
-        nodes = topojson.feature(vis.us, vis.us.objects.states).features;
+    vis.otherCircles = vis.otherSvg.append("g")
+        .attr("class", "other-circles-group")
+        .attr("transform", "translate(" + '0' + "," + '0' + ")");
 
-    nodes.forEach(function (node, i) {
+
+    vis.x = d3.scaleLinear()
+        .range([0, 100000])
+        .domain([0, d3.max(_.map(vis.data.world), country => {
+            return country['Prison Population Total']
+        })]);
+
+    vis.scale = d3.scaleLinear() // v4
+        .domain([0, 1000])
+        .range([0, 300]);  // clipped
+    vis.svg.append("text")
+        .attr("x", 0)
+        .attr("y", 25)
+        .text("Incarceration Rate Per 100,000")
+    var axisGroup = vis.svg.append("g").attr("transform", "translate(0,50)")
+    var axis = d3.axisTop() // v4
+        .scale(vis.scale )
+    var axisNodes = axisGroup.call(axis);
+    let scaleRange = _.range(300);
+    vis.svg.selectAll("color-scale")
+        .data(scaleRange)
+        .enter()
+        .append("rect")
+        .attr("class", "color-scale")
+        .attr("x", d=>{
+            return d;
+        })
+        .attr("y", 55)
+        .attr("width", 1)
+        .attr("height", 10)
+        .attr("fill", d=>{
+            let val = vis.scale.invert(d);
+            return vis.colorScale(val)
+        })
+    vis.wrangleData()
+}
+
+
+/*
+ * Data wrangling
+ */
+
+Simon.prototype.wrangleData = function () {
+    var vis = this;
+    vis.displayData = vis.data;
+
+
+    vis.stage++;
+    if (vis.stage % 3 === 1) {
+        vis.displayData = vis.data
+    } else if (vis.stage % 3 === 2) {
+        vis.displayData = vis.zeroData;
+    } else {
+        vis.displayData = vis.data;
+    }
+    vis.usData = _.find(vis.displayData.world, country => {
+        return country['Title'] == 'United States of America'
+    });
+    vis.otherCountries = ['China', 'Mexico', 'France', 'Canada'];
+    vis.otherCountryData = _.filter(vis.displayData.world, country => {
+        return _.includes(vis.otherCountries, country['Title'])
+    });
+
+    if (vis.stage % 3 === 1) {
+        vis.updateVis();
+    } else if (vis.stage % 3 === 2) {
+        vis.updateVis();
+        vis.growMap()
+        vis.drawMap()
+    }
+
+}
+
+
+/*
+ * The drawing function - should use the D3 update sequence (enter, update, exit)
+ * Function parameters only needed if different kinds of updates are needed
+ */
+
+Simon.prototype.updateVis = function () {
+    var vis = this;
+
+    let usCircle = vis.usCircle.selectAll(".us-circle")
+        .data([vis.usData]);
+
+    usCircle.enter().append("circle")
+        .merge(usCircle)
+        .transition()
+        .attr("class", "us-circle")
+        .attr("cx", 0)
+        .attr("cy", 0)
+        .attr("r", d => {
+            return Math.sqrt(vis.x(d['Prison Population Total']) / Math.PI)
+        })
+        .attr("fill", d=>{
+            return vis.colorScale(d['Prison Population Rate'])
+        })
+
+    usCircle.exit().remove()
+
+    let countryLabel = vis.usCircle.selectAll(".us-country-label")
+        .data([vis.usData]);
+    countryLabel.enter().append("text")
+        .merge(countryLabel)
+        .attr("class", "us-country-label")
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("text-anchor", "middle")
+        .text(d => {
+            return d['Title']
+        })
+        .attr("opacity", d => {
+            return d['Prison Population Total']
+        });
+    countryLabel.exit().remove()
+
+    let populationLabel = vis.usCircle.selectAll(".us-population-label")
+        .data([vis.usData]);
+
+    populationLabel.enter().append("text")
+        .merge(populationLabel)
+        .attr("x", 0)
+        .attr("y", 20)
+        .attr("class", "us-population-label")
+        .attr("text-anchor", "middle")
+        .text(d => {
+            return `Prison Population: ${d['Prison Population Total']}`
+        })
+        .attr("opacity", d => {
+            return d['Prison Population Total']
+        });
+    populationLabel.exit().remove()
+
+
+    let otherCircles = vis.otherCircles.selectAll(".other-circles")
+        .data(vis.otherCountryData)
+
+    otherCircles.enter().append("circle")
+        .merge(otherCircles)
+        .transition()
+        .attr("class", "other-circles")
+        .attr("cx", d => {
+            let index = _.indexOf(vis.otherCountries, d['Title'])
+            return (index % 2) * 300 + 100
+        })
+        .attr("cy", d => {
+            let index = _.indexOf(vis.otherCountries, d['Title']);
+            return Math.floor(index / 2) * 300 + 200
+        })
+        .attr("r", d => {
+            return Math.sqrt(vis.x(d['Prison Population Total']) / Math.PI)
+        })
+        .attr("fill", d=>{
+            return vis.colorScale(d['Prison Population Rate'])
+        })
+    otherCircles.exit().remove()
+
+
+    let otherCountryLabels = vis.otherSvg.selectAll(".other-country-labels")
+        .data(vis.otherCountryData)
+
+    otherCountryLabels.enter().append("text")
+        .merge(otherCountryLabels)
+        .attr("class", "other-country-labels")
+        .attr("x", d => {
+            let index = _.indexOf(vis.otherCountries, d['Title'])
+            return (index % 2) * 300 + 100
+        })
+        .attr("y", d => {
+            let index = _.indexOf(vis.otherCountries, d['Title']);
+            return Math.floor(index / 2) * 300 + 200 - Math.sqrt(vis.x(d['Prison Population Total']) / Math.PI) - 25
+        })
+        .attr("text-anchor", "middle")
+        .text(d => {
+            return d['Title']
+        })
+        .attr("opacity", d => {
+            return d['Prison Population Total']
+        });
+    otherCountryLabels.exit().remove();
+
+    let otherCountryPopulationLabels = vis.otherSvg.selectAll(".other-country-population-labels")
+        .data(vis.otherCountryData)
+
+    otherCountryPopulationLabels.enter().append("text")
+        .merge(otherCountryPopulationLabels)
+        .attr("class", "other-country-population-labels")
+        .attr("x", d => {
+            let index = _.indexOf(vis.otherCountries, d['Title'])
+            return (index % 2) * 300 + 100
+        })
+        .attr("y", d => {
+            let index = _.indexOf(vis.otherCountries, d['Title']);
+            return Math.floor(index / 2) * 300 + 200 - Math.sqrt(vis.x(d['Prison Population Total']) / Math.PI) - 10
+        })
+        .attr("text-anchor", "middle")
+        .text(d => {
+            return 'Prison Population:' + d['Prison Population Total']
+        })
+        .attr("opacity", d => {
+            return d['Prison Population Total']
+        });
+
+    otherCountryPopulationLabels.exit().remove();
+
+
+}
+
+Simon.prototype.growMap = function () {
+    const vis = this;
+    vis.width = 1200;
+    // $(`#${vis.parentElements[0]} svg`).width(1200);
+    // $(`#${vis.parentElements[1]} svg`).width(0);
+    vis.neighbors = topojson.neighbors(vis.data.us.objects.states.geometries);
+    vis.nodes = topojson.feature(vis.data.us, vis.data.us.objects.states).features;
+    var projection = d3.geoAlbersUsa()
+        .scale([100]);          // scale things down so see entire US
+
+// Define path generator
+    var path = d3.geoPath()               // path generator that will convert GeoJSON to SVG paths
+        .projection(projection);  // tell path generator to use albersUsa projection
+
+
+    vis.nodes.forEach(function (node, i) {
 
         var centroid = d3.geoPath().centroid(node);
 
@@ -42,31 +294,65 @@ Cartogram.prototype.initVis = function () {
 
     });
 
-    var states = vis.svg.selectAll("path")
-        .data(nodes)
+    var tip = d3.tip()
+        .attr('class', 'd3-tip')
+        .offset([-10, 0])
+        .html(function (d) {
+            let stateName = vis.data.fipsToState[d.id]
+            let stateData = _.find(vis.data.state, state => {
+                return _.trim(stateName) == _.trim(state['State'])
+            })
+            return `<div class="tool-tip"><strong>${stateName}</strong><br>
+                    <strong>In Prison/Jail </strong><span>${stateData['Total']}</span><br>
+                    <strong>Incarceration Rate per 100,000 adults </strong><span>${stateData['Rate Per 100000 Adult']}</span>
+<div>`
+        })
+
+    vis.svg.call(tip);
+
+    vis.states = vis.svg.selectAll("path")
+        .data(vis.nodes)
         .enter()
         .append("path")
+        .attr("class", "state-circles")
         .attr("d", pathString)
-        .attr("fill", "#ccc");
+        .attr("fill", d=>{
+            let stateName = vis.data.fipsToState[d.id]
+            let stateData = _.find(vis.data.state, state => {
+                return _.trim(stateName) == _.trim(state['State'])
+            })
+            return vis.colorScale(stateData['Rate Per 100000 All Ages'])
 
+        })
+        .on('mouseover', tip.show)
+        .on('mouseout', tip.hide)
+
+
+}
+Simon.prototype.drawMap = function () {
+    const vis = this;
     simulate();
 
     function simulate() {
-        nodes.forEach(function (node) {
+        vis.nodes.forEach(function (node) {
             node.x = node.x0;
             node.y = node.y0;
-            node.r = radius(randomizer());
+            let stateName = vis.data.fipsToState[node.id]
+            let stateData = _.find(vis.data.state, state => {
+                return _.trim(stateName) == _.trim(state['State'])
+            })
+
+            node.r = Math.sqrt(vis.x(stateData['Total']) / Math.PI)
         });
 
-        color.domain(d3.extent(nodes, d => d.r));
 
-        var links = d3.merge(neighbors.map(function (neighborSet, i) {
-            return neighborSet.filter(j => nodes[j]).map(function (j) {
-                return {source: i, target: j, distance: nodes[i].r + nodes[j].r + 3};
+        let links = d3.merge(vis.neighbors.map(function (neighborSet, i) {
+            return neighborSet.filter(j => vis.nodes[j]).map(function (j) {
+                return {source: i, target: j, distance: vis.nodes[i].r + vis.nodes[j].r + 3};
             });
         }));
 
-        var simulation = d3.forceSimulation(nodes)
+        var simulation = d3.forceSimulation(vis.nodes)
             .force("cx", d3.forceX().x(d => vis.width / 2).strength(0.02))
             .force("cy", d3.forceY().y(d => vis.height / 2).strength(0.02))
             .force("link", d3.forceLink(links).distance(d => d.distance))
@@ -79,7 +365,7 @@ Cartogram.prototype.initVis = function () {
             simulation.tick();
         }
 
-        nodes.forEach(function (node) {
+        vis.nodes.forEach(function (node) {
             var circle = pseudocircle(node),
                 closestPoints = node.rings.slice(1).map(function (ring) {
                     var i = d3.scan(circle.map(point => distance(point, ring.centroid)));
@@ -97,31 +383,27 @@ Cartogram.prototype.initVis = function () {
             };
         });
 
-        states
+        vis.states
             .sort((a, b) => b.r - a.r)
             .transition()
-            .delay(1000)
-            .duration(1500)
+            .duration(0)
             .attrTween("d", node => node.interpolator)
-            .attr("fill", d => d3.interpolateSpectral(color(d.r)))
-            .transition()
-            .delay(1000)
-            .attrTween("d", node => t => node.interpolator(1 - t))
-            .attr("fill", "#ccc")
-            .on("end", (d, i) => i || simulate());
+            .attr("class", "state-circles")
+
+        // .on("end", (d, i) => i );
 
     }
 
+};
 
-    function pseudocircle(node) {
-        return node.rings[0].map(function (point) {
-            var angle = node.startingAngle - 2 * Math.PI * (point.along / node.perimeter);
-            return [
-                Math.cos(angle) * node.r + node.x,
-                Math.sin(angle) * node.r + node.y
-            ];
-        });
-    }
+function pseudocircle(node) {
+    return node.rings[0].map(function (point) {
+        var angle = node.startingAngle - 2 * Math.PI * (point.along / node.perimeter);
+        return [
+            Math.cos(angle) * node.r + node.x,
+            Math.sin(angle) * node.r + node.y
+        ];
+    });
 }
 
 function cleanUpGeometry(node) {
