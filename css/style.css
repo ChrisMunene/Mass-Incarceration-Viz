@@ -20,10 +20,21 @@ body {
 }
 
 
-
 .carousel-control-next,
 .carousel-control-prev {
     filter: invert(100%);
+}
+
+#world-circles {
+    height: 600px;
+    width: 400px;
+    overflow: scroll;
+    direction: ltr;
+}
+
+#world-circles svg {
+    height: 10000px;
+    width: 400px;
 }
 
 .page-header {
@@ -77,8 +88,8 @@ table {
     border-collapse: collapse;
 }
 
-.tool-tip *{
-    font-size:10pt;
+.tool-tip * {
+    font-size: 10pt;
 }
 
 .other-circles {

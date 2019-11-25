@@ -34,7 +34,6 @@ Cartogram.prototype.initVis = function () {
         .domain([0, 800]);
 
 
-
     vis.width = 1000 - vis.margin.left - vis.margin.right,
         vis.height = 800 - vis.margin.top - vis.margin.bottom;
 
@@ -47,13 +46,22 @@ Cartogram.prototype.initVis = function () {
 
     vis.otherSvg = d3.select("#" + vis.parentElements[1]).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right - 660)
+        .attr("id", "other-circles-svg")
         .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
         .append("g")
         .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
+    vis.otherSvg.append("text")
+        .attr("x", 120)
+        .attr("y", -10)
+        .attr("text-anchor", "middle")
+        .style("font-size", "15px")
+        .attr("id", "comparable-countries")
+        .text("Comparable Countries (scroll)");
+
     vis.usCircle = vis.svg.append("g")
         .attr("class", "us-circle-group")
-        .attr("transform", "translate(" + '300' + "," + '300' + ")");
+        .attr("transform", "translate(" + '300' + "," + '350' + ")");
 
     vis.otherCircles = vis.otherSvg.append("g")
         .attr("class", "other-circles-group")
@@ -75,7 +83,7 @@ Cartogram.prototype.initVis = function () {
         .text("Incarceration Rate Per 100,000")
     var axisGroup = vis.svg.append("g").attr("transform", "translate(0,50)")
     var axis = d3.axisTop() // v4
-        .scale(vis.scale )
+        .scale(vis.scale)
     var axisNodes = axisGroup.call(axis);
     let scaleRange = _.range(300);
     vis.svg.selectAll("color-scale")
@@ -83,13 +91,13 @@ Cartogram.prototype.initVis = function () {
         .enter()
         .append("rect")
         .attr("class", "color-scale")
-        .attr("x", d=>{
+        .attr("x", d => {
             return d;
         })
         .attr("y", 55)
         .attr("width", 1)
-        .attr("height", 10)
-        .attr("fill", d=>{
+        .attr("height", 20)
+        .attr("fill", d => {
             let val = vis.scale.invert(d);
             return vis.colorScale(val)
         })
@@ -109,15 +117,11 @@ Cartogram.prototype.wrangleData = function () {
     vis.stage++;
     if (vis.stage % 3 === 1) {
         vis.displayData = vis.data
-    }  else {
+    } else {
         vis.displayData = vis.zeroData;
     }
     vis.usData = _.find(vis.displayData.world, country => {
         return country['Title'] == 'United States of America'
-    });
-    vis.otherCountries = ['China', 'Mexico', 'France', 'Canada'];
-    vis.otherCountryData = _.filter(vis.displayData.world, country => {
-        return _.includes(vis.otherCountries, country['Title'])
     });
 
     if (vis.stage % 3 === 1) {
@@ -137,9 +141,30 @@ Cartogram.prototype.wrangleData = function () {
  * Function parameters only needed if different kinds of updates are needed
  */
 
-Cartogram.prototype.updateVis = function () {
+Cartogram.prototype.updateVis = function (hovered) {
     var vis = this;
 
+    if(hovered){
+        let stateName = vis.data.fipsToState[hovered.id];
+        let stateData = _.find(vis.data.state, state => {
+            return _.trim(stateName) == _.trim(state['State'])
+        })
+        vis.otherCountryData = _.sortBy(vis.displayData.world, d=>{
+            return Math.abs(stateData['Total'] - d['Prison Population Total'])
+        })
+        vis.otherCountryData = _.filter(vis.otherCountryData, country => {
+            return country['Title'] != 'United States of America'
+        });
+        vis.otherSvg.select('#comparable-countries').text(d=>{
+            return `Comparable Countries to ${stateName} (scroll)`
+        })
+
+    } else{
+        vis.otherCountryData = _.sortBy(vis.displayData.world, 'Prison Population Total').reverse();
+        vis.otherCountryData = _.filter(vis.otherCountryData, country => {
+            return country['Title'] != 'United States of America'
+        });
+    }
     let usCircle = vis.usCircle.selectAll(".us-circle")
         .data([vis.usData]);
 
@@ -164,7 +189,7 @@ Cartogram.prototype.updateVis = function () {
         .merge(countryLabel)
         .attr("class", "us-country-label")
         .attr("x", 0)
-        .attr("y", d=>{
+        .attr("y", d => {
             return -Math.sqrt(vis.x(d['Prison Population Total']) / Math.PI) - 30
         })
         .attr("text-anchor", "middle")
@@ -182,7 +207,7 @@ Cartogram.prototype.updateVis = function () {
     populationLabel.enter().append("text")
         .merge(populationLabel)
         .attr("x", 0)
-        .attr("y", d=>{
+        .attr("y", d => {
             return -Math.sqrt(vis.x(d['Prison Population Total']) / Math.PI) - 10
         })
         .attr("class", "us-population-label")
@@ -197,19 +222,17 @@ Cartogram.prototype.updateVis = function () {
 
 
     let otherCircles = vis.otherCircles.selectAll(".other-circles")
-        .data(vis.otherCountryData)
+        .data(vis.otherCountryData);
 
     otherCircles.enter().append("circle")
         .merge(otherCircles)
         .transition()
         .attr("class", "other-circles")
         .attr("cx", d => {
-            let index = _.indexOf(vis.otherCountries, d['Title'])
-            return (index % 2) * 300 + 100
+            return 100;
         })
-        .attr("cy", d => {
-            let index = _.indexOf(vis.otherCountries, d['Title']);
-            return Math.floor(index / 2) * 300 + 200
+        .attr("cy", (d,i) => {
+            return i * 300 + 200
         })
         .attr("r", d => {
             return Math.sqrt(vis.x(d['Prison Population Total']) / Math.PI)
@@ -223,16 +246,15 @@ Cartogram.prototype.updateVis = function () {
     let otherCountryLabels = vis.otherSvg.selectAll(".other-country-labels")
         .data(vis.otherCountryData)
 
+
     otherCountryLabels.enter().append("text")
         .merge(otherCountryLabels)
         .attr("class", "other-country-labels")
         .attr("x", d => {
-            let index = _.indexOf(vis.otherCountries, d['Title'])
-            return (index % 2) * 300 + 100
+            return 100
         })
-        .attr("y", d => {
-            let index = _.indexOf(vis.otherCountries, d['Title']);
-            return Math.floor(index / 2) * 300 + 200 - Math.sqrt(vis.x(d['Prison Population Total']) / Math.PI) - 25
+        .attr("y", (d, i) => {
+            return i * 300 + 200 - Math.sqrt(vis.x(d['Prison Population Total']) / Math.PI) -23
         })
         .attr("text-anchor", "middle")
         .text(d => {
@@ -244,18 +266,16 @@ Cartogram.prototype.updateVis = function () {
     otherCountryLabels.exit().remove();
 
     let otherCountryPopulationLabels = vis.otherSvg.selectAll(".other-country-population-labels")
-        .data(vis.otherCountryData)
+        .data(vis.otherCountryData);
 
     otherCountryPopulationLabels.enter().append("text")
         .merge(otherCountryPopulationLabels)
         .attr("class", "other-country-population-labels")
         .attr("x", d => {
-            let index = _.indexOf(vis.otherCountries, d['Title'])
-            return (index % 2) * 300 + 100
+            return 100
         })
-        .attr("y", d => {
-            let index = _.indexOf(vis.otherCountries, d['Title']);
-            return Math.floor(index / 2) * 300 + 200 - Math.sqrt(vis.x(d['Prison Population Total']) / Math.PI) - 10
+        .attr("y", (d,i) => {
+            return i * 300 + 200 - Math.sqrt(vis.x(d['Prison Population Total']) / Math.PI) - 8
         })
         .attr("text-anchor", "middle")
         .text(d => {
@@ -298,7 +318,7 @@ Cartogram.prototype.growMap = function () {
 
     var tip = d3.tip()
         .attr('class', 'd3-tip')
-        .offset([-10, 0])
+        .offset([0, 100])
         .html(function (d) {
             let stateName = vis.data.fipsToState[d.id]
             let stateData = _.find(vis.data.state, state => {
@@ -332,7 +352,7 @@ Cartogram.prototype.growMap = function () {
         .append("path")
         .attr("class", "state-circles")
         .attr("d", pathString)
-        .attr("fill", d=>{
+        .attr("fill", d => {
             let stateName = vis.data.fipsToState[d.id]
             let stateData = _.find(vis.data.state, state => {
                 return _.trim(stateName) == _.trim(state['State'])
@@ -340,7 +360,10 @@ Cartogram.prototype.growMap = function () {
             return vis.colorScale(stateData['Rate Per 100000 All Ages'])
 
         })
-        .on('mouseover', tip.show)
+        .on('mouseover', d=>{
+            vis.updateVis(d);
+            return tip.show(d)
+        })
         .on('mouseout', tip.hide)
 
 
