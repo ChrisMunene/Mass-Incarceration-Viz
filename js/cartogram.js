@@ -4,7 +4,7 @@
  * @param _data						-- the actual data: perDayData
  */
 
-Simon = function (_parentElements, _data, _eventHandler) {
+Cartogram = function (_parentElements, _data, _eventHandler) {
     this.parentElements = _parentElements;
     this.data = _data;
     //this.eventHandler =
@@ -16,7 +16,6 @@ Simon = function (_parentElements, _data, _eventHandler) {
         }
     });
 
-
     this.initVis();
 }
 
@@ -25,7 +24,7 @@ Simon = function (_parentElements, _data, _eventHandler) {
  * Initialize visualization (static content, e.g. SVG area or axes)
  */
 
-Simon.prototype.initVis = function () {
+Cartogram.prototype.initVis = function () {
 
     const vis = this;
 
@@ -102,7 +101,7 @@ Simon.prototype.initVis = function () {
  * Data wrangling
  */
 
-Simon.prototype.wrangleData = function () {
+Cartogram.prototype.wrangleData = function () {
     var vis = this;
     vis.displayData = vis.data;
 
@@ -139,7 +138,7 @@ Simon.prototype.wrangleData = function () {
  * Function parameters only needed if different kinds of updates are needed
  */
 
-Simon.prototype.updateVis = function () {
+Cartogram.prototype.updateVis = function () {
     var vis = this;
 
     let usCircle = vis.usCircle.selectAll(".us-circle")
@@ -154,7 +153,7 @@ Simon.prototype.updateVis = function () {
         .attr("r", d => {
             return Math.sqrt(vis.x(d['Prison Population Total']) / Math.PI)
         })
-        .attr("fill", d=>{
+        .attr("fill", d => {
             return vis.colorScale(d['Prison Population Rate'])
         })
 
@@ -212,7 +211,7 @@ Simon.prototype.updateVis = function () {
         .attr("r", d => {
             return Math.sqrt(vis.x(d['Prison Population Total']) / Math.PI)
         })
-        .attr("fill", d=>{
+        .attr("fill", d => {
             return vis.colorScale(d['Prison Population Rate'])
         })
     otherCircles.exit().remove()
@@ -266,9 +265,9 @@ Simon.prototype.updateVis = function () {
     otherCountryPopulationLabels.exit().remove();
 
 
-}
+};
 
-Simon.prototype.growMap = function () {
+Cartogram.prototype.growMap = function () {
     const vis = this;
     vis.width = 1200;
     // $(`#${vis.parentElements[0]} svg`).width(1200);
@@ -329,7 +328,7 @@ Simon.prototype.growMap = function () {
 
 
 }
-Simon.prototype.drawMap = function () {
+Cartogram.prototype.drawMap = function () {
     const vis = this;
     simulate();
 

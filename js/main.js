@@ -8,7 +8,7 @@ queue()
     // .defer(d3.csv, "data/2015.csv")
     .await(createVis);
 
-let simon = null;
+let cartogram = null;
 
 function createVis(error, fipsToState, us, world_data, state_data2016) {
     _.each(world_data, country => {
@@ -21,7 +21,7 @@ function createVis(error, fipsToState, us, world_data, state_data2016) {
         state['Rate Per 100000 All Ages']  = _.toNumber(state['Rate Per 100000 All Ages'].replace(/[\s,]/g, ''))
     })
 
-    simon = new Simon(['simon', 'others'], {
+    cartogram = new Cartogram(['us-cartogram', 'world-circles'], {
         'world': world_data,
         'state': state_data2016,
         'us': us,
@@ -33,6 +33,5 @@ function createVis(error, fipsToState, us, world_data, state_data2016) {
 }
 
 function nextPage() {
-    simon.wrangleData()
-
+    cartogram.wrangleData()
 }
