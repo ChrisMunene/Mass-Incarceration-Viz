@@ -199,3 +199,7 @@ table {
 .x-axis path {
   display: none;
 }
+
+.call-to-action {
+  margin-left: 50px;
+}

@@ -59,7 +59,7 @@ function createVis(
 
   $(eventHandler).bind("selectionChanged", function(event, value) {
     matrixViz2.setSelectedRange(value);
-    fullpage_api.moveTo("slide3", 1);
+    fullpage_api.moveTo("slide6", 1);
   });
 }
 
