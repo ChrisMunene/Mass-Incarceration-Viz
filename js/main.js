@@ -2,6 +2,7 @@
 queue()
     .defer(d3.json, "data/fipsToState.json")
     .defer(d3.json, "https://d3js.org/us-10m.v1.json")
+    .defer(d3.json, "data/bardata.json")
     .defer(d3.csv, "data/World_Stats.csv")
     // .defer(d3.csv, "data/State_Data.csv")
     .defer(d3.csv, "data/2016StateData.csv")
@@ -10,8 +11,9 @@ queue()
     .await(createVis);
 
 let cartogram = null;
+let barchart = null;
 
-function createVis(error, fipsToState, us, world_data, state_data2016) {
+function createVis(error, fipsToState, us, bardata, world_data, state_data2016) {
     _.each(world_data, country => {
         country['Prison Population Total'] = _.toNumber(country['Prison Population Total'].replace(/[\s,]/g, ''))
         country['Prison Population Rate'] = _.toNumber(country['Prison Population Rate'].replace(/[\s,]/g, ''))
@@ -28,11 +30,20 @@ function createVis(error, fipsToState, us, world_data, state_data2016) {
         'us': us,
         'fipsToState': fipsToState
     })
+
     // let choropleth = new Choropleth("choropleth", {'us':us, 'prisonData':dataObj});
-     let cartogram = new Cartogram("cartogram", {'fipsToState': fipsToState, 'us': us, 'prisonData': dataObj});
+     barchart = new BarVis("bar-vis", bardata);
     // d3.select("#cartogram-button").on("click", cartogram.simulate())
 }
 
 function nextPage() {
     cartogram.wrangleData()
+}
+
+function updateBar(){
+    barchart.updateVisualization()
+}
+
+function sortButtonBar(){
+    barchart.sortButton()
 }

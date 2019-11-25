@@ -1,0 +1,311 @@
+{
+    "transferred": [
+        {
+            "Race": "Hispanic",
+            "Male": 0.062831799,
+            "Female": 0.027066006,
+            "Total": 0.089897805
+        },
+        {
+            "Race": "Native American",
+            "Male": 0.062890941,
+            "Female": 0.030101647,
+            "Total": 0.092992587
+        },
+        {
+            "Race": "Asian",
+            "Male": 0.015202074,
+            "Female": 0.00567597,
+            "Total": 0.020878045
+        },
+        {
+            "Race": "Pacific Islander",
+            "Male": 0.062246836,
+            "Female": 0.020138682,
+            "Total": 0.082385518
+        },
+        {
+            "Race": "Black",
+            "Male": 0.199297992,
+            "Female": 0.106829463,
+            "Total": 0.306127456
+        },
+        {
+            "Race": "White",
+            "Male": 0.048977994,
+            "Female": 0.019008503,
+            "Total": 0.067986497
+        },
+        {
+            "Race": "Two or More Races",
+            "Male": 0.083837352,
+            "Female": 0.040867157,
+            "Total": 0.124704509
+        }
+    ],
+    "oneplussusp":[
+      {
+        "Race": "Hispanic",
+        "Male": 2.31939099,
+        "Female": 1.096856024,
+        "Total": 3.416247014
+      },
+      {
+        "Race": "Native American",
+        "Male": 4.025378555,
+        "Female": 2.145638218,
+        "Total": 6.171016773
+      },
+      {
+        "Race": "Asian",
+        "Male": 0.885848298,
+        "Female": 0.28514805,
+        "Total": 1.170996347
+      },
+      {
+        "Race": "Pacific Islander",
+        "Male": 2.936128338,
+        "Female": 1.471496899,
+        "Total": 4.407625237
+      },
+      {
+        "Race": "Black",
+        "Male": 6.393485235,
+        "Female": 3.933153632,
+        "Total": 10.32663887
+      },
+      {
+        "Race": "White",
+        "Male": 1.76651432,
+        "Female": 0.685270497,
+        "Total": 2.451784818
+      },
+      {
+        "Race": "Two or More Races",
+        "Male": 3.488770626,
+        "Female": 1.749330296,
+        "Total": 5.238100922
+      }
+    ],
+    "school_arrest": [
+        {
+          "Race": "Hispanic",
+          "Male": 0.057783774,
+          "Female": 0.0266057,
+          "Total": 0.084389474
+        },
+        {
+          "Race": "Native American",
+          "Male": 0.097292823,
+          "Female": 0.065936941,
+          "Total": 0.163229763
+        },
+        {
+          "Race": "Asian",
+          "Male": 0.01889344,
+          "Female": 0.006033199,
+          "Total": 0.024926639
+        },
+        {
+          "Race": "Pacific Islander",
+          "Male": 0.101608806,
+          "Female": 0.058585258,
+          "Total": 0.160194064
+        },
+        {
+          "Race": "Black",
+          "Male": 0.119076611,
+          "Female": 0.076121918,
+          "Total": 0.195198529
+        },
+        {
+          "Race": "White",
+          "Male": 0.039949867,
+          "Female": 0.018323694,
+          "Total": 0.058273561
+        },
+        {
+          "Race": "Two or More Races",
+          "Male": 0.065819426,
+          "Female": 0.040412446,
+          "Total": 0.106231872
+        }
+    ],
+    "referred_to_law":[
+        {
+          "Race": "Hispanic",
+          "Male": 0.220195153,
+          "Female": 0.111762351,
+          "Total": 0.331957504
+        },
+        {
+          "Race": "Native American",
+          "Male": 0.393829879,
+          "Female": 0.251922116,
+          "Total": 0.645751995
+        },
+        {
+          "Race": "Asian",
+          "Male": 0.100500398,
+          "Female": 0.038620414,
+          "Total": 0.139120812
+        },
+        {
+          "Race": "Pacific Islander",
+          "Male": 0.253564318,
+          "Female": 0.125409067,
+          "Total": 0.378973385
+        },
+        {
+          "Race": "Black",
+          "Male": 0.386515378,
+          "Female": 0.238704088,
+          "Total": 0.625219465
+        },
+        {
+          "Race": "White",
+          "Male": 0.166987932,
+          "Female": 0.075839508,
+          "Total": 0.242827441
+        },
+        {
+          "Race": "Two or More Races",
+          "Male": 0.295846385,
+          "Female": 0.167731543,
+          "Total": 0.463577928
+        }
+    ],
+    "iss":[
+        {
+          "Race": "Hispanic",
+          "Male": 2.564926001,
+          "Female": 1.340358015,
+          "Total": 3.905284016
+        },
+        {
+          "Race": "Native American",
+          "Male": 3.537301853,
+          "Female": 2.011255866,
+          "Total": 5.548557719
+        },
+        {
+          "Race": "Asian",
+          "Male": 0.817974806,
+          "Female": 0.306264247,
+          "Total": 1.124239053
+        },
+        {
+          "Race": "Pacific Islander",
+          "Male": 1.984117903,
+          "Female": 1.058196215,
+          "Total": 3.042314118
+        },
+        {
+          "Race": "Black",
+          "Male": 5.472579135,
+          "Female": 3.501313558,
+          "Total": 8.973892693
+        },
+        {
+          "Race": "White",
+          "Male": 2.286952614,
+          "Female": 0.963092061,
+          "Total": 3.250044675
+        },
+        {
+          "Race": "Two or More Races",
+          "Male": 3.038379319,
+          "Female": 1.658444922,
+          "Total": 4.696824241
+        }
+    ],
+    "expulsionZT":[
+        {
+          "Race": "Hispanic",
+          "Male": 0.017430262,
+          "Female": 0.006720471,
+          "Total": 0.024150733
+        },
+        {
+          "Race": "Native American",
+          "Male": 0.025084706,
+          "Female": 0.012184,
+          "Total": 0.037268706
+        },
+        {
+          "Race": "Asian",
+          "Male": 0.008176573,
+          "Female": 0.003095984,
+          "Total": 0.011272557
+        },
+        {
+          "Race": "Pacific Islander",
+          "Male": 0.036158089,
+          "Female": 0.009153946,
+          "Total": 0.045312035
+        },
+        {
+          "Race": "Black",
+          "Male": 0.028901219,
+          "Female": 0.010863579,
+          "Total": 0.039764798
+        },
+        {
+          "Race": "White",
+          "Male": 0.017614573,
+          "Female": 0.006726522,
+          "Total": 0.024341095
+        },
+        {
+          "Race": "Two or More Races",
+          "Male": 0.027566858,
+          "Female": 0.011822488,
+          "Total": 0.039389346
+        }
+    ],
+    "expulsion":[
+        {
+          "Race": "Hispanic",
+          "Male": 0.025316842,
+          "Female": 0.008830208,
+          "Total": 0.03414705
+        },
+        {
+          "Race": "Native American",
+          "Male": 0.068624588,
+          "Female": 0.042644,
+          "Total": 0.111268587
+        },
+        {
+          "Race": "Asian",
+          "Male": 0.011351941,
+          "Female": 0.002857831,
+          "Total": 0.014209772
+        },
+        {
+          "Race": "Pacific Islander",
+          "Male": 0.043938943,
+          "Female": 0.032954207,
+          "Total": 0.076893151
+        },
+        {
+          "Race": "Black",
+          "Male": 0.067589909,
+          "Female": 0.033154413,
+          "Total": 0.100744322
+        },
+        {
+          "Race": "White",
+          "Male": 0.034139125,
+          "Female": 0.012889799,
+          "Total": 0.047028924
+        },
+        {
+          "Race": "Two or More Races",
+          "Male": 0.054849522,
+          "Female": 0.026486919,
+          "Total": 0.081336441
+        }
+    ]
+    
+}

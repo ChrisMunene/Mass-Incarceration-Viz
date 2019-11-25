@@ -60,12 +60,47 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
-        <h3 class="scroll-down-left lead">↓</h3>
-        <h3 class="scroll-down-right lead">↓</h3>
+        <h1 class="scroll-down-left lead">↓</h1>
+        <h1 class="scroll-down-right lead">↓</h1>
     </div>
-    <div class="section" id="section2">
 
+
+    <div class="section" id="section2">
+        <div class="row">
+            <div class="col content">
+                <h4>School Statistics - Race Breakdown</h4>
+                <br>
+                <p>Here, we investigate the various trends in disciplinary action taken against students across America.
+                We can see some standout trends with Black, Native American and Pacific Islander students having the highest
+                rates for many of the disciplinary measures. Please explore the different rates to further understand inequalities in
+                disciplinary action. You can choose to display the default ordering or sort/unsort the descending order.</p>
+            </div>
+
+            <div class="col content">
+                <br>
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="view-type">See Percent of Students Across USA who</label>
+                        <select class="form-control" id="view-type" onchange="updateBar()">
+                            <option value="iss">Received one-or-more in-school suspensions</option>
+                            <option value="oneplussusp">Received one-or-more out-of-school suspensions</option>
+                            <option value="expulsion">Were Expelled</option>
+                            <option value="expulsionZT">Were Expelled Under Zero Tolerance Policy</option>
+                            <option value="referred_to_law">Referred to a Law Enforcement Agency or Official</option>
+                            <option value="school_arrest">Received a School-Related Arrest</option>
+                            <option value="transferred">Were Transferred to an Alternative School for Disciplinary Reasons</option>
+                        </select>
+                        <button type="button" class="btn btn-outline-secondary" role="button" aria-pressed="true" id="sort-button" onclick="sortButtonBar()">Sort</button>
+                    </div>
+                </form>
+                <!-- Parent container for the visualization -->
+                <div id="bar-vis"></div>
+            </div>
+        </div>
+        <h1 class="scroll-down-left lead">↓</h1>
+        <h1 class="scroll-down-right lead">↓</h1>
     </div>
+
     <div class="section" id="section3">
         <div class="row">
             <div class="col content">
@@ -81,41 +116,11 @@
 <!--                     src="https://bl.ocks.org/ctufts/raw/298bfe4b11989960eeeecc9394e9f118/062f9cb2e813cdd86a9184fcc2cbfafc5f2f04bc/preview.png">-->
             </div>
         </div>
+        <h1 class="scroll-down-left lead">↓</h1>
+        <h1 class="scroll-down-right lead">↓</h1>
     </div>
-    <div class="section" id="section4">
-        <div class="row">
-            <div class="col content">
-                <h4>The School to Prison Pipeline</h4>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Vel eros donec ac odio tempor. Lorem dolor sed viverra ipsum nunc aliquet
-                    bibendum enim. Risus quis varius quam quisque id diam vel quam elementum. Sollicitudin ac orci
-                    phasellus egestas tellus rutrum tellus. Ultricies mi quis hendrerit dolor magna eget est lorem
-                    ipsum. Ut aliquam purus sit amet luctus venenatis. Feugiat in ante metus dictum at tempor commodo
-                    ullamcorper a. Nibh mauris cursus mattis molestie a iaculis at erat. Lobortis feugiat vivamus at
-                    augue eget arcu dictum varius duis. Pulvinar elementum integer enim neque volutpat ac tincidunt.
-                    Mattis vulputate enim nulla aliquet porttitor. Mi tempus imperdiet nulla malesuada pellentesque elit
-                    eget gravida cum. Lobortis scelerisque fermentum dui faucibus in ornare. Semper feugiat nibh sed
-                    pulvinar proin gravida. Velit dignissim sodales ut eu sem integer. Tempus urna et pharetra pharetra
-                    massa massa ultricies mi quis.
-
-                    Nibh venenatis cras sed felis eget. Sagittis id consectetur purus ut faucibus. Cras semper auctor
-                    neque vitae tempus quam pellentesque. Est ultricies integer quis auctor elit sed vulputate mi.
-                    Faucibus vitae aliquet nec ullamcorper sit amet. Vel risus commodo viverra maecenas accumsan. Amet
-                    justo donec enim diam. Nisl vel pretium lectus quam id leo in vitae. Venenatis a condimentum vitae
-                    sapien pellentesque habitant morbi tristique senectus. Lorem dolor sed viverra ipsum nunc. Quisque
-                    id diam vel quam elementum pulvinar etiam non quam. Sapien eget mi proin sed libero. Integer vitae
-                    justo eget magna fermentum iaculis eu non. Commodo viverra maecenas accumsan lacus vel facilisis
-                    volutpat est. Pulvinar elementum integer enim neque volutpat.</p>
-
-
-            </div>
-            <div class="col content">
-                <img class="column-image"
-                     src="https://bl.ocks.org/ctufts/raw/298bfe4b11989960eeeecc9394e9f118/062f9cb2e813cdd86a9184fcc2cbfafc5f2f04bc/preview.png">
-            </div>
-        </div>
-    </div>
+    <div class="section" id="section4"> </div>
 
 </div>
 
@@ -125,7 +130,7 @@
 <script type="text/javascript" src="js/fullpage.js"></script>
 <script type="text/javascript">
     var myFullpage = new fullpage('#fullpage', {
-        sectionsColor: ['#f2f2f2', '#f1f1f1', '#ffffff', 'whitesmoke', '#ccddff', 'whitesmoke', '#ccddff'],
+        sectionsColor: ['#f2f2f2', '#f1f1f1', '#ffffff', 'whitesmoke', '#f3f3f3', 'whitesmoke', '#ccddff'],
         licenseKey: 'ABB0465B-FA524899-995F79FD-B0187797',
         normalScrollElements: '#other-circles-svg'
     });
@@ -147,6 +152,7 @@
 
 <script src="js/choropleth.js"></script>
 <script src="js/cartogram.js"></script>
+<script src="js/stackedbar.js"></script>
 
 
 <script src="js/main.js"></script>

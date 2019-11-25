@@ -134,3 +134,75 @@ table {
     font-size: 30pt;
 
 }
+
+/*************/
+/*    FORM   */
+/*************/
+
+.form-inline {
+    margin-bottom: 30px;
+}
+
+.form-control {
+    border: 1px solid;
+    width: 250px;
+}
+
+.form-group label {
+    font-weight: 400;
+    margin-right: 10px;
+}
+
+.form-inline button, .btn-link:active {
+    border-left: 1px solid #888;
+    margin-left: 15px;
+    padding-left: 15px;
+    color: #333;
+    cursor: pointer;
+    outline: none;
+}
+.form-inline button:hover, .btn-link:active, .btn-link:focus  {
+    border-left: 1px solid #888;
+    color: #8E7060;
+    text-decoration: none;
+    outline: none;
+}
+.form-inline button .glyphicon {
+    margin-right: 5px;
+}
+
+
+
+/***************/
+/*  BAR CHART  */
+/***************/
+
+
+.axis {
+    font: 10px sans-serif;
+    fill: #333;
+}
+
+.axis-title {
+    fill: #9C8B83;
+    font-size: 14px;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #333;
+    shape-rendering: crispEdges;
+}
+
+.x-axis {
+    font-size: 14px;
+}
+
+.y-axis {
+    font-size: 14px;
+}
+
+.x-axis path {
+    display: none;
+}
