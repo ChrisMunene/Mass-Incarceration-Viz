@@ -55,7 +55,7 @@ Cartogram.prototype.initVis = function () {
         .attr("x", 120)
         .attr("y", -10)
         .attr("text-anchor", "middle")
-        .style("font-size", "15px")
+        .style("font-size", "15spx")
         .attr("id", "comparable-countries")
         .text("Comparable Countries (scroll)");
 

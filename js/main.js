@@ -29,7 +29,7 @@ function createVis(error, fipsToState, us, world_data, state_data2016) {
         'fipsToState': fipsToState
     })
     // let choropleth = new Choropleth("choropleth", {'us':us, 'prisonData':dataObj});
-    // let cartogram = new Cartogram("cartogram", {'fipsToState': fipsToState, 'us': us, 'prisonData': dataObj});
+     let cartogram = new Cartogram("cartogram", {'fipsToState': fipsToState, 'us': us, 'prisonData': dataObj});
     // d3.select("#cartogram-button").on("click", cartogram.simulate())
 }
 
