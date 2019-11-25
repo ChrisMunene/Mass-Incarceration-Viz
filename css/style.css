@@ -1,138 +1,131 @@
-
 body {
-    font-family: 'Merriweather', serif;
+  font-family: "Merriweather", serif;
 }
 
 #section0 {
-    background-image: url('../img/aswin-deth-jy7_yN68ZbU-unsplash.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
+  background-image: url("../img/aswin-deth-jy7_yN68ZbU-unsplash.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
-
-.carousel-control-next, .carousel-control-prev {
-    width: 5%;
-    height: 65%;
-}
-
-.carousel-control-next-icon {
-    width: 40px;
-    height: 40px;
-}
-
 
 .carousel-control-next,
 .carousel-control-prev {
-    filter: invert(100%);
+  width: 5%;
+  height: 65%;
+}
+
+.carousel-control-next-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+  filter: invert(100%);
 }
 
 #world-circles {
-    height: 600px;
-    width: 400px;
-    overflow: scroll;
-    direction: ltr;
+  height: 600px;
+  width: 400px;
+  overflow: scroll;
+  direction: ltr;
 }
 
 #world-circles svg {
-    height: 10000px;
-    width: 400px;
+  height: 10000px;
+  width: 400px;
 }
 
 .page-header {
-    text-align: right;
-    padding: 25px 150px 0px 25px;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    left: 0px;
+  text-align: right;
+  padding: 25px 150px 0px 25px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  left: 0px;
 }
 
 .jumbotron {
-    margin-bottom: 2em;
-    margin-left: 2em;
-    margin-right: 2em;
-    margin-top: 10em;
+  margin-bottom: 2em;
+  margin-left: 2em;
+  margin-right: 2em;
+  margin-top: 10em;
 }
 
 .jumbotron * {
-    font-size: 16pt
+  font-size: 16pt;
 }
 
 .page-credits {
-    text-align: left;
-    padding: 25px 150px 0px 25px;
-    position: absolute;
-    top: 0px;
+  text-align: left;
+  padding: 25px 150px 0px 25px;
+  margin: 5px;
+  top: 0px;
 }
 
 .us-circle {
-    stroke: darkred;
-    stroke-width: 3px;
+  stroke: darkred;
+  stroke-width: 3px;
 }
 
 .state-circles {
-    stroke: darkred;
-    stroke-width: 3px;
+  stroke: darkred;
+  stroke-width: 3px;
 }
 
 .tool-tip {
-    background: rgba(255, 255, 255, 0.95);
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 5px;
-    padding-bottom: 0px;
-
+  background: rgba(255, 255, 255, 0.95);
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
+  padding-bottom: 0px;
 }
 
-
 table {
-    border-collapse: collapse;
+  border-collapse: collapse;
 }
 
 .tool-tip * {
-    font-size: 10pt;
+  font-size: 10pt;
 }
 
 .other-circles {
-    stroke: darkslateblue;
-    stroke-width: 3px;
+  stroke: darkslateblue;
+  stroke-width: 3px;
 }
 
 .legend-circle {
-    fill: none;
-    stroke: darkgrey;
-    stroke-width: 3px;
+  fill: none;
+  stroke: darkgrey;
+  stroke-width: 3px;
 }
 
-
 .column-image {
-    max-width: 100%;
+  max-width: 100%;
 }
 
 .content {
-    margin: 30px;
+  margin: 30px;
 }
 
-
 .white-text {
-    color: white;
+  color: white;
 }
 
 .scroll-down-left {
-    position: absolute;
-    text-align: right;
-    left: 10px;
-    bottom: 0px;
-    font-size: 30pt;
+  position: absolute;
+  text-align: right;
+  left: 10px;
+  bottom: 0px;
+  font-size: 30pt;
 }
 
-
 .scroll-down-right {
-    position: absolute;
-    text-align: right;
-    right: 10px;
-    bottom: 0px;
-    font-size: 30pt;
-
+  position: absolute;
+  text-align: right;
+  right: 10px;
+  bottom: 0px;
+  font-size: 30pt;
 }
 
 /*************/
@@ -140,69 +133,69 @@ table {
 /*************/
 
 .form-inline {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 .form-control {
-    border: 1px solid;
-    width: 250px;
+  border: 1px solid;
+  width: 250px;
 }
 
 .form-group label {
-    font-weight: 400;
-    margin-right: 10px;
+  font-weight: 400;
+  margin-right: 10px;
 }
 
-.form-inline button, .btn-link:active {
-    border-left: 1px solid #888;
-    margin-left: 15px;
-    padding-left: 15px;
-    color: #333;
-    cursor: pointer;
-    outline: none;
+.form-inline button,
+.btn-link:active {
+  border-left: 1px solid #888;
+  margin-left: 15px;
+  padding-left: 15px;
+  color: #333;
+  cursor: pointer;
+  outline: none;
 }
-.form-inline button:hover, .btn-link:active, .btn-link:focus  {
-    border-left: 1px solid #888;
-    color: #8E7060;
-    text-decoration: none;
-    outline: none;
+.form-inline button:hover,
+.btn-link:active,
+.btn-link:focus {
+  border-left: 1px solid #888;
+  color: #8e7060;
+  text-decoration: none;
+  outline: none;
 }
 .form-inline button .glyphicon {
-    margin-right: 5px;
+  margin-right: 5px;
 }
-
-
 
 /***************/
 /*  BAR CHART  */
 /***************/
 
-
 .axis {
-    font: 10px sans-serif;
-    fill: #333;
+  font: 10px sans-serif;
+  fill: #333;
 }
 
 .axis-title {
-    fill: #9C8B83;
-    font-size: 14px;
+  fill: #9c8b83;
+  font-size: 14px;
 }
 
 .axis path,
 .axis line {
-    fill: none;
-    stroke: #333;
-    shape-rendering: crispEdges;
+  fill: none;
+  stroke: #333;
+  shape-rendering: crispEdges;
 }
 
 .x-axis {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 .y-axis {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 .x-axis path {
-    display: none;
+  display: none;
 }
