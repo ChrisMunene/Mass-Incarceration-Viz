@@ -109,10 +109,8 @@ Cartogram.prototype.wrangleData = function () {
     vis.stage++;
     if (vis.stage % 3 === 1) {
         vis.displayData = vis.data
-    } else if (vis.stage % 3 === 2) {
+    }  else {
         vis.displayData = vis.zeroData;
-    } else {
-        vis.displayData = vis.data;
     }
     vis.usData = _.find(vis.displayData.world, country => {
         return country['Title'] == 'United States of America'
@@ -124,10 +122,11 @@ Cartogram.prototype.wrangleData = function () {
 
     if (vis.stage % 3 === 1) {
         vis.updateVis();
-    } else if (vis.stage % 3 === 2) {
+    } else {
+        $('.carousel-control-next-icon').hide();
         vis.updateVis();
-        vis.growMap()
-        vis.drawMap()
+        vis.growMap();
+        vis.drawMap();
     }
 
 }
@@ -323,7 +322,11 @@ Cartogram.prototype.growMap = function () {
 
     vis.svg.call(tip);
 
-    vis.states = vis.svg.selectAll("path")
+    vis.usMap = vis.svg.append("g")
+        .attr("class", "us-map")
+        .attr("transform", "translate(" + '-100' + "," + '0' + ")");
+
+    vis.states = vis.usMap.selectAll("path")
         .data(vis.nodes)
         .enter()
         .append("path")
