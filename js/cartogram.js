@@ -34,7 +34,7 @@ Cartogram.prototype.initVis = function () {
         .domain([0, 800]);
 
 
-    vis.width = 1000 - vis.margin.left - vis.margin.right,
+    vis.width = 900 - vis.margin.left - vis.margin.right,
         vis.height = 800 - vis.margin.top - vis.margin.bottom;
 
     // SVG drawing area
@@ -45,7 +45,7 @@ Cartogram.prototype.initVis = function () {
         .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
     vis.otherSvg = d3.select("#" + vis.parentElements[1]).append("svg")
-        .attr("width", vis.width + vis.margin.left + vis.margin.right - 660)
+        .attr("width", vis.width + vis.margin.left + vis.margin.right - 450)
         .attr("id", "other-circles-svg")
         .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
         .append("g")
