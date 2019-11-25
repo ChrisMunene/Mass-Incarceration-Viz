@@ -165,7 +165,9 @@ Cartogram.prototype.updateVis = function () {
         .merge(countryLabel)
         .attr("class", "us-country-label")
         .attr("x", 0)
-        .attr("y", 0)
+        .attr("y", d=>{
+            return -Math.sqrt(vis.x(d['Prison Population Total']) / Math.PI) - 30
+        })
         .attr("text-anchor", "middle")
         .text(d => {
             return d['Title']
@@ -181,7 +183,9 @@ Cartogram.prototype.updateVis = function () {
     populationLabel.enter().append("text")
         .merge(populationLabel)
         .attr("x", 0)
-        .attr("y", 20)
+        .attr("y", d=>{
+            return -Math.sqrt(vis.x(d['Prison Population Total']) / Math.PI) - 10
+        })
         .attr("class", "us-population-label")
         .attr("text-anchor", "middle")
         .text(d => {
@@ -302,9 +306,19 @@ Cartogram.prototype.growMap = function () {
                 return _.trim(stateName) == _.trim(state['State'])
             })
             return `<div class="tool-tip"><strong>${stateName}</strong><br>
-                    <strong>In Prison/Jail </strong><span>${stateData['Total']}</span><br>
-                    <strong>Incarceration Rate per 100,000 adults </strong><span>${stateData['Rate Per 100000 Adult']}</span>
-<div>`
+                    <table class="table table-borderless">
+                      <tbody>
+                        <tr>
+                          <td>In Prison/Jail</td>
+                          <td>${stateData['Total']}</td>
+                        </tr> 
+                        <tr>
+                          <td>Incarceration Rate per 100,000 adults</td>
+                          <td>${stateData['Rate Per 100000 Adult']}</td>
+                        </tr>
+                        </tbody>
+                        </table>
+                    <div>`
         })
 
     vis.svg.call(tip);

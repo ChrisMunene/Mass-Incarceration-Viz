@@ -11,7 +11,15 @@ body {
 
 .carousel-control-next, .carousel-control-prev {
     width: 5%;
+    height: 65%;
 }
+
+.carousel-control-next-icon {
+    width: 40px;
+    height: 40px;
+}
+
+
 
 .carousel-control-next,
 .carousel-control-prev {
@@ -27,12 +35,15 @@ body {
     left: 0px;
 }
 
-.jumbotron{
+.jumbotron {
     margin-bottom: 2em;
     margin-left: 2em;
     margin-right: 2em;
     margin-top: 10em;
+}
 
+.jumbotron * {
+    font-size: 16pt
 }
 
 .page-credits {
@@ -46,6 +57,7 @@ body {
     stroke: darkred;
     stroke-width: 3px;
 }
+
 .state-circles {
     stroke: darkred;
     stroke-width: 3px;
@@ -56,6 +68,9 @@ body {
     padding: 5px;
 }
 
+.tool-tip *{
+    font-size:10pt;
+}
 
 .other-circles {
     stroke: darkslateblue;
