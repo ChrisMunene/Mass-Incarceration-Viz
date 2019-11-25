@@ -1,10 +1,111 @@
 Scatterplot = function (_parentElement, _data) {
     this.parentElement = _parentElement;
-    let {us, prisonData} = _data;
+    this.schoolData = _data;
+    this.wrangleData();
+
     console.log("data");
-    console.log(_data);
-    this.us = us;
-    this.prisonData = prisonData;
-    this.initVis();
+    console.log(this.schoolData);
+};
+
+
+Scatterplot.prototype.wrangleData = function() {
+    var vis = this;
+
+    vis.schoolData.forEach(function(d) {
+        d.pct_suspended = +d.pct_suspended;
+        d.pct_incarcerated = +d.pct_incarcerated;
+    });
+
+    console.log("vis.schoolData")
+    console.log(vis.schoolData);
+
+    vis.initVis();
 }
 
+Scatterplot.prototype.initVis = function() {
+    var vis = this;
+    // * TO-DO *
+
+    vis.margin = {top: 40, right: 0, bottom: 60, left: 60};
+
+    vis.width = 700 - vis.margin.left - vis.margin.right,
+        vis.height = 600 - vis.margin.top - vis.margin.bottom;
+
+    // SVG drawing area
+    vis.svg = d3.select("#" + vis.parentElement).append("svg")
+        .attr("width", vis.width + vis.margin.left + vis.margin.right)
+        .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
+
+    // Scales and axes
+
+    console.log("extent of suspension data");
+    console.log([d3.min(vis.schoolData, function(d) {
+        // console.log(d.pct_suspended);
+        return d.pct_incarcerated;
+    }), d3.max(vis.schoolData, function(d) {
+        // console.log(d.pct_suspended);
+        return d.pct_incarcerated;
+    })/2]);
+
+    vis.x = d3.scaleLinear()
+        .range([0, vis.width])
+        .domain(d3.extent(vis.schoolData, function(d) {
+                // console.log(d.pct_suspended);
+                return d.pct_suspended;
+            })
+        );
+
+    vis.y = d3.scaleLinear()
+        .range([vis.height, 0])
+        .domain([d3.min(vis.schoolData, function(d) {
+            // console.log(d.pct_suspended);
+            return d.pct_incarcerated;
+        }), d3.max(vis.schoolData, function(d) {
+            // console.log(d.pct_suspended);
+            return d.pct_incarcerated;
+        })/2]);
+
+    vis.xAxis = d3.axisBottom()
+        .scale(vis.x);
+
+    vis.svg.append("text")
+        .attr("transform", "translate(" + (vis.width/2) + "," + (vis.height + 35) + ")")
+        .style("text-anchor", "middle")
+        .text("Suspension rate per county");
+
+    vis.yAxis = d3.axisLeft()
+        .scale(vis.y);
+
+    // vis.rotateTranslate = d3.svg.transform().rotate(-90).translate(-20, 0);
+    vis.svg.append("text")
+        .attr("transform", "rotate(-90) translate(0, -35)")
+        .attr("y", 0)
+        .attr("x",0 - (vis.height / 2))
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text("Incarceration rate per county");
+
+    vis.svg.append("g")
+        .attr("class", "x-axis axis")
+        .attr("transform", "translate(0," + vis.height + ")");
+
+    vis.svg.append("g")
+        .attr("class", "y-axis axis");
+
+    vis.svg.selectAll(".point")
+        .data(vis.schoolData)
+        .enter()
+        .append("circle")
+        .attr("class", "point")
+        .attr("r", 3)
+        .attr("cx", function(d) {
+            return vis.x(d.pct_suspended);
+        })
+        .attr("cy", function(d) {
+            console.log(d.pct_incarcerated);
+            return vis.y(d.pct_incarcerated);
+        })
+        .style("fill", "red");
+}

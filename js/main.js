@@ -6,7 +6,7 @@ queue()
   .defer(d3.csv, "data/World_Stats.csv")
   // .defer(d3.csv, "data/State_Data.csv")
   .defer(d3.csv, "data/2016StateData.csv")
-  .defer(d3.csv, "data/VeraPlusSchoolsCounty.csv")
+  .defer(d3.csv, "data/prison_suspension.csv")
   .defer(d3.csv, "data/incarceration_trends.csv")
   // .defer(d3.csv, "data/2015.csv")
   .await(createVis);
@@ -21,6 +21,7 @@ function createVis(
   bardata,
   world_data,
   state_data2016,
+  schoolData,
   trendsData
 ) {
   _.each(world_data, country => {
@@ -52,6 +53,7 @@ function createVis(
   barchart = new BarVis("bar-vis", bardata);
   // d3.select("#cartogram-button").on("click", cartogram.simulate())
 
+  scatterplot = new Scatterplot("scatterplot", schoolData);
   // 1. Create event handler
   var eventHandler = {};
   let matrixViz1 = new Matrix("dot-matrix", trendsData, 18, eventHandler);
