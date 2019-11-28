@@ -67,9 +67,6 @@ Scatterplot.prototype.initVis = function() {
             return d.pct_incarcerated;
         })/2]);
 
-    vis.xAxis = d3.axisBottom()
-        .scale(vis.x);
-
     vis.svg.append("text")
         .attr("transform", "translate(" + (vis.width/2) + "," + (vis.height + 35) + ")")
         .style("text-anchor", "middle")
@@ -77,6 +74,9 @@ Scatterplot.prototype.initVis = function() {
 
     vis.yAxis = d3.axisLeft()
         .scale(vis.y);
+
+    vis.xAxis = d3.axisBottom()
+        .scale(vis.x);
 
     // vis.rotateTranslate = d3.svg.transform().rotate(-90).translate(-20, 0);
     vis.svg.append("text")
@@ -89,10 +89,22 @@ Scatterplot.prototype.initVis = function() {
 
     vis.svg.append("g")
         .attr("class", "x-axis axis")
-        .attr("transform", "translate(0," + vis.height + ")");
+        .attr("transform", "translate(0," + vis.height + ")")
+        .call(vis.xAxis);
 
     vis.svg.append("g")
-        .attr("class", "y-axis axis");
+        .attr("class", "y-axis axis")
+        .call(vis.yAxis);
+
+
+    vis.tooltip = d3.tip()
+        .attr('class', 'tooltip')
+        .html(function(d) {
+            console.log(d);
+            return "<span>Percent suspended: " + d3.format(",.2f")(d.pct_suspended*100) + "%</span><br><span>Percent incarcerated: " + d3.format(",.2f")(d.pct_incarcerated*100) + "%</span>";}
+            );
+
+    vis.svg.call(vis.tooltip);
 
     vis.svg.selectAll(".point")
         .data(vis.schoolData)
@@ -104,8 +116,8 @@ Scatterplot.prototype.initVis = function() {
             return vis.x(d.pct_suspended);
         })
         .attr("cy", function(d) {
-            console.log(d.pct_incarcerated);
             return vis.y(d.pct_incarcerated);
         })
-        .style("fill", "red");
-}
+        .on('mouseover', vis.tooltip.show)
+        .on('mouseout', vis.tooltip.hide);
+};
