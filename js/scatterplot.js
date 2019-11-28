@@ -96,11 +96,56 @@ Scatterplot.prototype.initVis = function() {
         .attr("class", "y-axis axis")
         .call(vis.yAxis);
 
+    //
+    // var xSeries = d3.range(1, xLabels.length + 1);
+    // var ySeries = data.map(function(d) { return parseFloat(d['rate']); });
+    //
+    // var leastSquaresCoeff = leastSquares(xSeries, ySeries);
+    //
+    // // apply the reults of the least squares regression
+    // var x1 = xLabels[0];
+    // var y1 = leastSquaresCoeff[0] + leastSquaresCoeff[1];
+    // var x2 = xLabels[xLabels.length - 1];
+    // var y2 = leastSquaresCoeff[0] * xSeries.length + leastSquaresCoeff[1];
+    // var trendData = [[x1,y1,x2,y2]];
+    //
+    // var trendline = svg.selectAll(".trendline")
+    //     .data(trendData);
+    //
+    // trendline.enter()
+    //     .append("line")
+    //     .attr("class", "trendline")
+    //     .attr("x1", function(d) { return xScale(d[0]); })
+    //     .attr("y1", function(d) { return yScale(d[1]); })
+    //     .attr("x2", function(d) { return xScale(d[2]); })
+    //     .attr("y2", function(d) { return yScale(d[3]); })
+    //     .attr("stroke", "black")
+    //     .attr("stroke-width", 1);
 
+    // vis.linearRegression = ƒ(vis.schoolData);
+    vis.linearRegression = d3.regressionLinear()
+        .x(d => d.pct_suspended)
+        .y(d => d.pct_incarcerated)
+        .domain(d3.extent(vis.schoolData, function(d) {
+            return d.pct_suspended;
+        }));
+    vis.regressionLine = vis.linearRegression(vis.schoolData);
+
+    vis.line = d3.line()
+        .x(d => vis.x(d[0]))
+        .y(d => vis.y(d[1]));
+
+    vis.svg.append("path")
+        .datum(vis.regressionLine)
+        .attr("d", vis.line)
+        .style("stroke", "steelblue")
+        .style("stroke-width", "2px");
+
+
+    //tooltip on mouseover
     vis.tooltip = d3.tip()
         .attr('class', 'tooltip')
         .html(function(d) {
-            console.log(d);
             return "<span>Percent suspended: " + d3.format(",.2f")(d.pct_suspended*100) + "%</span><br><span>Percent incarcerated: " + d3.format(",.2f")(d.pct_incarcerated*100) + "%</span>";}
             );
 
