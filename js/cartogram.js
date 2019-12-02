@@ -17,7 +17,7 @@ Cartogram = function (_parentElements, _data, _eventHandler) {
     });
 
     this.initVis();
-}
+};
 
 
 /*
@@ -34,57 +34,34 @@ Cartogram.prototype.initVis = function () {
         .domain([0, 800]);
 
 
-    vis.width = 900 - vis.margin.left - vis.margin.right,
-        vis.height = 800 - vis.margin.top - vis.margin.bottom;
+    vis.width = 1300 - vis.margin.left - vis.margin.right,
+        vis.height = 600 - vis.margin.top - vis.margin.bottom;
 
     // SVG drawing area
     vis.svg = d3.select("#" + vis.parentElements[0]).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
+        .attr("id", `${vis.parentElements[0]}-svg`)
         .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
         .append("g")
         .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
-    vis.otherSvg = d3.select("#" + vis.parentElements[1]).append("svg")
-        .attr("width", vis.width + vis.margin.left + vis.margin.right - 450)
-        .attr("id", "other-circles-svg")
-        .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
-        .append("g")
-        .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
-
-    vis.otherSvg.append("text")
-        .attr("x", 120)
-        .attr("y", -10)
-        .attr("text-anchor", "middle")
-        .style("font-size", "15spx")
-        .attr("id", "comparable-countries")
-        .text("Comparable Countries (scroll)");
-
-    vis.usCircle = vis.svg.append("g")
-        .attr("class", "us-circle-group")
-        .attr("transform", "translate(" + '300' + "," + '350' + ")");
-
-    vis.otherCircles = vis.otherSvg.append("g")
-        .attr("class", "other-circles-group")
-        .attr("transform", "translate(" + '0' + "," + '0' + ")");
-
-
-    vis.x = d3.scaleLinear()
-        .range([0, 100000])
-        .domain([0, d3.max(_.map(vis.data.world), country => {
-            return country['Prison Population Total']
-        })]);
-
-    vis.scale = d3.scaleLinear() // v4
-        .domain([0, 1000])
-        .range([0, 300]);  // clipped
     vis.svg.append("text")
         .attr("x", 0)
-        .attr("y", 25)
-        .text("Incarceration Rate Per 100,000")
-    var axisGroup = vis.svg.append("g").attr("transform", "translate(0,50)")
-    var axis = d3.axisTop() // v4
-        .scale(vis.scale)
-    var axisNodes = axisGroup.call(axis);
+        .attr("class", "legend-label")
+        .attr("y", -5)
+        .text("Incarceration Rate Per 100,000 People");
+
+
+    vis.scale = d3.scaleLinear() // v4
+        .domain([0, 800])
+        .range([0, 300]);  // clipped
+
+    let axisGroup = vis.svg.append("g").attr("transform", "translate(0,20)");
+    let axis = d3.axisTop() // v4
+        .scale(vis.scale);
+    axisGroup.call(axis);
+
+
     let scaleRange = _.range(300);
     vis.svg.selectAll("color-scale")
         .data(scaleRange)
@@ -94,403 +71,459 @@ Cartogram.prototype.initVis = function () {
         .attr("x", d => {
             return d;
         })
-        .attr("y", 55)
+        .attr("y", 25)
         .attr("width", 1)
         .attr("height", 20)
         .attr("fill", d => {
             let val = vis.scale.invert(d);
             return vis.colorScale(val)
-        })
-    vis.wrangleData()
-}
-
-
-/*
- * Data wrangling
- */
-
-Cartogram.prototype.wrangleData = function () {
-    var vis = this;
-    vis.displayData = vis.data;
-
-
-    vis.stage++;
-    if (vis.stage % 3 === 1) {
-        vis.displayData = vis.data
-    } else {
-        vis.displayData = vis.zeroData;
-    }
-    vis.usData = _.find(vis.displayData.world, country => {
-        return country['Title'] == 'United States of America'
-    });
-
-    if (vis.stage % 3 === 1) {
-        vis.updateVis();
-    } else {
-        $('.carousel-control-next-icon').hide();
-        vis.updateVis();
-        vis.growMap();
-        vis.drawMap();
-    }
-
-}
-
-
-/*
- * The drawing function - should use the D3 update sequence (enter, update, exit)
- * Function parameters only needed if different kinds of updates are needed
- */
-
-Cartogram.prototype.updateVis = function (hovered) {
-    var vis = this;
-
-    if(hovered){
-        let stateName = vis.data.fipsToState[hovered.id];
-        let stateData = _.find(vis.data.state, state => {
-            return _.trim(stateName) == _.trim(state['State'])
-        })
-        vis.otherCountryData = _.sortBy(vis.displayData.world, d=>{
-            return Math.abs(stateData['Total'] - d['Prison Population Total'])
-        })
-        vis.otherCountryData = _.filter(vis.otherCountryData, country => {
-            return country['Title'] != 'United States of America'
-        });
-        vis.otherSvg.select('#comparable-countries').text(d=>{
-            return `Comparable Countries to ${stateName} (scroll)`
-        })
-
-    } else{
-        vis.otherCountryData = _.sortBy(vis.displayData.world, 'Prison Population Total').reverse();
-        vis.otherCountryData = _.filter(vis.otherCountryData, country => {
-            return country['Title'] != 'United States of America'
-        });
-    }
-    let usCircle = vis.usCircle.selectAll(".us-circle")
-        .data([vis.usData]);
-
-    usCircle.enter().append("circle")
-        .merge(usCircle)
-        .transition()
-        .attr("class", "us-circle")
-        .attr("cx", 0)
-        .attr("cy", 0)
-        .attr("r", d => {
-            return Math.sqrt(vis.x(d['Prison Population Total']) / Math.PI)
-        })
-        .attr("fill", d => {
-            return vis.colorScale(d['Prison Population Rate'])
-        })
-
-    usCircle.exit().remove()
-
-    let countryLabel = vis.usCircle.selectAll(".us-country-label")
-        .data([vis.usData]);
-    countryLabel.enter().append("text")
-        .merge(countryLabel)
-        .attr("class", "us-country-label")
-        .attr("x", 0)
-        .attr("y", d => {
-            return -Math.sqrt(vis.x(d['Prison Population Total']) / Math.PI) - 30
-        })
-        .attr("text-anchor", "middle")
-        .text(d => {
-            return d['Title']
-        })
-        .attr("opacity", d => {
-            return d['Prison Population Total']
-        });
-    countryLabel.exit().remove()
-
-    let populationLabel = vis.usCircle.selectAll(".us-population-label")
-        .data([vis.usData]);
-
-    populationLabel.enter().append("text")
-        .merge(populationLabel)
-        .attr("x", 0)
-        .attr("y", d => {
-            return -Math.sqrt(vis.x(d['Prison Population Total']) / Math.PI) - 10
-        })
-        .attr("class", "us-population-label")
-        .attr("text-anchor", "middle")
-        .text(d => {
-            return `Prison Population: ${d['Prison Population Total']}`
-        })
-        .attr("opacity", d => {
-            return d['Prison Population Total']
-        });
-    populationLabel.exit().remove()
-
-
-    let otherCircles = vis.otherCircles.selectAll(".other-circles")
-        .data(vis.otherCountryData);
-
-    otherCircles.enter().append("circle")
-        .merge(otherCircles)
-        .transition()
-        .attr("class", "other-circles")
-        .attr("cx", d => {
-            return 100;
-        })
-        .attr("cy", (d,i) => {
-            return i * 300 + 200
-        })
-        .attr("r", d => {
-            return Math.sqrt(vis.x(d['Prison Population Total']) / Math.PI)
-        })
-        .attr("fill", d => {
-            return vis.colorScale(d['Prison Population Rate'])
-        })
-    otherCircles.exit().remove()
-
-
-    let otherCountryLabels = vis.otherSvg.selectAll(".other-country-labels")
-        .data(vis.otherCountryData)
-
-
-    otherCountryLabels.enter().append("text")
-        .merge(otherCountryLabels)
-        .attr("class", "other-country-labels")
-        .attr("x", d => {
-            return 100
-        })
-        .attr("y", (d, i) => {
-            return i * 300 + 200 - Math.sqrt(vis.x(d['Prison Population Total']) / Math.PI) -23
-        })
-        .attr("text-anchor", "middle")
-        .text(d => {
-            return d['Title']
-        })
-        .attr("opacity", d => {
-            return d['Prison Population Total']
-        });
-    otherCountryLabels.exit().remove();
-
-    let otherCountryPopulationLabels = vis.otherSvg.selectAll(".other-country-population-labels")
-        .data(vis.otherCountryData);
-
-    otherCountryPopulationLabels.enter().append("text")
-        .merge(otherCountryPopulationLabels)
-        .attr("class", "other-country-population-labels")
-        .attr("x", d => {
-            return 100
-        })
-        .attr("y", (d,i) => {
-            return i * 300 + 200 - Math.sqrt(vis.x(d['Prison Population Total']) / Math.PI) - 8
-        })
-        .attr("text-anchor", "middle")
-        .text(d => {
-            return 'Prison Population:' + d['Prison Population Total']
-        })
-        .attr("opacity", d => {
-            return d['Prison Population Total']
         });
 
-    otherCountryPopulationLabels.exit().remove();
+    let nextButton = vis.svg.append("g")
+        .attr("class", "next-button-group")
+        .attr("transform", `translate(${vis.width - vis.margin.left},${vis.height / 2 - vis.margin.top}) scale(0.1)`);
 
+    nextButton.append("path")
+        .attr("d", "M128 192L0 320l192 192L0 704l128 128 320-320L128 192z")
+        .attr("class", "next-button")
+        .on("click", d => {
+            return vis.usMap()
+        });
 
-};
+    let prev = vis.svg.append("g")
+        .attr("class", "prev-button-group")
+        .attr("transform", `translate(0,${vis.height / 2 - vis.margin.top + 102}) scale(0.1) rotate(180)`);
 
-Cartogram.prototype.growMap = function () {
-    const vis = this;
-    vis.width = 1200;
-    // $(`#${vis.parentElements[0]} svg`).width(1200);
-    // $(`#${vis.parentElements[1]} svg`).width(0);
-    vis.neighbors = topojson.neighbors(vis.data.us.objects.states.geometries);
-    vis.nodes = topojson.feature(vis.data.us, vis.data.us.objects.states).features;
-    var projection = d3.geoAlbersUsa()
-        .scale([100]);          // scale things down so see entire US
+    prev.append("path")
+        .attr("d", "M128 192L0 320l192 192L0 704l128 128 320-320L128 192z")
+        .attr("class", "prev-button")
+        .on("click", d => {
+            return vis.worldMap()
+        });
 
-// Define path generator
-    var path = d3.geoPath()               // path generator that will convert GeoJSON to SVG paths
-        .projection(projection);  // tell path generator to use albersUsa projection
-
-
-    vis.nodes.forEach(function (node, i) {
-
-        var centroid = d3.geoPath().centroid(node);
-
-        node.x0 = centroid[0];
-        node.y0 = centroid[1];
-
-        cleanUpGeometry(node);
-
-    });
-
-    var tip = d3.tip()
+    vis.tip = d3.tip()
         .attr('class', 'd3-tip')
         .offset([0, 100])
         .html(function (d) {
-            let stateName = vis.data.fipsToState[d.id]
-            let stateData = _.find(vis.data.state, state => {
-                return _.trim(stateName) == _.trim(state['State'])
-            })
-            return `<div class="tool-tip"><strong>${stateName}</strong><br>
+            return `<div class="tool-tip"><strong>${_.get(d, 'countryName') || _.get(d, 'stateName') || ''}</strong><br>
                     <table class="table table-borderless">
                       <tbody>
                         <tr>
                           <td>In Prison/Jail</td>
-                          <td>${stateData['Total']}</td>
+                          <td>${_.get(d, 'countryData["Prison Population Total"]') ||
+            _.get(d, 'stateData["Total"]') || ''}</td>
                         </tr> 
                         <tr>
-                          <td>Incarceration Rate per 100,000 adults</td>
-                          <td>${stateData['Rate Per 100000 Adult']}</td>
+                          <td>Incarceration Rate per 100,000</td>
+                          <td>${_.get(d, 'countryData["Prison Population Rate"]') ||
+            _.get(d, 'stateData["Rate Per 100000 All Ages"]') || ''}</td>
                         </tr>
                         </tbody>
                         </table>
                     <div>`
-        })
+        });
 
-    vis.svg.call(tip);
-
-    vis.usMap = vis.svg.append("g")
-        .attr("class", "us-map")
-        .attr("transform", "translate(" + '-100' + "," + '0' + ")");
-
-    vis.states = vis.usMap.selectAll("path")
-        .data(vis.nodes)
-        .enter()
-        .append("path")
-        .attr("class", "state-circles")
-        .attr("d", pathString)
-        .attr("fill", d => {
-            let stateName = vis.data.fipsToState[d.id]
-            let stateData = _.find(vis.data.state, state => {
-                return _.trim(stateName) == _.trim(state['State'])
-            })
-            return vis.colorScale(stateData['Rate Per 100000 All Ages'])
-
-        })
-        .on('mouseover', d=>{
-            vis.updateVis(d);
-            return tip.show(d)
-        })
-        .on('mouseout', tip.hide)
+    vis.svg.call(vis.tip);
+    vis.populationScale = vis.svg.append("g")
+        .attr("transform", "translate(" + (vis.margin.left + 100) + "," + (vis.height + vis.margin.bottom) + ")");
 
 
-}
-Cartogram.prototype.drawMap = function () {
+    vis.similarCountriesSvg = d3.select("#" + vis.parentElements[1]).append("svg")
+        .attr("id", `${vis.parentElements[1]}-svg`)
+        .attr("width", 0)
+        .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
+        .append("g");
+
+    vis.similarCountriesSvg.append("text")
+        .attr("x", 200)
+        .attr("y", 15)
+        .attr("class", "similar-countries-title")
+        .text("Countries w/ comparable prison populations");
+
+
+    vis.similarCountriesSvg
+        .append("rect")
+        .attr("x", 0)
+        .attr("y", 40)
+        .attr("class", "similar-countries-inner-box")
+        .attr("width", 500)
+        .attr("height", 2000);
+    vis.similarCountriesEmptyLabel = vis.similarCountriesSvg.append("g");
+    vis.similarCountriesEmptyLabel.append("text")
+        .attr("x", 200)
+        .attr("y", 190)
+        .attr("class", "similar-countries-inner")
+        .text("click on a state");
+
+    vis.similarCountriesDataGroup = vis.similarCountriesSvg.append("g");
+
+
+    vis.similarCountriesEmptyLabel.append("text")
+        .attr("x", 200)
+        .attr("y", 230)
+        .attr("class", "similar-countries-inner")
+        .text("to view countries w/");
+
+    vis.similarCountriesEmptyLabel.append("text")
+        .attr("x", 200)
+        .attr("y", 270)
+        .attr("class", "similar-countries-inner")
+        .text("similar jail + prison ");
+
+    vis.similarCountriesEmptyLabel.append("text")
+        .attr("x", 200)
+        .attr("y", 310)
+        .attr("class", "similar-countries-inner")
+        .text("populations ");
+
+
+    return vis.worldMap()
+};
+
+Cartogram.prototype.worldMap = function () {
     const vis = this;
-    simulate();
 
-    function simulate() {
-        vis.nodes.forEach(function (node) {
-            node.x = node.x0;
-            node.y = node.y0;
-            let stateName = vis.data.fipsToState[node.id]
-            let stateData = _.find(vis.data.state, state => {
-                return _.trim(stateName) == _.trim(state['State'])
-            })
 
+
+
+    d3.select(`#${vis.parentElements[0]}-svg`).transition()
+        .attr("width", vis.width + vis.margin.left + vis.margin.right);
+
+    d3.select(`#${vis.parentElements[1]}-svg`).transition()
+        .attr("width", 0)
+        .attr("height", 0)
+
+    vis.similarCountriesSvg.transition()
+        .duration(1000)
+        .ease(d3.easeCubic)
+        .attr("transform", "translate(700,20) scale(0)");
+
+
+    if(vis.similarCountriesEmptyLabel) {
+        vis.similarCountriesEmptyLabel.transition()
+            .duration(0)
+            .attr("transform", "scale(1)");
+    }
+
+    if (vis.similarCountriesDataGroup) {
+        vis.similarCountriesDataGroup.transition()
+            .duration(0)
+            .attr("transform", "scale(0)");
+    }
+
+
+
+
+
+
+    vis.populationScaleVals = [100000, 500000, 1000000, 2000000];
+    vis.x = d3.scaleLinear()
+        .range([0, 10000])
+        .domain([0, d3.max(_.map(vis.data.worldData), country => {
+            return country['Prison Population Total']
+        })]);
+    let countries = topojson.feature(vis.data.world, vis.data.world.objects.countries).features;
+
+    vis.worldProjection = d3.geoMollweide()
+        .scale(220)
+        .translate([vis.width / 2 - 100, vis.height / 2 + 50]);
+
+    vis.worldPath = d3.geoPath()
+        .projection(vis.worldProjection);
+
+    vis.nodes = _.map(countries, elem => {
+        let node = {};
+        node.centroid = vis.worldPath.centroid(elem);
+        node.x = node.x0 = node.centroid[0];
+        node.y = node.y0 = node.centroid[1];
+        node.geoJson = elem;
+        let countryName = _.find(vis.data.countryNames, name => {
+            return _.toNumber(name.id) === _.toNumber(node.geoJson.id);
+        });
+        node.countryName = _.get(countryName, 'name', '');
+        let countryData = _.find(vis.data.worldData, country => {
+            return _.trim(node.countryName) === _.trim(country['Title'])
+        });
+        if (!countryData) {
+            node.r = 0
+        } else {
+            node.countryData = countryData;
+            node.r = Math.sqrt(vis.x(countryData['Prison Population Total']) / Math.PI)
+        }
+        return node;
+
+    });
+
+    vis.updateVis();
+};
+
+
+Cartogram.prototype.usMap = function () {
+    const vis = this;
+
+    d3.select(`#${vis.parentElements[0]}-svg`)
+        .transition()
+        .delay(1000)
+        .duration(0)
+        .attr("width", 750);
+
+    d3.select(`#${vis.parentElements[1]}-svg`)
+        .transition()
+        .delay(1000)
+        .duration(0)
+        .attr("width", 400)
+        .attr("height", 2000)
+
+
+
+    vis.similarCountriesSvg.transition()
+        .delay(1300)
+        .duration(0)
+        .attr("transform", "translate(0,0) scale(1)");
+
+    vis.populationScaleVals = [50000, 100000, 200000, 300000];
+    vis.x = d3.scaleLinear()
+        .range([0, 10000])
+        .domain([0, d3.max(_.map(vis.data.state), state => {
+            return state['Total']
+        })]);
+
+    vis.usPath = d3.geoPath();
+
+
+    let states = topojson.feature(vis.data.us, vis.data.us.objects.states).features;
+
+    vis.nodes = _.map(states, elem => {
+        let node = {};
+        node.centroid = vis.usPath.centroid(elem);
+        node.x = node.x0 = node.centroid[0] * 0.7 + 15;
+        node.y = node.y0 = node.centroid[1] * 0.7 + 20;
+        node.centroid = [node.x, node.y];
+        node.geoJson = elem;
+
+        let stateName = vis.data.fipsToState[elem.id];
+
+        let stateData = _.find(vis.data.state, state => {
+            return _.trim(stateName) == _.trim(state['State'])
+        });
+
+        node.stateName = stateName;
+        if (!stateData) {
+            node.r = 0
+        } else {
+            node.stateData = stateData;
             node.r = Math.sqrt(vis.x(stateData['Total']) / Math.PI)
+        }
+        return node;
+
+    });
+
+    return vis.updateVis();
+};
+
+Cartogram.prototype.updateVis = function () {
+    const vis = this;
+
+
+    let populationScaleCircles = vis.populationScale.selectAll(".legend-circle")
+        .data(vis.populationScaleVals);
+
+    populationScaleCircles.enter()
+        .append("circle")
+        .attr("class", "legend-circle")
+        .merge(populationScaleCircles)
+        .transition()
+        .duration(1500)
+        .ease(d3.easeCubic)
+        .attr("cx", 0)
+        .attr("cy", 0)
+        .attr("r", d => {
+            return Math.sqrt(vis.x(d) / Math.PI)
+        });
+
+    populationScaleCircles.exit().remove();
+
+
+    let populationScaleLabels = vis.populationScale.selectAll(".legend-text")
+        .data(vis.populationScaleVals);
+    populationScaleLabels.enter()
+        .append("text")
+        .attr("class", "legend-text")
+        .merge(populationScaleLabels)
+        .transition()
+        .duration(1500)
+        .ease(d3.easeCubic)
+        .attr("x", d => {
+            return 0
+        })
+        .attr("y", d => {
+            return 0 - Math.sqrt(vis.x(d) / Math.PI) - 3
+        })
+        .text(d => {
+            return _.toString(d)
+        });
+    populationScaleLabels.exit().remove();
+
+
+    vis.populationScale.append("text")
+        .attr("x", 0)
+        .attr("y", -80)
+        .attr("class", "legend-scale-title")
+        .text("Population Scale Legend");
+
+    vis.nodes = simulate(vis.nodes);
+
+
+    let circles = vis.svg.selectAll(".world-circles")
+        .data(vis.nodes);
+
+    circles.enter()
+        .append("circle")
+        .on('mouseover', d => {
+            return vis.tip.show(d)
+        })
+        .on('mouseout', vis.tip.hide)
+        .on('click', d => {
+            if (d.stateData) {
+                return vis.drawSimilarCountries(d)
+            }
+        })
+        .merge(circles)
+        .transition()
+        .duration(1500)
+        .ease(d3.easeCubic)
+        .attr("class", "world-circles")
+        .attr("cx", d => {
+            return d.x;
+        })
+        .attr("cy", d => {
+            return d.y;
+        })
+        .attr("r", d => {
+            return d.r;
+        })
+        .attr("fill", d => {
+            return vis.colorScale(_.get(d, 'countryData["Prison Population Rate"]') ||
+                _.get(d, 'stateData["Rate Per 100000 All Ages"]'))
         });
 
 
-        let links = d3.merge(vis.neighbors.map(function (neighborSet, i) {
-            return neighborSet.filter(j => vis.nodes[j]).map(function (j) {
-                return {source: i, target: j, distance: vis.nodes[i].r + vis.nodes[j].r + 3};
-            });
-        }));
+    circles.exit().remove();
 
-        var simulation = d3.forceSimulation(vis.nodes)
+
+    function simulate(nodes) {
+        const simulation = d3.forceSimulation(nodes)
             .force("cx", d3.forceX().x(d => vis.width / 2).strength(0.02))
             .force("cy", d3.forceY().y(d => vis.height / 2).strength(0.02))
-            .force("link", d3.forceLink(links).distance(d => d.distance))
-            .force("x", d3.forceX().x(d => d.x).strength(0.1))
-            .force("y", d3.forceY().y(d => d.y).strength(0.1))
-            .force("collide", d3.forceCollide().strength(0.8).radius(d => d.r + 3))
+            .force("x", d3.forceX().x(d => d.x).strength(0.3))
+            .force("y", d3.forceY().y(d => d.y).strength(0.3))
+            .force("charge", d3.forceManyBody().strength(-1))
+            .force("collide", d3.forceCollide().radius(d => d.r + 2).strength(0.8))
             .stop();
 
-        while (simulation.alpha() > 0.1) {
+        while (simulation.alpha() > 0.01) {
             simulation.tick();
         }
-
-        vis.nodes.forEach(function (node) {
-            var circle = pseudocircle(node),
-                closestPoints = node.rings.slice(1).map(function (ring) {
-                    var i = d3.scan(circle.map(point => distance(point, ring.centroid)));
-                    return ring.map(() => circle[i]);
-                }),
-                interpolator = d3.interpolateArray(node.rings, [circle, ...closestPoints]);
-
-            node.interpolator = function (t) {
-                var str = pathString(interpolator(t));
-                // Prevent some fill-rule flickering for MultiPolygons
-                if (t > 0.99) {
-                    return str.split("Z")[0] + "Z";
-                }
-                return str;
-            };
-        });
-
-        vis.states
-            .sort((a, b) => b.r - a.r)
-            .transition()
-            .duration(0)
-            .attrTween("d", node => node.interpolator)
-            .attr("class", "state-circles")
-
-        // .on("end", (d, i) => i );
-
+        return nodes;
     }
+
 
 };
 
-function pseudocircle(node) {
-    return node.rings[0].map(function (point) {
-        var angle = node.startingAngle - 2 * Math.PI * (point.along / node.perimeter);
-        return [
-            Math.cos(angle) * node.r + node.x,
-            Math.sin(angle) * node.r + node.y
-        ];
+
+Cartogram.prototype.drawSimilarCountries = function (state) {
+    const vis = this;
+
+    vis.similarCountriesDataGroup.transition()
+        .duration(0)
+        .attr("transform", "scale(1)");
+
+
+    vis.similarCountriesEmptyLabel.transition()
+        .duration(0)
+        .attr("transform", "scale(0)");
+
+    let similarCountries = _.sortBy(vis.data.worldData, country => {
+        return Math.abs(state.stateData['Total'] - country['Prison Population Total'])
     });
-}
-
-function cleanUpGeometry(node) {
-
-    node.rings = (node.geometry.type === "Polygon" ? [node.geometry.coordinates] : node.geometry.coordinates);
-
-    node.rings = node.rings.map(function (polygon) {
-        polygon[0].area = d3.polygonArea(polygon[0]);
-        polygon[0].centroid = d3.polygonCentroid(polygon[0]);
-        return polygon[0];
-    });
-
-    node.rings.sort((a, b) => b.area - a.area);
-
-    node.perimeter = d3.polygonLength(node.rings[0]);
-
-    // Optional step, but makes for more circular circles
-    bisect(node.rings[0], node.perimeter / 72);
-
-    node.rings[0].reduce(function (prev, point) {
-        point.along = prev ? prev.along + distance(point, prev) : 0;
-        node.perimeter = point.along;
-        return point;
-    }, null);
-
-    node.startingAngle = Math.atan2(node.rings[0][0][1] - node.y0, node.rings[0][0][0] - node.x0);
-
-}
-
-function bisect(ring, maxSegmentLength) {
-    for (var i = 0; i < ring.length; i++) {
-        var a = ring[i], b = i === ring.length - 1 ? ring[0] : ring[i + 1];
-
-        while (distance(a, b) > maxSegmentLength) {
-            b = midpoint(a, b);
-            ring.splice(i + 1, 0, b);
+    similarCountries = _.slice(similarCountries, 0, 20);
+    let circleProperties = _.range(0, 20);
+    _.forEach(similarCountries, (elem, i) => {
+        let obj = {};
+        obj.radius = Math.sqrt(vis.x(elem['Prison Population Total']) / Math.PI);
+        obj.x = 200;
+        if (i === 0) {
+            obj.y = obj.radius + 70
+        } else {
+            obj.y = circleProperties[i - 1].y + 30 + circleProperties[i - 1].radius + obj.radius
         }
-    }
-}
+        obj.countryName = elem['Title'];
+        obj.countryData = elem;
+        circleProperties[i] = obj;
+    });
 
-function distance(a, b) {
-    return Math.sqrt((a[0] - b[0]) * (a[0] - b[0]) + (a[1] - b[1]) * (a[1] - b[1]));
-}
 
-function midpoint(a, b) {
-    return [a[0] + (b[0] - a[0]) * 0.5, a[1] + (b[1] - a[1]) * 0.5];
-}
+    let stateTitle = vis.similarCountriesDataGroup.selectAll(".state-title")
+        .data([state.stateName]);
+    stateTitle.enter()
+        .append("text")
+        .merge(stateTitle)
+        .transition()
+        .attr("x", 200)
+        .attr("y", 35)
+        .attr("class", "state-title")
+        .text(d => {
+            return `to ${d}`
+        });
 
-function pathString(d) {
-    return (d.rings || d).map(ring => "M" + ring.join("L") + "Z").join(" ");
-}
+
+
+    let similarCircles = vis.similarCountriesDataGroup.selectAll(".world-circles")
+        .data(circleProperties);
+    similarCircles.enter()
+        .append("circle")
+        .on('mouseover', d => {
+            return vis.tip.show(d)
+        })
+        .on('mouseout', vis.tip.hide)
+        .merge(similarCircles)
+        .transition()
+        .duration(1500)
+        .ease(d3.easeCubic)
+        .attr("class", "world-circles")
+        .attr("cx", d => {
+            return d.x;
+        })
+        .attr("cy", d => {
+            return d.y;
+        })
+        .attr("r", d => {
+            return d.radius;
+        })
+        .attr("fill", d => {
+            return vis.colorScale(_.get(d, 'countryData["Prison Population Rate"]') ||
+                _.get(d, 'stateData["Rate Per 100000 All Ages"]'))
+        });
+
+
+    let similarCircleTitles = vis.similarCountriesDataGroup.selectAll(".country-titles")
+        .data(circleProperties);
+    similarCircleTitles.enter()
+        .append("text")
+        .merge(similarCircleTitles)
+        .transition()
+        .duration(1500)
+        .ease(d3.easeCubic)
+        .attr("class", "country-titles")
+        .attr("x", d => {
+            return d.x;
+        })
+        .attr("y", d => {
+            return d.y - d.radius - 5;
+        })
+        .text(d => {
+            return d.countryName;
+        })
+
+
+};
