@@ -13,12 +13,12 @@ body {
     fill: #eee;
 }
 
-.similar-countries-box{
-  fill: rgb(200, 200, 200);
+.similar-countries-box {
+    fill: rgb(200, 200, 200);
 }
 
-.similar-countries-inner-box{
-  fill: rgb(122, 122, 122);
+.similar-countries-inner-box {
+    fill: rgb(158, 158, 158);
 }
 
 .carousel-control-next,
@@ -40,7 +40,8 @@ body {
 #world-circles {
     height: 600px;
     width: 400px;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
     direction: ltr;
 }
 
@@ -63,11 +64,21 @@ body {
     margin-right: 2em;
     margin-top: 10em;
 }
-.next-button{
-  fill:gray;
+
+.next-button {
+     fill: gray;
+ }
+
+.next-button:hover {
+    fill: #3c3c3c;
 }
-.next-button:hover{
-  fill: #3c3c3c;
+
+.prev-button {
+    fill: gray;
+}
+
+.prev-button:hover {
+    fill: #3c3c3c;
 }
 
 
@@ -88,7 +99,7 @@ body {
 }
 
 .table td {
-  padding: .3rem;
+    padding: .3rem;
 }
 
 
@@ -114,29 +125,34 @@ table {
     stroke: darkgrey;
     stroke-width: 3px;
 }
-.legend-text{
-  text-anchor: middle;
-  font-size: 8pt;
-}
-.legend-scale-title{
-  text-anchor: middle;
-  font-size: 1rem;
-}
-.similar-countries-title{
-  text-anchor: middle;
-}
-.country-titles{
-  text-anchor: middle;
-  font-size: 14pt;
-  fill: #ffffff;
-  font-weight: bolder;
+
+.legend-text {
+    text-anchor: middle;
+    font-size: 8pt;
 }
 
-.similar-countries-inner{
-  text-anchor: middle;
-  font-weight: bolder;
-  fill:lightgray;
-  font-size: 26pt;
+.legend-scale-title {
+    text-anchor: middle;
+    font-size: 1rem;
+}
+
+.similar-countries-title {
+    text-anchor: middle;
+    font-size: 10pt;
+}
+
+.country-titles {
+    text-anchor: middle;
+    font-size: 10pt;
+    fill: #ffffff;
+    font-weight: bolder;
+}
+
+.similar-countries-inner {
+    text-anchor: middle;
+    font-weight: bolder;
+    fill: #e0e0e0;
+    font-size: 18pt;
 }
 
 .column-image {
@@ -248,19 +264,20 @@ table {
 .call-to-action {
     margin-left: 50px;
 }
-.state-title{
-  font-size: 14pt;
-  font-weight: bolder;
-  text-anchor: middle;
+
+.state-title {
+    font-size: 10pt;
+    font-weight: bolder;
+    text-anchor: middle;
 }
 
 .tooltip {
-  position: absolute;
-  text-align: center;
-  padding: 2px;
-  font: 12px sans-serif;
-  background: lightsteelblue;
-  border: 0px;
-  border-radius: 2px;
-  pointer-events: none;
+    position: absolute;
+    text-align: center;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 2px;
+    pointer-events: none;
 }

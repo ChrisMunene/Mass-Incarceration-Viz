@@ -1,282 +1,276 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+    <meta charset="utf-8"/>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>CS171 - Final Project</title>
 
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/fullpage.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/fullpage.css"/>
     <link
-      href="https://fonts.googleapis.com/css?family=Merriweather&display=swap"
-      rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Merriweather&display=swap"
+            rel="stylesheet"
     />
 
     <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css"
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css"
     />
 
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-  <body>
-    <div id="fullpage">
-      <div class="section active" id="section0" data-anchor="slide1">
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<div id="fullpage">
+    <div class="section active" id="section0" data-anchor="slide1">
         <div class="page-header white-text">
-          <h1>Visualizing Mass Incarceration</h1>
-          <h1>And The School-To-Prison Pipeline</h1>
+            <h1>Visualizing Mass Incarceration</h1>
+            <h1>And The School-To-Prison Pipeline</h1>
         </div>
         <div class="page-credits white-text">
-          <h4>Harvard CS171 Final Project</h4>
-          <h5>Christopher Kinyua</h5>
-          <h5>Nikhil Vanderklaauw</h5>
-          <h5>Shruthi Venkata</h5>
-          <h5>Simon Warchol</h5>
+            <h4>Harvard CS171 Final Project</h4>
+            <h5>Christopher Kinyua</h5>
+            <h5>Nikhil Vanderklaauw</h5>
+            <h5>Shruthi Venkata</h5>
+            <h5>Simon Warchol</h5>
         </div>
         <div class="jumbotron">
-          <p>
-            Mass incarceration is one of the most jarring realities of the
-            United States--the US holds one quarter of the world’s incarcerated
-            population, while it only constitutes 5% of the global population.
-            The practice of imprisoning socioeconomic and racial minorities, as
-            well as other specific groups, stems from a harsh and complex
-            history of racial discrimination unique to the United States, whose
-            infrastructure and economy originally emerged from slavery, and in
-            which under the 13th Amendment, involuntary servitude is only
-            permissible in the context of jail. This history has transformed
-            into an equally complex modern reality, in which demographics are
-            jailed in varying patterns, for varying reasons, across different
-            regions of the US. These visualizations aim to expose trends in
-            incarceration via a number of those factors, and then more
-            specifically address the role of educational institutions and their
-            punitive systems in feeding the prison-industrial complex.
-          </p>
+            <p>
+                Mass incarceration is one of the most jarring realities of the
+                United States--the US holds one quarter of the world’s incarcerated
+                population, while it only constitutes 5% of the global population.
+                The practice of imprisoning socioeconomic and racial minorities, as
+                well as other specific groups, stems from a harsh and complex
+                history of racial discrimination unique to the United States, whose
+                infrastructure and economy originally emerged from slavery, and in
+                which under the 13th Amendment, involuntary servitude is only
+                permissible in the context of jail. This history has transformed
+                into an equally complex modern reality, in which demographics are
+                jailed in varying patterns, for varying reasons, across different
+                regions of the US. These visualizations aim to expose trends in
+                incarceration via a number of those factors, and then more
+                specifically address the role of educational institutions and their
+                punitive systems in feeding the prison-industrial complex.
+            </p>
         </div>
         <h3 class="scroll-down-left lead white-text">↓</h3>
         <h3 class="scroll-down-right lead white-text">↓</h3>
-      </div>
-
-      <div class="section" id="section3">
-        <!--        <button type="button" id="cartogram-button" class="btn btn-primary">Cartogram</button>-->
-        <h1>Worldwide Incarceration Totals and Rates</h1>
-        <div
-          id="carouselExampleControls"
-          class="carousel slide"
-          data-ride="carousel"
-        >
-          <div class="carousel-inner">
-            <div class="row">
-              <div class="col" id="us-cartogram"></div>
-              <!--                <img src="img/Dot-Chart-Example.png">-->
-
-              <div class="col" id="world-circles"></div>
-            </div>
-          </div>
-          <a class="carousel-control-next" role="button">
-            <span
-              class="carousel-control-next-icon"
-              aria-hidden="true"
-              onclick="nextPage()"
-            ></span>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
-        <h1 class="scroll-down-left lead">↓</h1>
-        <h1 class="scroll-down-right lead">↓</h1>
-      </div>
-
-      <div class="section" id="section4">
-        <div class="row">
-          <div class="col content">
-            <h4>School Statistics - Race Breakdown</h4>
-            <br />
-            <p>
-              Here, we investigate the various trends in disciplinary action
-              taken against students across America. We can see some standout
-              trends with Black, Native American and Pacific Islander students
-              having the highest rates for many of the disciplinary measures.
-              Please explore the different rates to further understand
-              inequalities in disciplinary action. You can choose to display the
-              default ordering or sort/unsort the descending order.
-            </p>
-          </div>
-
-          <div class="col content">
-            <br />
-            <form class="form-inline">
-              <div class="form-group">
-                <label for="view-type"
-                  >See Percent of Students Across USA who</label
-                >
-                <select
-                  class="form-control"
-                  id="view-type"
-                  onchange="updateBar()"
-                >
-                  <option value="iss"
-                    >Received one-or-more in-school suspensions</option
-                  >
-                  <option value="oneplussusp"
-                    >Received one-or-more out-of-school suspensions</option
-                  >
-                  <option value="expulsion">Were Expelled</option>
-                  <option value="expulsionZT"
-                    >Were Expelled Under Zero Tolerance Policy</option
-                  >
-                  <option value="referred_to_law"
-                    >Referred to a Law Enforcement Agency or Official</option
-                  >
-                  <option value="school_arrest"
-                    >Received a School-Related Arrest</option
-                  >
-                  <option value="transferred"
-                    >Were Transferred to an Alternative School for Disciplinary
-                    Reasons</option
-                  >
-                </select>
-                <button
-                  type="button"
-                  class="btn btn-outline-secondary"
-                  role="button"
-                  aria-pressed="true"
-                  id="sort-button"
-                  onclick="sortButtonBar()"
-                >
-                  Sort
-                </button>
-              </div>
-            </form>
-            <!-- Parent container for the visualization -->
-            <div id="bar-vis"></div>
-          </div>
-        </div>
-        <h1 class="scroll-down-left lead">↓</h1>
-        <h1 class="scroll-down-right lead">↓</h1>
-      </div>
-
-      <div class="section" id="section5">
-        <div class="row">
-          <div class="col content">
-            <h4>The School to Prison Pipeline</h4>
-
-            <p>
-              The ACLU describes the “school-to-prison pipeline” as a national
-              trend in which youth are funneled out of schools into juvenile and
-              criminal justice systems. Especially affected are students with
-              learning disabilities, and children from minority and
-              disadvantaged groups, including racial minorities and children who
-              grew up in poverty. These scatterplots demonstrate the
-              correlations between county-wide incarceration rates and
-              disability, and incarceration rates and punitive or disciplinary
-              methods used in county schools, including suspension, expulsion,
-              and corporal punishment. These graphs additionally expose
-              variation in strength of correlation between races [WILL HAVE
-              DIFFERENT/ADDITIONAL TEXT AS THESE GRAPHS ARE COMPLETE AND WE KNOW
-              WHAT THE DATA SHOWS]
-            </p>
-            <p>
-              “When children attend schools that place a greater value on
-              discipline and security than on knowledge and intellectual
-              development, they are attending prep schools for prison”
-            </p>
-            <p>― Angela Y. Davis, Are Prisons Obsolete?</p>
-          </div>
-          <div class="col content">
-            <div id="scatterplot"></div>
-            <!--                <img class="column-image"-->
-            <!--                     src="https://bl.ocks.org/ctufts/raw/298bfe4b11989960eeeecc9394e9f118/062f9cb2e813cdd86a9184fcc2cbfafc5f2f04bc/preview.png">-->
-          </div>
-        </div>
-        <h1 class="scroll-down-left lead">↓</h1>
-        <h1 class="scroll-down-right lead">↓</h1>
-      </div>
-
-      <div class="section" id="section1" >
-          <div class="page-credits">
-            <h4>US Incarcerated Population</h4>
-          </div>
-          <div class="row text-group">
-            <div class="call-to-action">
-              Each of the dots below represent 1M individuals in the US
-              population. How many of these individuals do you think are currently
-              incarcerated? (Drag and click to make your selection).
-            </div>
-            <div class="call-to-action" id="interactive-text"></div>
-          </div>
-          <div class="row ">
-            <div class="col content">
-              <div id="dot-matrix"></div>
-            </div>
-          </div>
-          <h3 class="scroll-down-left lead white-text">↓</h3>
-        <h3 class="scroll-down-right lead white-text">↓</h3>
-        </div>
-  
-        <div class="section" id="section2" >
-            <div class="page-credits">
-              <!-- <h4>Section 2</h4> -->
-              <p class="call-to-action">
-                Thanks for selecting. Here's how you did:
-              </p>
-              <br />
-              <div id="selection-result"></div>
-            </div>
-            <div class="row">
-              <div class="col content">
-                <div id="dot-matrix-2"></div>
-              </div>
-            </div>
-          </div>
-          <h3 class="scroll-down-left lead white-text">↓</h3>
-          <h3 class="scroll-down-right lead white-text">↓</h3>
-      </div>
     </div>
 
-    <!-- Load JS libraries -->
+    <div class="section" id="section1">
+        <h1>Worldwide Incarceration Totals and Rates</h1>
+        <div class="container-fluid">
 
-    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
-    <script type="text/javascript" src="js/fullpage.js"></script>
-    <script type="text/javascript">
-      var myFullpage = new fullpage("#fullpage", {
+            <div class="row">
+                <div class="col" id="us-cartogram"></div>
+
+                <div class="col" id="world-circles"></div>
+            </div>
+            <h1 class="scroll-down-left lead">↓</h1>
+            <h1 class="scroll-down-right lead">↓</h1>
+        </div>
+    </div>
+
+    <div class="section" id="section2">
+        <div class="row">
+            <div class="col content">
+                <h4>School Statistics - Race Breakdown</h4>
+                <br/>
+                <p>
+                    Here, we investigate the various trends in disciplinary action
+                    taken against students across America. We can see some standout
+                    trends with Black, Native American and Pacific Islander students
+                    having the highest rates for many of the disciplinary measures.
+                    Please explore the different rates to further understand
+                    inequalities in disciplinary action. You can choose to display the
+                    default ordering or sort/unsort the descending order.
+                </p>
+            </div>
+
+            <div class="col content">
+                <br/>
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="view-type"
+                        >See Percent of Students Across USA who</label
+                        >
+                        <select
+                                class="form-control"
+                                id="view-type"
+                                onchange="updateBar()"
+                        >
+                            <option value="iss"
+                            >Received one-or-more in-school suspensions
+                            </option
+                            >
+                            <option value="oneplussusp"
+                            >Received one-or-more out-of-school suspensions
+                            </option
+                            >
+                            <option value="expulsion">Were Expelled</option>
+                            <option value="expulsionZT"
+                            >Were Expelled Under Zero Tolerance Policy
+                            </option
+                            >
+                            <option value="referred_to_law"
+                            >Referred to a Law Enforcement Agency or Official
+                            </option
+                            >
+                            <option value="school_arrest"
+                            >Received a School-Related Arrest
+                            </option
+                            >
+                            <option value="transferred"
+                            >Were Transferred to an Alternative School for Disciplinary
+                                Reasons
+                            </option
+                            >
+                        </select>
+                        <button
+                                type="button"
+                                class="btn btn-outline-secondary"
+                                role="button"
+                                aria-pressed="true"
+                                id="sort-button"
+                                onclick="sortButtonBar()"
+                        >
+                            Sort
+                        </button>
+                    </div>
+                </form>
+                <!-- Parent container for the visualization -->
+                <div id="bar-vis"></div>
+            </div>
+        </div>
+        <h1 class="scroll-down-left lead">↓</h1>
+        <h1 class="scroll-down-right lead">↓</h1>
+    </div>
+
+    <div class="section" id="section3">
+        <div class="row">
+            <div class="col content">
+                <h4>The School to Prison Pipeline</h4>
+
+                <p>
+                    The ACLU describes the “school-to-prison pipeline” as a national
+                    trend in which youth are funneled out of schools into juvenile and
+                    criminal justice systems. Especially affected are students with
+                    learning disabilities, and children from minority and
+                    disadvantaged groups, including racial minorities and children who
+                    grew up in poverty. These scatterplots demonstrate the
+                    correlations between county-wide incarceration rates and
+                    disability, and incarceration rates and punitive or disciplinary
+                    methods used in county schools, including suspension, expulsion,
+                    and corporal punishment. These graphs additionally expose
+                    variation in strength of correlation between races [WILL HAVE
+                    DIFFERENT/ADDITIONAL TEXT AS THESE GRAPHS ARE COMPLETE AND WE KNOW
+                    WHAT THE DATA SHOWS]
+                </p>
+                <p>
+                    “When children attend schools that place a greater value on
+                    discipline and security than on knowledge and intellectual
+                    development, they are attending prep schools for prison”
+                </p>
+                <p>― Angela Y. Davis, Are Prisons Obsolete?</p>
+            </div>
+            <div class="col content">
+                <div id="scatterplot"></div>
+                <!--                <img class="column-image"-->
+                <!--                     src="https://bl.ocks.org/ctufts/raw/298bfe4b11989960eeeecc9394e9f118/062f9cb2e813cdd86a9184fcc2cbfafc5f2f04bc/preview.png">-->
+            </div>
+        </div>
+        <h1 class="scroll-down-left lead">↓</h1>
+        <h1 class="scroll-down-right lead">↓</h1>
+    </div>
+
+    <div class="section" id="section4">
+        <div class="page-credits">
+            <h4>US Incarcerated Population</h4>
+        </div>
+        <div class="row text-group">
+            <div class="call-to-action">
+                Each of the dots below represent 1M individuals in the US
+                population. How many of these individuals do you think are currently
+                incarcerated? (Drag and click to make your selection).
+            </div>
+            <div class="call-to-action" id="interactive-text"></div>
+        </div>
+        <div class="row ">
+            <div class="col content">
+                <div id="dot-matrix"></div>
+            </div>
+        </div>
+        <h3 class="scroll-down-left lead white-text">↓</h3>
+        <h3 class="scroll-down-right lead white-text">↓</h3>
+    </div>
+
+    <div class="section" id="section5">
+        <div class="page-credits">
+            <!-- <h4>Section 2</h4> -->
+            <p class="call-to-action">
+                Thanks for selecting. Here's how you did:
+            </p>
+            <br/>
+            <div id="selection-result"></div>
+        </div>
+        <div class="row">
+            <div class="col content">
+                <div id="dot-matrix-2"></div>
+            </div>
+        </div>
+    </div>
+    <h3 class="scroll-down-left lead white-text">↓</h3>
+    <h3 class="scroll-down-right lead white-text">↓</h3>
+</div>
+
+<!-- Load JS libraries -->
+
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
+<script type="text/javascript" src="js/fullpage.js"></script>
+<script type="text/javascript">
+    var myFullpage = new fullpage("#fullpage", {
         sectionsColor: [
-          "#f2f2f2",
-          "#f1f1f1",
-          "#ffffff",
-          "#f1f1f1",
-          "#ffffff",
-          "whitesmoke",
-          "#f3f3f3",
-          "whitesmoke",
-          "#ccddff"
+            "#f2f2f2",
+            "#f1f1f1",
+            "#ffffff",
+            "#f1f1f1",
+            "#ffffff",
+            "whitesmoke",
+            "#f3f3f3",
+            "whitesmoke",
+            "#ccddff"
         ],
+        navigation: true,
+        navigationPosition: 'right',
         licenseKey: "ABB0465B-FA524899-995F79FD-B0187797",
         anchors: ["slide1", "slide2", "slide3", "slide4", "slide5", "slide6"],
-        normalScrollElements: "#other-circles-svg"
-      });
-    </script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/queue.v1.min.js"></script>
-    <script src="js/d3-regression.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
+        normalScrollElements: "#world-circles-svg"
+    });
+</script>
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/queue.v1.min.js"></script>
+<script src="js/d3-regression.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
 
-    <script src="js/d3.min.js"></script>
-    <script src="js/d3-tip.js"></script>
+<script src="js/d3.min.js"></script>
+<script src="js/d3-tip.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
-    <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
-    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
+<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script src="https://d3js.org/d3-geo.v1.min.js"></script>
+<script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
 
 
-    <script src="js/choropleth.js"></script>
-    <script src="js/cartogram.js"></script>
-    <script src="js/stackedbar.js"></script>
-    <script src="js/matrix.js"></script>
-    <script src="js/scatterplot.js"></script>
+<script src="js/choropleth.js"></script>
+<script src="js/cartogram.js"></script>
+<script src="js/stackedbar.js"></script>
+<script src="js/matrix.js"></script>
+<script src="js/scatterplot.js"></script>
 
-    <script src="js/main.js"></script>
-  </body>
+<script src="js/main.js"></script>
+</body>
 </html>

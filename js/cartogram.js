@@ -34,9 +34,8 @@ Cartogram.prototype.initVis = function () {
         .domain([0, 800]);
 
 
-    vis.width = 1300 - vis.margin.left - vis.margin.right,
-        vis.height = 600 - vis.margin.top - vis.margin.bottom;
-
+    vis.width = $(window).width() - vis.margin.left - vis.margin.right,
+        vis.height = $(window).height() - vis.margin.top - vis.margin.bottom - 100;
     // SVG drawing area
     vis.svg = d3.select("#" + vis.parentElements[0]).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
@@ -79,11 +78,11 @@ Cartogram.prototype.initVis = function () {
             return vis.colorScale(val)
         });
 
-    let nextButton = vis.svg.append("g")
+    let next = vis.svg.append("g")
         .attr("class", "next-button-group")
-        .attr("transform", `translate(${vis.width - vis.margin.left},${vis.height / 2 - vis.margin.top}) scale(0.1)`);
+        .attr("transform", `translate(${vis.width - vis.margin.left - 100},${vis.height / 2 - vis.margin.top}) scale(0.1)`);
 
-    nextButton.append("path")
+    next.append("path")
         .attr("d", "M128 192L0 320l192 192L0 704l128 128 320-320L128 192z")
         .attr("class", "next-button")
         .on("click", d => {
@@ -92,7 +91,7 @@ Cartogram.prototype.initVis = function () {
 
     let prev = vis.svg.append("g")
         .attr("class", "prev-button-group")
-        .attr("transform", `translate(0,${vis.height / 2 - vis.margin.top + 102}) scale(0.1) rotate(180)`);
+        .attr("transform", `translate(0,${vis.height / 2 - vis.margin.top + 102}) scale(0.0) rotate(180)`);
 
     prev.append("path")
         .attr("d", "M128 192L0 320l192 192L0 704l128 128 320-320L128 192z")
@@ -131,26 +130,25 @@ Cartogram.prototype.initVis = function () {
     vis.similarCountriesSvg = d3.select("#" + vis.parentElements[1]).append("svg")
         .attr("id", `${vis.parentElements[1]}-svg`)
         .attr("width", 0)
-        .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
+        .attr("height", 0)
         .append("g");
 
     vis.similarCountriesSvg.append("text")
-        .attr("x", 200)
+        .attr("x", 150)
         .attr("y", 15)
         .attr("class", "similar-countries-title")
         .text("Countries w/ comparable prison populations");
-
 
     vis.similarCountriesSvg
         .append("rect")
         .attr("x", 0)
         .attr("y", 40)
         .attr("class", "similar-countries-inner-box")
-        .attr("width", 500)
+        .attr("width", 300)
         .attr("height", 2000);
     vis.similarCountriesEmptyLabel = vis.similarCountriesSvg.append("g");
     vis.similarCountriesEmptyLabel.append("text")
-        .attr("x", 200)
+        .attr("x", 150)
         .attr("y", 190)
         .attr("class", "similar-countries-inner")
         .text("click on a state");
@@ -159,19 +157,19 @@ Cartogram.prototype.initVis = function () {
 
 
     vis.similarCountriesEmptyLabel.append("text")
-        .attr("x", 200)
+        .attr("x", 150)
         .attr("y", 230)
         .attr("class", "similar-countries-inner")
         .text("to view countries w/");
 
     vis.similarCountriesEmptyLabel.append("text")
-        .attr("x", 200)
+        .attr("x", 150)
         .attr("y", 270)
         .attr("class", "similar-countries-inner")
         .text("similar jail + prison ");
 
     vis.similarCountriesEmptyLabel.append("text")
-        .attr("x", 200)
+        .attr("x", 150)
         .attr("y", 310)
         .attr("class", "similar-countries-inner")
         .text("populations ");
@@ -183,15 +181,20 @@ Cartogram.prototype.initVis = function () {
 Cartogram.prototype.worldMap = function () {
     const vis = this;
 
+    vis.svg.select(".next-button-group").transition()
+        .duration(0)
+        .attr("transform", `translate(${vis.width - vis.margin.left - 100},${vis.height / 2 - vis.margin.top}) scale(0.1)`);
 
+    vis.svg.select(".prev-button-group").transition()
+        .duration(0)
+        .attr("transform", `translate(0,${vis.height / 2 - vis.margin.top + 102}) scale(0.0) rotate(180)`);
 
 
     d3.select(`#${vis.parentElements[0]}-svg`).transition()
         .attr("width", vis.width + vis.margin.left + vis.margin.right);
 
     d3.select(`#${vis.parentElements[1]}-svg`).transition()
-        .attr("width", 0)
-        .attr("height", 0)
+        .attr("width", 0);
 
     vis.similarCountriesSvg.transition()
         .duration(1000)
@@ -199,7 +202,7 @@ Cartogram.prototype.worldMap = function () {
         .attr("transform", "translate(700,20) scale(0)");
 
 
-    if(vis.similarCountriesEmptyLabel) {
+    if (vis.similarCountriesEmptyLabel) {
         vis.similarCountriesEmptyLabel.transition()
             .duration(0)
             .attr("transform", "scale(1)");
@@ -210,11 +213,6 @@ Cartogram.prototype.worldMap = function () {
             .duration(0)
             .attr("transform", "scale(0)");
     }
-
-
-
-
-
 
     vis.populationScaleVals = [100000, 500000, 1000000, 2000000];
     vis.x = d3.scaleLinear()
@@ -261,19 +259,26 @@ Cartogram.prototype.worldMap = function () {
 Cartogram.prototype.usMap = function () {
     const vis = this;
 
+    vis.svg.select(".next-button-group").transition()
+        .duration(0)
+        .attr("transform", `translate(${vis.width - vis.margin.left - 100},${vis.height / 2 - vis.margin.top}) scale(0.0)`);
+
+    vis.svg.select(".prev-button-group").transition()
+        .duration(0)
+        .attr("transform", `translate(0,${vis.height / 2 - vis.margin.top + 102}) scale(0.1) rotate(180)`);
+
     d3.select(`#${vis.parentElements[0]}-svg`)
         .transition()
         .delay(1000)
         .duration(0)
-        .attr("width", 750);
+        .attr("width", 2 / 3 * vis.width);
 
     d3.select(`#${vis.parentElements[1]}-svg`)
         .transition()
         .delay(1000)
         .duration(0)
-        .attr("width", 400)
-        .attr("height", 2000)
-
+        .attr("width", 1 / 2 * vis.width)
+        .attr("height", 2000);
 
 
     vis.similarCountriesSvg.transition()
@@ -451,7 +456,7 @@ Cartogram.prototype.drawSimilarCountries = function (state) {
     _.forEach(similarCountries, (elem, i) => {
         let obj = {};
         obj.radius = Math.sqrt(vis.x(elem['Prison Population Total']) / Math.PI);
-        obj.x = 200;
+        obj.x = 150;
         if (i === 0) {
             obj.y = obj.radius + 70
         } else {
@@ -469,13 +474,12 @@ Cartogram.prototype.drawSimilarCountries = function (state) {
         .append("text")
         .merge(stateTitle)
         .transition()
-        .attr("x", 200)
+        .attr("x", 150)
         .attr("y", 35)
         .attr("class", "state-title")
         .text(d => {
             return `to ${d}`
         });
-
 
 
     let similarCircles = vis.similarCountriesDataGroup.selectAll(".world-circles")
