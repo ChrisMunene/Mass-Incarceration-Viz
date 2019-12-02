@@ -145,7 +145,7 @@ Cartogram.prototype.initVis = function () {
         .attr("y", 40)
         .attr("class", "similar-countries-inner-box")
         .attr("width", 300)
-        .attr("height", 2000);
+        .attr("height", 2200);
     vis.similarCountriesEmptyLabel = vis.similarCountriesSvg.append("g");
     vis.similarCountriesEmptyLabel.append("text")
         .attr("x", 150)
@@ -278,7 +278,7 @@ Cartogram.prototype.usMap = function () {
         .delay(1000)
         .duration(0)
         .attr("width", 1 / 2 * vis.width)
-        .attr("height", 2000);
+        .attr("height", 2200);
 
 
     vis.similarCountriesSvg.transition()
