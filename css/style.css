@@ -13,9 +13,9 @@ body {
   fill: #eee;
 }
 .boundary {
-    fill: none;
-    stroke: rgba(149, 149, 149, 0.29);
-    stroke-width: 1px;
+  fill: none;
+  stroke: rgba(149, 149, 149, 0.29);
+  stroke-width: 1px;
 }
 
 .similar-countries-box {
@@ -100,11 +100,10 @@ body {
   stroke: #565656;
   stroke-width: 2px;
 }
-.selected-state{
-    stroke: #000000;
-    stroke-width: 3px;
+.selected-state {
+  stroke: #000000;
+  stroke-width: 3px;
 }
-
 
 .table td {
   padding: 0.3rem;
@@ -148,15 +147,13 @@ table {
 }
 
 .country-titles {
-
-    text-anchor: start;
-    font-size: 7pt;
-    fill: #929292;
-    font-weight: bolder;
-
+  text-anchor: start;
+  font-size: 7pt;
+  fill: #929292;
+  font-weight: bolder;
 }
-.similar-countries-legend{
-    font-size: 6pt;
+.similar-countries-legend {
+  font-size: 6pt;
 }
 
 .similar-countries-inner {
@@ -316,10 +313,6 @@ table {
   padding-left: 60px;
 }
 
-.fp-controlArrow {
-  background-color: red;
-}
-
 .details-card {
   margin: 10px;
 }
@@ -328,6 +321,13 @@ table {
   font-size: 20px;
   font-weight: bold;
   margin: 10px;
+}
+
+.fp-controlArrow.fp-next {
+  margin-right: 30px;
+  right: 15px;
+  border-width: 38.5px 0 38.5px 34px;
+  border-color: transparent transparent transparent gray;
 }
 
 .red {
@@ -344,4 +344,11 @@ table {
 
 .blue {
   color: blue;
+}
+
+.fp-controlArrow.fp-prev {
+  left: 15px;
+  width: 0;
+  border-width: 38.5px 34px 38.5px 0;
+  border-color: transparent gray transparent transparent;
 }
