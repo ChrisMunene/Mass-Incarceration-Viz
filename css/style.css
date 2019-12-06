@@ -60,9 +60,16 @@ body {
 
 .jumbotron {
     margin-bottom: 2em;
-    margin-left: 2em;
-    margin-right: 2em;
-    margin-top: 10em;
+    margin-left: 10em;
+    margin-right: 10em;
+    margin-top: 0em;
+    background-color: transparent;
+    font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
+}
+
+.opening-text {
+    /*opacity: 0;*/
+    color: white;
 }
 
 .next-button {
@@ -88,8 +95,9 @@ body {
 
 .page-credits {
     text-align: left;
-    padding: 25px 150px 0px 25px;
-    margin: 5px;
+    padding: 25px 100px 0px 25px;
+    margin-top: 0px;
+    margin-left: 30px;
     top: 0px;
 }
 
@@ -280,4 +288,13 @@ table {
     border: 0px;
     border-radius: 2px;
     pointer-events: none;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    /*margin-left: 10px;*/
+}
+
+.title {
+    margin-top: 120px;
 }
