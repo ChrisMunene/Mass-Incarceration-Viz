@@ -12,10 +12,10 @@ BarVis = function(_parentElement, _data, _eventHandler ){
 BarVis.prototype.initVis = function() {
 	var vis = this;
 
-	vis.margin = {top: 60, right: 60, bottom: 60, left: 60};
+	vis.margin = {top: 60, right: 60, bottom: 60, left: 80};
 
 	vis.width = 1000 - vis.margin.left - vis.margin.right;
-	vis.height = 600 - vis.margin.top - vis.margin.bottom;
+	vis.height = 432 - vis.margin.top - vis.margin.bottom;
 
 	vis.svg = d3.select("#bar-vis").append("svg")
 		.attr("width", vis.width + vis.margin.left + vis.margin.right)
@@ -42,6 +42,15 @@ BarVis.prototype.initVis = function() {
 	vis.my_yaxis = vis.svg.append("g")
 		.attr("class", "axis y-axis")
 		.attr("transform", "translate(" + 0 + ",0)");
+
+	vis.svg.append("text")
+		.attr("class", "axis x-axis")
+		.attr("transform", "rotate(-90) translate(0, -35)")
+		.attr("y", -29)
+		.attr("x",0 - (vis.height / 2))
+		.attr("dy", "1em")
+		.style("text-anchor", "middle")
+		.text("Percent of Students");
 
 
 	vis.legendx = 10;
@@ -102,24 +111,24 @@ BarVis.prototype.sortButton = function (){
 
 	vis.updateVisualization();
 }
+BarVis.prototype.dropdownChanged = function () {
+	vis=this;
+	vis.clicked=false
+	vis.updateVisualization()
+}
 
 // Render visualization
 BarVis.prototype.updateVisualization = function (){
 
 	var vis = this;
-
-	//Get option selected
 	vis.selected = d3.select("#view-type").property("value");
-
 	vis.newdata = vis.data[vis.selected];
 	vis.filterdata = [...vis.newdata];
 
 	if(vis.sorted){
-		console.log("true here")
 		vis.filterdata = vis.filterdata.sort(function(a, b) { return b.Total - a.Total; });
 	}
 	else{
-		console.log("false here")
 	}
 
 	vis.columns = d3.keys(vis.filterdata[0])
@@ -145,18 +154,58 @@ BarVis.prototype.updateVisualization = function (){
 				return "#60B394";
 			}})
 
-	vis.sections = vis.svg.selectAll(".layer").selectAll(".bar").data(function(d) {console.log('here'); return d;})
+
+	vis.sections = vis.svg.selectAll(".layer").selectAll(".bar").data(function(d) { return d;})
 
 	vis.sections.enter()
 		.append("rect")
 		.attr("class","bar")
+		.on("click",function(d){
+			if(vis.clicked){
+				vis.clicked=false
+			}
+			else{
+				vis.clicked = true;
+				var thisrace = d.data.Race
+				d3.selectAll(".bar").style("opacity", function(d){
+					if(d.data.Race != thisrace){
+						return 0.7;
+					}
+					if(d.data.Race == thisrace){
+						return 1;
+					}
+				})
+			}
+			$(vis.eventHandler).trigger("selectionChanged", [d.data.Race, vis.selected, vis.clicked]);
+
+		})
+		.on("mouseover",function(d){
+			if(vis.clicked!=true) {
+				var thisrace = d.data.Race
+				d3.selectAll(".bar").style("opacity", function (d) {
+					if (d.data.Race != thisrace) {
+						return 0.7;
+					}
+				})
+			}
+		})
+		.on("mouseout",function(d){
+			if(vis.clicked!=true) {
+				var thisrace = d.data.Race
+				d3.selectAll(".bar").style("opacity", function (d) {
+					if (d.data.Race != thisrace) {
+						return 1;
+					}
+				})
+			}
+		})
 		.merge(vis.sections)
 		.transition()
 		.duration(800)
 		.attr("x", function(d) { return vis.x(d.data.Race); })
 		.attr("y", function(d) { return vis.y(d[1]); })
 		.attr("width", vis.x.bandwidth())
-		.attr("height", function(d) { return vis.y(d[0]) - vis.y(d[1]); });
+		.attr("height", function(d) { return vis.y(d[0]) - vis.y(d[1]); })
 
 	vis.sections.exit().remove();
 

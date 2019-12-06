@@ -1,5 +1,5 @@
 {
-    "transferred": [
+    "TRANSF": [
         {
             "Race": "Hispanic",
             "Male": 0.062831799,
@@ -35,15 +35,9 @@
             "Male": 0.048977994,
             "Female": 0.019008503,
             "Total": 0.067986497
-        },
-        {
-            "Race": "Two or More Races",
-            "Male": 0.083837352,
-            "Female": 0.040867157,
-            "Total": 0.124704509
         }
     ],
-    "oneplussusp":[
+    "OOS":[
       {
         "Race": "Hispanic",
         "Male": 2.31939099,
@@ -79,15 +73,9 @@
         "Male": 1.76651432,
         "Female": 0.685270497,
         "Total": 2.451784818
-      },
-      {
-        "Race": "Two or More Races",
-        "Male": 3.488770626,
-        "Female": 1.749330296,
-        "Total": 5.238100922
       }
     ],
-    "school_arrest": [
+    "ARREST": [
         {
           "Race": "Hispanic",
           "Male": 0.057783774,
@@ -123,15 +111,9 @@
           "Male": 0.039949867,
           "Female": 0.018323694,
           "Total": 0.058273561
-        },
-        {
-          "Race": "Two or More Races",
-          "Male": 0.065819426,
-          "Female": 0.040412446,
-          "Total": 0.106231872
         }
     ],
-    "referred_to_law":[
+    "REF":[
         {
           "Race": "Hispanic",
           "Male": 0.220195153,
@@ -167,15 +149,9 @@
           "Male": 0.166987932,
           "Female": 0.075839508,
           "Total": 0.242827441
-        },
-        {
-          "Race": "Two or More Races",
-          "Male": 0.295846385,
-          "Female": 0.167731543,
-          "Total": 0.463577928
         }
     ],
-    "iss":[
+    "ISS":[
         {
           "Race": "Hispanic",
           "Male": 2.564926001,
@@ -211,15 +187,9 @@
           "Male": 2.286952614,
           "Female": 0.963092061,
           "Total": 3.250044675
-        },
-        {
-          "Race": "Two or More Races",
-          "Male": 3.038379319,
-          "Female": 1.658444922,
-          "Total": 4.696824241
         }
     ],
-    "expulsionZT":[
+    "EXPZT":[
         {
           "Race": "Hispanic",
           "Male": 0.017430262,
@@ -255,15 +225,9 @@
           "Male": 0.017614573,
           "Female": 0.006726522,
           "Total": 0.024341095
-        },
-        {
-          "Race": "Two or More Races",
-          "Male": 0.027566858,
-          "Female": 0.011822488,
-          "Total": 0.039389346
         }
     ],
-    "expulsion":[
+    "EXP":[
         {
           "Race": "Hispanic",
           "Male": 0.025316842,
@@ -299,12 +263,6 @@
           "Male": 0.034139125,
           "Female": 0.012889799,
           "Total": 0.047028924
-        },
-        {
-          "Race": "Two or More Races",
-          "Male": 0.054849522,
-          "Female": 0.026486919,
-          "Total": 0.081336441
         }
     ]
     

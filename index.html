@@ -99,28 +99,28 @@
                                 id="view-type"
                                 onchange="updateBar()"
                         >
-                            <option value="iss"
+                            <option value="ISS"
                             >Received one-or-more in-school suspensions
                             </option
                             >
-                            <option value="oneplussusp"
+                            <option value="OOS"
                             >Received one-or-more out-of-school suspensions
                             </option
                             >
-                            <option value="expulsion">Were Expelled</option>
-                            <option value="expulsionZT"
+                            <option value="EXP">Were Expelled</option>
+                            <option value="EXPZT"
                             >Were Expelled Under Zero Tolerance Policy
                             </option
                             >
-                            <option value="referred_to_law"
+                            <option value="REF"
                             >Referred to a Law Enforcement Agency or Official
                             </option
                             >
-                            <option value="school_arrest"
+                            <option value="ARREST"
                             >Received a School-Related Arrest
                             </option
                             >
-                            <option value="transferred"
+                            <option value="TRANSF"
                             >Were Transferred to an Alternative School for Disciplinary
                                 Reasons
                             </option
@@ -139,7 +139,13 @@
                     </div>
                 </form>
                 <!-- Parent container for the visualization -->
-                <div id="bar-vis"></div>
+                <div class="row">
+                    <div id="bar-vis"></div>
+                </div>
+                <div class="row">
+                    <div id="choro-vis"></div>
+                </div>
+
             </div>
         </div>
         <h1 class="scroll-down-left lead">↓</h1>

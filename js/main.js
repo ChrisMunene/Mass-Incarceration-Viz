@@ -4,6 +4,8 @@ queue()
     .defer(d3.json, "https://d3js.org/us-10m.v1.json")
     .defer(d3.json, "https://d3js.org/world-110m.v1.json")
     .defer(d3.json, "data/bardata.json")
+    .defer(d3.json, "data/choro.json")
+    .defer(d3.json, "data/fipsToState.json")
     .defer(d3.csv, "data/World_Stats.csv")
     // .defer(d3.csv, "data/State_Data.csv")
     .defer(d3.csv, "data/2016StateData.csv")
@@ -15,6 +17,7 @@ queue()
 
 let cartogram = null;
 let barchart = null;
+let choropleth = null;
 
 function createVis(
     error,
@@ -22,6 +25,8 @@ function createVis(
     us,
     world,
     bardata,
+    choro,
+    fipstostate,
     world_data,
     state_data2016,
     schoolData,
@@ -56,9 +61,17 @@ function createVis(
         countryNames: countryNames
     });
 
-    // let choropleth = new Choropleth("choropleth", {'us': us, 'prisonData': prisonData});
-    barchart = new BarVis("bar-vis", bardata);
-    // d3.select("#cartogram-button").on("click", cartogram.simulate())
+    var ch_bar_eventHandler = {};
+
+    choropleth = new Choropleth("choro-vis", {'us': us, 'fips': fipsToState,'choroData': choro},ch_bar_eventHandler);
+    barchart = new BarVis("bar-vis", bardata,ch_bar_eventHandler);
+
+    $(ch_bar_eventHandler).bind("selectionChanged", function (event, race, selected, clicked) {
+        choropleth.onSelectionChange(race,selected,clicked);
+    });
+
+
+
 
     scatterplot = new Scatterplot("scatterplot", schoolData);
     // 1. Create event handler
@@ -70,6 +83,8 @@ function createVis(
         matrixViz2.setSelectedRange(value);
         fullpage_api.moveTo("slide6", 1);
     });
+
+    // d3.select("#cartogram-button").on("click", cartogram.simulate())
 }
 
 function nextPage() {
@@ -77,7 +92,9 @@ function nextPage() {
 }
 
 function updateBar() {
-    barchart.updateVisualization();
+    barchart.dropdownChanged();
+
+
 }
 
 function sortButtonBar() {
