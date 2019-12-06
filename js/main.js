@@ -110,3 +110,7 @@ function updateBar() {
 function sortButtonBar() {
   barchart.sortButton();
 }
+
+$(".fp-controlArrow").click(() => {
+  console.log(window.location.hash.split("/"));
+});
