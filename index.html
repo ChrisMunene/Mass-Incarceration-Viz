@@ -22,7 +22,7 @@
   </head>
   <body>
     <div id="fullpage">
-      <div class="section active" id="section0" data-anchor="slide1">
+      <div class="section active" id="section0" data-anchor="slide0">
         <div class="page-header white-text">
           <h1>Visualizing Mass Incarceration</h1>
           <h1>And The School-To-Prison Pipeline</h1>
@@ -57,23 +57,68 @@
         <h3 class="scroll-down-right lead white-text">↓</h3>
       </div>
 
-      <div class="section" id="section1">
+      <section class="section" id="section1" data-anchor="slide1">
+          <div class="page-credits">
+            <h4>US Incarcerated Population Interactive</h4>
+          </div>
+          <div class="slide" data-anchor="slide4a">
+            <div class="row matrix-container">
+                <div class="col-md-6 col-lg-6 centered-column">
+                    <div class="call-to-action intro-text" id="intro-text-0">
+                      Each of the dots on the right represents 1% of the US
+                      population(3M individuals). What percent of the US population do you think is currently incarcerated? (Drag and click to make your selection).
+                    </div>
+                    <div class="call-to-action" id="interactive-text-0"></div>
+                  </div>
+              <div class="col-md-6 col-lg-6 centered-row">
+                <div id="dot-matrix"></div>
+              </div>
+             
+            </div>
+          </div>
+          <div class="slide" data-anchor="slide4b">
+              <div class="row matrix-container">
+                  <div class="col-md-6 col-lg-6 centered-column">
+                      <div class="call-to-action intro-text" id="intro-text-1">
+                        Out of the 14M Incarcerated Americans, How many do you think are Black/African American? Each dot represents 1% of the population(Around 140K Individuals). Drag and click to make your selection.
+                      </div>
+                      <div class="call-to-action" id="interactive-text-1"></div>
+                    </div>
+                <div class="col-md-6 col-lg-6 centered-row">
+                  <div id="dot-matrix-race"></div>
+                </div>
+               
+              </div>
+          </div>
+          <div class="slide" data-anchor="slide4c">
+              <div class="row matrix-container">
+                  <div class="col-md-6 col-lg-6 centered-column">
+                      <div class="call-to-action intro-text" id="intro-text-2">
+                        Out of all school-related arrests in the US, how many do you think are Black/African American? Each dot represents 1% of school-related arrests(Around 100K Individuals). Drag and click to make your selection.
+                      </div>
+                      <div class="call-to-action" id="interactive-text-2"></div>
+                    </div>
+                <div class="col-md-6 col-lg-6 centered-row">
+                  <div id="dot-matrix-school"></div>
+                </div>
+               
+              </div>
+          </div>
+          
+          <h3 class="scroll-down-left lead white-text">↓</h3>
+          <h3 class="scroll-down-right lead white-text">↓</h3>
+        </section>
+
+      <div class="section" id="section2" data-anchor="slide2">
         <h1>Worldwide Incarceration Totals and Rates</h1>
         <div class="container-fluid">
-          <div class="row">
-            <div class="col" id="us-cartogram"></div>
-
-
             <div class="row">
                 <div class="col" id="us-cartogram"></div>
-
-                <div class="col" id="world-circles"></div>
             </div>
-
-        </div>
+      </div>
       </div>
 
-      <div class="section" id="section2">
+      <div class="section" id="section3" data-anchor="slide3">
         <div class="row">
           <div class="col content">
             <h4>School Statistics - Race Breakdown</h4>
@@ -142,7 +187,7 @@
         <h1 class="scroll-down-right lead">↓</h1>
       </div>
 
-      <div class="section" id="section3">
+      <div class="section" id="section4" data-anchor="slide4">
         <div class="row">
           <div class="col content">
             <h4>The School to Prison Pipeline</h4>
@@ -179,57 +224,7 @@
         <h1 class="scroll-down-right lead">↓</h1>
       </div>
 
-      <section class="section" id="section4">
-        <div class="page-credits">
-          <h4>US Incarcerated Population Interactive</h4>
-        </div>
-        <div class="slide" data-anchor="slide4a">
-          <div class="row matrix-container">
-              <div class="col-md-6 col-lg-6 centered-column">
-                  <div class="call-to-action intro-text" id="intro-text-0">
-                    Each of the dots on the right represents 1% of the US
-                    population(3M individuals). What percent of the US population do you think is currently incarcerated? (Drag and click to make your selection).
-                  </div>
-                  <div class="call-to-action" id="interactive-text-0"></div>
-                </div>
-            <div class="col-md-6 col-lg-6 centered-row">
-              <div id="dot-matrix"></div>
-            </div>
-           
-          </div>
-        </div>
-        <div class="slide" data-anchor="slide4b">
-            <div class="row matrix-container">
-                <div class="col-md-6 col-lg-6 centered-column">
-                    <div class="call-to-action intro-text" id="intro-text-1">
-                      Out of the 14M Incarcerated Americans, How many do you think are Black/African American? Each dot represents 1% of the population(Around 140K Individuals). Drag and click to make your selection.
-                    </div>
-                    <div class="call-to-action" id="interactive-text-1"></div>
-                  </div>
-              <div class="col-md-6 col-lg-6 centered-row">
-                <div id="dot-matrix-race"></div>
-              </div>
-             
-            </div>
-        </div>
-        <div class="slide" data-anchor="slide4c">
-            <div class="row matrix-container">
-                <div class="col-md-6 col-lg-6 centered-column">
-                    <div class="call-to-action intro-text" id="intro-text-2">
-                      Out of all school-related arrests in the US, how many do you think are Black/African American? Each dot represents 1% of school-related arrests(Around 100K Individuals). Drag and click to make your selection.
-                    </div>
-                    <div class="call-to-action" id="interactive-text-2"></div>
-                  </div>
-              <div class="col-md-6 col-lg-6 centered-row">
-                <div id="dot-matrix-school"></div>
-              </div>
-             
-            </div>
-        </div>
-        
-        <h3 class="scroll-down-left lead white-text">↓</h3>
-        <h3 class="scroll-down-right lead white-text">↓</h3>
-      </section>
+      
 
       
 
@@ -245,34 +240,14 @@
           "#ffffff",
           "#f1f1f1",
           "#ffffff",
-          "whitesmoke",
-          "#f3f3f3",
-          "whitesmoke",
-          "#ccddff"
+          
+          
         ],
         navigation: true,
         navigationPosition: "right",
         licenseKey: "ABB0465B-FA524899-995F79FD-B0187797",
-        anchors: ["slide1", "slide2", "slide3", "slide4", "slide5", "slide6", "slide4a", "slide4b", "slide4c"],
-        normalScrollElements: "#world-circles-svg",
-        onLeave: function(origin, destination, direction){
-		      var leavingSection = this;
-
-          // //after leaving section 2
-          // if(origin.index == 1 && direction =='down'){
-          //   alert("Going to section 3!");
-          // }
-
-          // else if(origin.index == 1 && direction == 'up'){
-          //   alert("Going to section 1!");
-          // }
-
-          console.log('Origin: ')
-          console.dir(origin)
-          console.log('Destination: ')
-          console.dir(destination)
-          console.log('direction: ' + direction)
-	      }
+        anchors: ["slide0","slide1", "slide2", "slide3", "slide4"],
+        normalScrollElements: "#world-circles-svg"
       });
     </script>
     <script src="js/jquery.min.js"></script>
