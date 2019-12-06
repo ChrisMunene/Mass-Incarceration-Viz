@@ -13,12 +13,6 @@ body {
     fill: #eee;
 }
 
-.boundary {
-    fill: none;
-    stroke: rgba(149, 149, 149, 0.29);
-    stroke-width: 1px;
-}
-
 .similar-countries-box {
     fill: rgb(200, 200, 200);
 }
@@ -52,6 +46,7 @@ body {
 }
 
 #world-circles svg {
+
 }
 
 .page-header {
@@ -65,25 +60,14 @@ body {
 
 .jumbotron {
     margin-bottom: 2em;
-    margin-left: 10em;
-    margin-right: 10em;
-    margin-top: 0em;
-    background-color: transparent;
-    font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
-}
-
-.opening-text {
-    /*opacity: 0;*/
-    color: white;
-    margin-bottom: 2em;
     margin-left: 2em;
     margin-right: 2em;
     margin-top: 10em;
 }
 
 .next-button {
-    fill: gray;
-}
+     fill: gray;
+ }
 
 .next-button:hover {
     fill: #3c3c3c;
@@ -97,15 +81,15 @@ body {
     fill: #3c3c3c;
 }
 
+
 .jumbotron * {
     font-size: 16pt;
 }
 
 .page-credits {
     text-align: left;
-    padding: 25px 100px 0px 25px;
-    margin-top: 0px;
-    margin-left: 30px;
+    padding: 25px 150px 0px 25px;
+    margin: 5px;
     top: 0px;
 }
 
@@ -114,14 +98,10 @@ body {
     stroke-width: 2px;
 }
 
-.selected-state {
-    stroke: #000000;
-    stroke-width: 3px;
+.table td {
+    padding: .3rem;
 }
 
-.table td {
-    padding: 0.3rem;
-}
 
 .tool-tip {
     background: rgba(255, 255, 255, 0.95);
@@ -138,6 +118,7 @@ table {
 .tool-tip * {
     font-size: 10pt;
 }
+
 
 .legend-circle {
     fill: none;
@@ -160,28 +141,11 @@ table {
     font-size: 10pt;
 }
 
-.big-stats {
-    font-size: 2.5rem;
-    margin: 100px;
-}
-
-.bigger-number {
-    font-size: 4rem;
-}
-
-.source {
-    margin: 100px;
-}
-
 .country-titles {
-    text-anchor: start;
-    font-size: 7pt;
-    fill: #929292;
+    text-anchor: middle;
+    font-size: 10pt;
+    fill: #ffffff;
     font-weight: bolder;
-}
-
-.similar-countries-legend {
-    font-size: 6pt;
 }
 
 .similar-countries-inner {
@@ -298,7 +262,7 @@ table {
 }
 
 .call-to-action {
-    width: auto;
+    margin-left: 50px;
 }
 
 .state-title {
@@ -316,95 +280,4 @@ table {
     border: 0px;
     border-radius: 2px;
     pointer-events: none;
-}
-
-.tooltipchoro {
-    position: absolute;
-    text-align: center;
-    padding: 2px;
-    font: 12px sans-serif;
-    background: lightsteelblue;
-    border: 0px;
-    border-radius: 2px;
-    pointer-events: none;
-}
-
-.state.path {
-    fill: cornflowerblue;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5 {
-    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-    /*margin-left: 10px;*/
-}
-
-.title {
-    margin-top: 120px;
-}
-
-.matrix-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
-    padding-right: 10px;
-    padding-left: 10px;
-}
-
-.centered-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-.centered-column {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding-left: 60px;
-}
-
-.details-card {
-    margin: 10px;
-}
-
-.intro-text {
-    font-size: 20px;
-    font-weight: bold;
-    margin: 10px;
-}
-
-.fp-controlArrow.fp-next {
-    margin-right: 30px;
-    right: 15px;
-    border-width: 38.5px 0 38.5px 34px;
-    border-color: transparent transparent transparent gray;
-}
-
-.red {
-    color: red;
-}
-
-.green {
-    color: green;
-}
-
-.bold {
-    font-weight: bold;
-}
-
-.blue {
-    color: blue;
-}
-
-.fp-controlArrow.fp-prev {
-    left: 15px;
-    width: 0;
-    border-width: 38.5px 34px 38.5px 0;
-    border-color: transparent gray transparent transparent;
 }

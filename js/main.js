@@ -14,7 +14,6 @@ queue()
     .defer(d3.tsv, "https://cdn.rawgit.com/mbostock/4090846/raw/d534aba169207548a8a3d670c9c2cc719ff05c47/world-country-names.tsv")
     .defer(d3.csv, "data/2015.csv")
     .await(createVis);
-
 let cartogram = null;
 let barchart = null;
 let choropleth = null;
@@ -63,28 +62,50 @@ function createVis(
 
     var ch_bar_eventHandler = {};
 
-    choropleth = new Choropleth("choro-vis", {'us': us, 'fips': fipsToState,'choroData': choro},ch_bar_eventHandler);
-    barchart = new BarVis("bar-vis", bardata,ch_bar_eventHandler);
+    choropleth = new Choropleth("choro-vis", {'us': us, 'fips': fipsToState, 'choroData': choro}, ch_bar_eventHandler);
+    barchart = new BarVis("bar-vis", bardata, ch_bar_eventHandler);
 
     $(ch_bar_eventHandler).bind("selectionChanged", function (event, race, selected, clicked) {
-        choropleth.onSelectionChange(race,selected,clicked);
+        choropleth.onSelectionChange(race, selected, clicked);
     });
-
-
-
 
     scatterplot = new Scatterplot("scatterplot", schoolData);
     // 1. Create event handler
-    var eventHandler = {};
-    let matrixViz1 = new Matrix("dot-matrix", trendsData, 18, eventHandler);
-    let matrixViz2 = new Matrix("dot-matrix-2", trendsData, 18, eventHandler);
-
-    $(eventHandler).bind("selectionChanged", function (event, value) {
-        matrixViz2.setSelectedRange(value);
-        fullpage_api.moveTo("slide6", 1);
+    var matrices = new Map();
+    matrices.set(0, {
+        handler: {},
+        tag: `selectionChanged${0}`,
+        size: 10,
+        svg: {},
+        parent: "dot-matrix"
     });
 
-    // d3.select("#cartogram-button").on("click", cartogram.simulate())
+    matrices.set(1, {
+        handler: {},
+        tag: `selectionChanged${1}`,
+        size: 10,
+        svg: {},
+        parent: "dot-matrix-race"
+    });
+
+    matrices.set(2, {
+        handler: {},
+        tag: `selectionChanged${2}`,
+        size: 10,
+        svg: {},
+        parent: "dot-matrix-school"
+    });
+
+    matrices.forEach((matrix, index) => {
+        const {handler, tag, size, parent} = matrix;
+        matrix.svg = new Matrix(parent, trendsData, size, handler, tag, index);
+        $(handler).bind(tag, function (event, value) {
+            matrix.svg.setSelectedRange(value);
+        });
+
+        // d3.select("#cartogram-button").on("click", cartogram.simulate())
+    });
+
 }
 
 function nextPage() {
@@ -92,6 +113,7 @@ function nextPage() {
 }
 
 function updateBar() {
+
     barchart.dropdownChanged();
 
 
@@ -100,3 +122,7 @@ function updateBar() {
 function sortButtonBar() {
     barchart.sortButton();
 }
+
+$(".fp-controlArrow").click(() => {
+    console.log(window.location.hash.split("/"));
+});

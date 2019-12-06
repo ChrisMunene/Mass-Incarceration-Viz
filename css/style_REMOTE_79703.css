@@ -164,13 +164,11 @@ table {
     font-size: 2.5rem;
     margin: 100px;
 }
-
-.bigger-number {
-    font-size: 4rem;
+.bigger-number{
+  font-size:4rem;
 }
-
-.source {
-    margin: 100px;
+.source{
+  margin:100px;
 }
 
 .country-titles {
@@ -316,21 +314,6 @@ table {
     border: 0px;
     border-radius: 2px;
     pointer-events: none;
-}
-
-.tooltipchoro {
-    position: absolute;
-    text-align: center;
-    padding: 2px;
-    font: 12px sans-serif;
-    background: lightsteelblue;
-    border: 0px;
-    border-radius: 2px;
-    pointer-events: none;
-}
-
-.state.path {
-    fill: cornflowerblue;
 }
 
 h1,
