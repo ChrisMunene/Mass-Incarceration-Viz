@@ -175,7 +175,7 @@ Matrix.prototype.setSelectedRange = function(value) {
       body: `<p>You have selected <span class="bold green">${vis.selectedRange}%</span> of the population(<span class="bold green">${num_selected}M</span> individuals).</p>`
     },
     {
-      title: "Real Data",
+      title: "Actual Data",
       body: `<p>In reality, about <span class='bold red'>${
         vis.actual_value[vis.index]
       }%</span> of the population(<span class=" bold red">${
