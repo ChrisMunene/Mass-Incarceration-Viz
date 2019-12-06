@@ -180,11 +180,15 @@ Matrix.prototype.setSelectedRange = function(value) {
         vis.actual_value[vis.index]
       }%</span> of the population(<span class=" bold red">${
         vis.total[vis.index]
-      }M</span> indiviuals) in the US are currently incarcerated.</p><p>You <span class="red">${
-        diff > 0 ? "overestimated" : "underestimated"
-      }</span> the real value by <span class="red">${Math.abs(
-        diff.toFixed(2)
-      )}%</span>.</p>`
+      }M</span> indiviuals) in the US are currently incarcerated.</p>${
+        diff != 0
+          ? `<p>You <span class="red">${
+              diff > 0 ? "overestimated" : "underestimated"
+            }</span> the real value by <span class="red">${Math.abs(
+              diff.toFixed(2)
+            )}%</span>.</p>`
+          : `<p>You got it right!!</p>`
+      }`
     }
   ];
   let detailsDiv = document.querySelector(`#interactive-text-${vis.index}`);
