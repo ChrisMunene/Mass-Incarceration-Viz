@@ -12,6 +12,11 @@ body {
     stroke: none;
     fill: #eee;
 }
+.boundary {
+    fill: none;
+    stroke: rgba(149, 149, 149, 0.29);
+    stroke-width: 1px;
+}
 
 .similar-countries-box {
     fill: rgb(200, 200, 200);
@@ -97,6 +102,11 @@ body {
     stroke: #565656;
     stroke-width: 2px;
 }
+.selected-state{
+    stroke: #000000;
+    stroke-width: 3px;
+}
+
 
 .table td {
     padding: .3rem;
@@ -142,10 +152,13 @@ table {
 }
 
 .country-titles {
-    text-anchor: middle;
-    font-size: 10pt;
-    fill: #ffffff;
+    text-anchor: start;
+    font-size: 7pt;
+    fill: #929292;
     font-weight: bolder;
+}
+.similar-countries-legend{
+    font-size: 6pt;
 }
 
 .similar-countries-inner {
