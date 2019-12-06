@@ -61,22 +61,7 @@ Cartogram.prototype.initVis = function () {
     axisGroup.call(axis);
 
 
-    let scaleRange = _.range(300);
-    vis.svg.selectAll("color-scale")
-        .data(scaleRange)
-        .enter()
-        .append("rect")
-        .attr("class", "color-scale")
-        .attr("x", d => {
-            return d;
-        })
-        .attr("y", 25)
-        .attr("width", 1)
-        .attr("height", 20)
-        .attr("fill", d => {
-            let val = vis.scale.invert(d);
-            return vis.colorScale(val)
-        });
+
 
     let next = vis.svg.append("g")
         .attr("class", "next-button-group")
@@ -126,12 +111,8 @@ Cartogram.prototype.initVis = function () {
     vis.populationScale = vis.svg.append("g")
         .attr("transform", "translate(" + (vis.margin.left + 100) + "," + (vis.height + vis.margin.bottom) + ")");
 
-
-    vis.similarCountriesSvg = d3.select("#" + vis.parentElements[1]).append("svg")
-        .attr("id", `${vis.parentElements[1]}-svg`)
-        .attr("width", 0)
-        .attr("height", 0)
-        .append("g");
+    vis.similarCountriesSvg = vis.svg.append("g")
+        .attr("transform", "translate(750,0) scale(0)")
 
     vis.similarCountriesSvg.append("text")
         .attr("x", 150)
@@ -145,7 +126,7 @@ Cartogram.prototype.initVis = function () {
         .attr("y", 40)
         .attr("class", "similar-countries-inner-box")
         .attr("width", 300)
-        .attr("height", 2200);
+        .attr("height", 420);
     vis.similarCountriesEmptyLabel = vis.similarCountriesSvg.append("g");
     vis.similarCountriesEmptyLabel.append("text")
         .attr("x", 150)
@@ -154,6 +135,11 @@ Cartogram.prototype.initVis = function () {
         .text("click on a state");
 
     vis.similarCountriesDataGroup = vis.similarCountriesSvg.append("g");
+
+    vis.axisGroup = vis.similarCountriesDataGroup.append("g")
+        .attr("transform" ,"translate(3,43)")
+        .attr("class", "similar-countries-legend")
+
 
 
     vis.similarCountriesEmptyLabel.append("text")
@@ -174,12 +160,72 @@ Cartogram.prototype.initVis = function () {
         .attr("class", "similar-countries-inner")
         .text("populations ");
 
+    vis.countries = topojson.feature(vis.data.world, vis.data.world.objects.countries).features;
+
+    vis.worldProjection = d3.geoEckert4()
+        .scale(220)
+        .translate([vis.width / 2 - 100, vis.height / 2 + 50]);
+
+    vis.worldPath = d3.geoPath()
+        .projection(vis.worldProjection);
+
+    vis.worldMapBackground = vis.svg.append("g")
+        .attr("class", "boundary")
+        .selectAll("boundary")
+        .data(topojson.feature(vis.data.world, vis.data.world.objects.countries).features)
+        .enter().append("path")
+        .attr("d", vis.worldPath);
+
+
+    vis.usPath = d3.geoPath();
+
+
+    vis.states = topojson.feature(vis.data.us, vis.data.us.objects.states).features;
+    vis.usMapBackground = vis.svg.append("g")
+        .attr("class", "boundary")
+        .selectAll("boundary")
+        .data(topojson.feature(vis.data.us, vis.data.us.objects.states).features)
+        .enter().append("path")
+        .attr("d", vis.usPath);
+
+    vis.usMapBackground.transition()
+        .attr("transform", " translate(15,40) scale(0.0)");
+
+    let scaleRange = _.range(300);
+    vis.svg.selectAll("color-scale")
+        .data(scaleRange)
+        .enter()
+        .append("rect")
+        .attr("class", "color-scale")
+        .attr("x", d => {
+            return d;
+        })
+        .attr("y", 25)
+        .attr("width", 1)
+        .attr("height", 20)
+        .attr("fill", d => {
+            let val = vis.scale.invert(d);
+            return vis.colorScale(val)
+        });
+
 
     return vis.worldMap()
 };
 
+
+
 Cartogram.prototype.worldMap = function () {
     const vis = this;
+
+    vis.similarCountriesSvg.transition()
+        .attr("transform", " translate(750,0) scale(0.0)");
+
+    vis.usMapBackground.transition()
+        .attr("transform", " translate(15,40) scale(0.0)");
+
+    vis.worldMapBackground.transition().duration(0)
+        .delay(1000)
+        .attr("transform", "scale(1.0)");
 
     vis.svg.select(".next-button-group").transition()
         .duration(0)
@@ -190,16 +236,7 @@ Cartogram.prototype.worldMap = function () {
         .attr("transform", `translate(0,${vis.height / 2 - vis.margin.top + 102}) scale(0.0) rotate(180)`);
 
 
-    d3.select(`#${vis.parentElements[0]}-svg`).transition()
-        .attr("width", vis.width + vis.margin.left + vis.margin.right);
 
-    d3.select(`#${vis.parentElements[1]}-svg`).transition()
-        .attr("width", 0);
-
-    vis.similarCountriesSvg.transition()
-        .duration(1000)
-        .ease(d3.easeCubic)
-        .attr("transform", "translate(700,20) scale(0)");
 
 
     if (vis.similarCountriesEmptyLabel) {
@@ -220,16 +257,9 @@ Cartogram.prototype.worldMap = function () {
         .domain([0, d3.max(_.map(vis.data.worldData), country => {
             return country['Prison Population Total']
         })]);
-    let countries = topojson.feature(vis.data.world, vis.data.world.objects.countries).features;
 
-    vis.worldProjection = d3.geoMollweide()
-        .scale(220)
-        .translate([vis.width / 2 - 100, vis.height / 2 + 50]);
 
-    vis.worldPath = d3.geoPath()
-        .projection(vis.worldProjection);
-
-    vis.nodes = _.map(countries, elem => {
+    vis.nodes = _.map(vis.countries, elem => {
         let node = {};
         node.centroid = vis.worldPath.centroid(elem);
         node.x = node.x0 = node.centroid[0];
@@ -252,12 +282,25 @@ Cartogram.prototype.worldMap = function () {
 
     });
 
+
+
+
     vis.updateVis();
 };
 
 
 Cartogram.prototype.usMap = function () {
     const vis = this;
+    vis.similarCountriesSvg.transition()
+        .delay(1000)
+        .attr("transform", " translate(750,0) scale(1.0)");
+
+    vis.usMapBackground.transition()
+        .delay(1000)
+        .attr("transform", " translate(15,40) scale(0.7)");
+
+    vis.worldMapBackground.transition().duration(0)
+        .attr("transform", "scale(0.0)");
 
     vis.svg.select(".next-button-group").transition()
         .duration(0)
@@ -267,24 +310,9 @@ Cartogram.prototype.usMap = function () {
         .duration(0)
         .attr("transform", `translate(0,${vis.height / 2 - vis.margin.top + 102}) scale(0.1) rotate(180)`);
 
-    d3.select(`#${vis.parentElements[0]}-svg`)
-        .transition()
-        .delay(1000)
-        .duration(0)
-        .attr("width", 2 / 3 * vis.width);
-
-    d3.select(`#${vis.parentElements[1]}-svg`)
-        .transition()
-        .delay(1000)
-        .duration(0)
-        .attr("width", 1 / 2 * vis.width)
-        .attr("height", 2200);
 
 
-    vis.similarCountriesSvg.transition()
-        .delay(1300)
-        .duration(0)
-        .attr("transform", "translate(0,0) scale(1)");
+
 
     vis.populationScaleVals = [50000, 100000, 200000, 300000];
     vis.x = d3.scaleLinear()
@@ -293,16 +321,14 @@ Cartogram.prototype.usMap = function () {
             return state['Total']
         })]);
 
-    vis.usPath = d3.geoPath();
 
-
-    let states = topojson.feature(vis.data.us, vis.data.us.objects.states).features;
-
-    vis.nodes = _.map(states, elem => {
+    vis.nodes = _.map(vis.states, elem => {
         let node = {};
         node.centroid = vis.usPath.centroid(elem);
+        // node.x = node.x0 = node.centroid[0] * 0.7;
+        // node.y = node.y0 = node.centroid[1] * 0.7;
         node.x = node.x0 = node.centroid[0] * 0.7 + 15;
-        node.y = node.y0 = node.centroid[1] * 0.7 + 20;
+        node.y = node.y0 = node.centroid[1] * 0.7 + 40;
         node.centroid = [node.x, node.y];
         node.geoJson = elem;
 
@@ -418,12 +444,10 @@ Cartogram.prototype.updateVis = function () {
 
     function simulate(nodes) {
         const simulation = d3.forceSimulation(nodes)
-            .force("cx", d3.forceX().x(d => vis.width / 2).strength(0.02))
-            .force("cy", d3.forceY().y(d => vis.height / 2).strength(0.02))
             .force("x", d3.forceX().x(d => d.x).strength(0.3))
             .force("y", d3.forceY().y(d => d.y).strength(0.3))
             .force("charge", d3.forceManyBody().strength(-1))
-            .force("collide", d3.forceCollide().radius(d => d.r + 2).strength(0.8))
+            .force("collide", d3.forceCollide().radius(d => d.r + 2).strength(0.2))
             .stop();
 
         while (simulation.alpha() > 0.01) {
@@ -439,6 +463,8 @@ Cartogram.prototype.updateVis = function () {
 Cartogram.prototype.drawSimilarCountries = function (state) {
     const vis = this;
 
+
+
     vis.similarCountriesDataGroup.transition()
         .duration(0)
         .attr("transform", "scale(1)");
@@ -451,22 +477,27 @@ Cartogram.prototype.drawSimilarCountries = function (state) {
     let similarCountries = _.sortBy(vis.data.worldData, country => {
         return Math.abs(state.stateData['Total'] - country['Prison Population Total'])
     });
-    similarCountries = _.slice(similarCountries, 0, 20);
-    let circleProperties = _.range(0, 20);
+    similarCountries = _.slice(similarCountries, 0, 10);
+    let barProperties = _.range(0, 10);
     _.forEach(similarCountries, (elem, i) => {
         let obj = {};
-        obj.radius = Math.sqrt(vis.x(elem['Prison Population Total']) / Math.PI);
-        obj.x = 150;
-        if (i === 0) {
-            obj.y = obj.radius + 70
-        } else {
-            obj.y = circleProperties[i - 1].y + 30 + circleProperties[i - 1].radius + obj.radius
-        }
         obj.countryName = elem['Title'];
         obj.countryData = elem;
-        circleProperties[i] = obj;
+        barProperties[i] = obj;
+    });
+    barProperties.push(state);
+
+    barProperties = _.sortBy(barProperties, entity => {
+        return _.get(entity, "stateData['Total']") || _.get(entity, "countryData['Prison Population Total']")
     });
 
+    barProperties.reverse();
+
+    const maxVal = _.get(barProperties[0], "stateData['Total']") || _.get(barProperties[0], "countryData['Prison Population Total']")
+
+    let barchartScale = d3.scaleLinear().range([0, 280]).domain([0, maxVal]);
+
+    vis.axisGroup.call(d3.axisBottom(barchartScale).ticks(4));
 
     let stateTitle = vis.similarCountriesDataGroup.selectAll(".state-title")
         .data([state.stateName]);
@@ -483,9 +514,9 @@ Cartogram.prototype.drawSimilarCountries = function (state) {
 
 
     let similarCircles = vis.similarCountriesDataGroup.selectAll(".world-circles")
-        .data(circleProperties);
+        .data(barProperties);
     similarCircles.enter()
-        .append("circle")
+        .append("rect")
         .on('mouseover', d => {
             return vis.tip.show(d)
         })
@@ -494,15 +525,20 @@ Cartogram.prototype.drawSimilarCountries = function (state) {
         .transition()
         .duration(1500)
         .ease(d3.easeCubic)
-        .attr("class", "world-circles")
-        .attr("cx", d => {
-            return d.x;
+        .attr("class", d=>{
+            if(d.stateName){
+                return "world-circles selected-state"
+            }
+            return "world-circles"
         })
-        .attr("cy", d => {
-            return d.y;
+        .attr("x", 3)
+        .attr("y", (d,i)=>{
+            return i * 36 + 63;
         })
-        .attr("r", d => {
-            return d.radius;
+        .attr("height", 30)
+        .attr("width", d=>{
+            let totalPop = _.get(d, "stateData['Total']") || _.get(d, "countryData['Prison Population Total']");
+            return barchartScale(totalPop)
         })
         .attr("fill", d => {
             return vis.colorScale(_.get(d, 'countryData["Prison Population Rate"]') ||
@@ -511,7 +547,7 @@ Cartogram.prototype.drawSimilarCountries = function (state) {
 
 
     let similarCircleTitles = vis.similarCountriesDataGroup.selectAll(".country-titles")
-        .data(circleProperties);
+        .data(barProperties);
     similarCircleTitles.enter()
         .append("text")
         .merge(similarCircleTitles)
@@ -519,14 +555,12 @@ Cartogram.prototype.drawSimilarCountries = function (state) {
         .duration(1500)
         .ease(d3.easeCubic)
         .attr("class", "country-titles")
-        .attr("x", d => {
-            return d.x;
-        })
-        .attr("y", d => {
-            return d.y - d.radius - 5;
+        .attr("x", 6)
+        .attr("y", (d,i)=>{
+            return i * 36 + 83;
         })
         .text(d => {
-            return d.countryName;
+            return d.countryName || d.stateName;
         })
 
 
