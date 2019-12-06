@@ -156,7 +156,7 @@ Matrix.prototype.updateVis = function() {
 };
 
 /*
- * The sorting function
+ * The selection function
  */
 Matrix.prototype.setSelectedRange = function(value) {
   var vis = this;
@@ -172,15 +172,33 @@ Matrix.prototype.setSelectedRange = function(value) {
   const details = [
     {
       title: "Your Guess",
-      body: `<p>You have selected <span class="bold green">${vis.selectedRange}%</span> of the population(<span class="bold green">${num_selected}M</span> individuals).</p>`
+      body: `<p>You have selected <span class="bold green">${
+        vis.selectedRange
+      }%</span> of the${
+        vis.index == 1
+          ? " incarcerated population"
+          : vis.index == 2
+          ? " school-related arrests"
+          : " population"
+      } (<span class="bold green">${num_selected}M</span> individuals).</p>`
     },
     {
       title: "Actual Data",
       body: `<p>In reality, about <span class='bold red'>${
         vis.actual_value[vis.index]
-      }%</span> of the population(<span class=" bold red">${
+      }%</span> of the${
+        vis.index == 1
+          ? " incarcerated"
+          : vis.index == 2
+          ? " school-related arrests"
+          : " "
+      } ${vis.index == 2 ? "" : "population"}(<span class=" bold red">${
         vis.total[vis.index]
-      }M</span> indiviuals) in the US are currently incarcerated.</p>${
+      }M</span> indiviuals) in the US are ${
+        vis.index == 1 || vis.index == 2
+          ? "Black/African American"
+          : "currently incarcerated"
+      }.</p>${
         diff != 0
           ? `<p>You <span class="red">${
               diff > 0 ? "overestimated" : "underestimated"
