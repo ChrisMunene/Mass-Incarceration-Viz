@@ -205,12 +205,29 @@ Matrix.prototype.setSelectedRange = function(value) {
     .attr("fill", (d, i) => getColor(d, i));
 
   function getColor(d, i) {
-    if (d <= vis.actual_value[vis.index]) {
-      return "red";
-    } else if (d > vis.actual_value[vis.index] && d <= vis.selectedRange) {
-      return "green";
+    var diff = vis.selectedRange - vis.actual_value[vis.index];
+    if (diff > 0) {
+      if (d <= vis.actual_value[vis.index]) {
+        return "red";
+      } else if (d > vis.actual_value[vis.index] && d <= vis.selectedRange) {
+        return "green";
+      } else {
+        return "white";
+      }
+    } else if (diff < 0) {
+      if (d > vis.selectedRange && d <= vis.actual_value[vis.index]) {
+        return "red";
+      } else if (d <= vis.selectedRange) {
+        return "green";
+      } else {
+        return "white";
+      }
     } else {
-      return "white";
+      if (d <= vis.selectedRange) {
+        return "red";
+      } else {
+        return "white";
+      }
     }
   }
   vis.circles.on("mouseover", null);
