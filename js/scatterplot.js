@@ -16,9 +16,6 @@ Scatterplot.prototype.wrangleData = function() {
         d.pct_incarcerated = +d.pct_incarcerated;
     });
 
-    console.log("vis.schoolData")
-    console.log(vis.schoolData);
-
     vis.initVis();
 }
 
@@ -38,21 +35,12 @@ Scatterplot.prototype.initVis = function() {
         .append("g")
         .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
+
+
     // Scales and axes
-
-    console.log("extent of suspension data");
-    console.log([d3.min(vis.schoolData, function(d) {
-        // console.log(d.pct_suspended);
-        return d.pct_incarcerated;
-    }), d3.max(vis.schoolData, function(d) {
-        // console.log(d.pct_suspended);
-        return d.pct_incarcerated;
-    })/2]);
-
     vis.x = d3.scaleLinear()
         .range([0, vis.width])
         .domain(d3.extent(vis.schoolData, function(d) {
-                // console.log(d.pct_suspended);
                 return d.pct_suspended;
             })
         );
@@ -60,10 +48,8 @@ Scatterplot.prototype.initVis = function() {
     vis.y = d3.scaleLinear()
         .range([vis.height, 0])
         .domain([d3.min(vis.schoolData, function(d) {
-            // console.log(d.pct_suspended);
             return d.pct_incarcerated;
         }), d3.max(vis.schoolData, function(d) {
-            // console.log(d.pct_suspended);
             return d.pct_incarcerated;
         })/2]);
 
@@ -78,7 +64,7 @@ Scatterplot.prototype.initVis = function() {
     vis.xAxis = d3.axisBottom()
         .scale(vis.x);
 
-    // vis.rotateTranslate = d3.svg.transform().rotate(-90).translate(-20, 0);
+
     vis.svg.append("text")
         .attr("transform", "translate(-75, 0) rotate(-90)")
         .attr("y", 0)
@@ -96,7 +82,7 @@ Scatterplot.prototype.initVis = function() {
         .attr("class", "y-axis axis")
         .call(vis.yAxis);
 
-    //trendline
+    //define trendline
     vis.linearRegression = d3.regressionLinear()
         .x(d => d.pct_suspended)
         .y(d => d.pct_incarcerated)
