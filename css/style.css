@@ -384,12 +384,12 @@ h5 {
   border-color: transparent transparent transparent gray;
 }
 
-.red {
-  color: red;
+.matrix-secondary-color {
+  color: firebrick;
 }
 
-.green {
-  color: green;
+.matrix-primary-color {
+  color: rgb(30, 30, 197);
 }
 
 .bold {
@@ -418,6 +418,8 @@ h5 {
   flex-direction: row;
   justify-content: center;
   width: 100%;
+  margin-bottom: 20px;
+  text-decoration: underline;
 }
 
 .form-control {

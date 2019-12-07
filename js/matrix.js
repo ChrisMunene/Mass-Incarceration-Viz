@@ -64,7 +64,7 @@ Matrix.prototype.initVis = function() {
   vis.colorScale = d3
     .scaleOrdinal()
     .domain(categories)
-    .range(["green", "red"]);
+    .range(["rgb(30, 30, 197)", "firebrick"]);
 
   // Legend
   vis.legend_g = vis.svg
@@ -140,14 +140,14 @@ Matrix.prototype.updateVis = function() {
         `<div class="card details-card">
         <div class="card-body">
           <p class="card-text intro-text">
-          You have selected <span class='green'>${num_selected}M</span> individuals (<span class="green">${val}%</span>) of the population
+          You have selected <span class='matrix-primary-color'>${num_selected}M</span> individuals (<span class="matrix-primary-color">${val}%</span>) of the population
           </p>
         </div>
       </div>`
       );
       d3.selectAll(`.row${vis.index}`)
         .selectAll(`.circle${vis.index}`)
-        .attr("fill", (d, i) => (d <= val ? "green" : "white"));
+        .attr("fill", (d, i) => (d <= val ? "rgb(30, 30, 197)" : "white"));
     });
 
     vis.circles.on("click", val => {
@@ -178,7 +178,7 @@ Matrix.prototype.setSelectedRange = function(value) {
   const details = [
     {
       title: "Your Guess",
-      body: `<p>You have selected <span class="bold green">${
+      body: `<p>You have selected <span class="bold matrix-primary-color">${
         vis.selectedRange
       }%</span> of the${
         vis.index == 1
@@ -186,11 +186,11 @@ Matrix.prototype.setSelectedRange = function(value) {
           : vis.index == 2
           ? " school-related arrests"
           : " population"
-      } (<span class="bold green">${num_selected}M</span> individuals).</p>`
+      } (<span class="bold matrix-primary-color">${num_selected}M</span> individuals).</p>`
     },
     {
       title: "Actual Data",
-      body: `<p>In reality, about <span class='bold red'>${
+      body: `<p>In reality, about <span class='bold matrix-secondary-color'>${
         vis.actual_value[vis.index]
       }%</span> of the${
         vis.index == 1
@@ -198,7 +198,9 @@ Matrix.prototype.setSelectedRange = function(value) {
           : vis.index == 2
           ? " school-related arrests"
           : " "
-      } ${vis.index == 2 ? "" : "population"}(<span class=" bold red">${
+      } ${
+        vis.index == 2 ? "" : "population"
+      }(<span class=" bold matrix-secondary-color">${
         vis.total[vis.index]
       }M</span> indiviuals) in the US are ${
         vis.index == 1 || vis.index == 2 || vis.index == 3
@@ -206,13 +208,13 @@ Matrix.prototype.setSelectedRange = function(value) {
           : "currently incarcerated"
       }.</p>${
         diff != 0
-          ? `<p>You <span class="red">${
+          ? `<p>You <span class="matrix-secondary-color">${
               diff > 0 ? "overestimated" : "underestimated"
-            }</span> the real value by <span class="red">${Math.abs(
+            }</span> the real value by <span class="matrix-secondary-color">${Math.abs(
               diff.toFixed(2)
             )}%</span>.</p>${
               vis.index == 3
-                ? `<p><strong>The proportion of black people in the US who are currently incarcerated is <span class="red">3X</span> as big as their proportion in the total population of the US.</strong></p>`
+                ? `<p><strong>The proportion of black people in the US who are currently incarcerated is <span class="matrix-secondary-color">3X</span> as big as their proportion in the total population of the US.</strong></p>`
                 : ""
             }`
           : `<p>You got it right!!</p>`
@@ -233,12 +235,19 @@ Matrix.prototype.setSelectedRange = function(value) {
     detailsDiv.innerHTML += html;
   });
 
+  //   const comparison_data = [{
+  //     'countries':
+  //     [['US',4.4],['Canada', 0.001], ['UK', 0.001]]
+  // },{
+  //   'races':[['Black/African American', 33],['Latin',],['Native American',], ['Asian',], ['White', ]]
+  // }]
+
   if (vis.index == 0) {
     detailsDiv.innerHTML += `<div class="card details-card">
     <div class="card-body">
       <h5 class="card-title">Compared with similar countries:</h5>
       <p class="card-text">
-      <p><strong>US: <span class='red'>4.4%</span></strong></p><p><strong>Canada: <span class='red'>0.001%</span> </strong></p><p><strong>UK: <span class='red'>0.001%</span></strong></p>
+      <p><strong>US: <span class='matrix-secondary-color'>4.4%</span></strong></p><p><strong>Canada: <span class='matrix-secondary-color'>0.001%</span> </strong></p><p><strong>UK: <span class='matrix-secondary-color'>0.001%</span></strong></p>
       </p>
     </div>
   </div>`;
@@ -252,23 +261,23 @@ Matrix.prototype.setSelectedRange = function(value) {
     var diff = vis.selectedRange - vis.actual_value[vis.index];
     if (diff > 0) {
       if (d <= vis.actual_value[vis.index]) {
-        return "red";
+        return "firebrick";
       } else if (d > vis.actual_value[vis.index] && d <= vis.selectedRange) {
-        return "green";
+        return "rgb(30, 30, 197)";
       } else {
         return "white";
       }
     } else if (diff < 0) {
       if (d > vis.selectedRange && d <= vis.actual_value[vis.index]) {
-        return "red";
+        return "firebrick";
       } else if (d <= vis.selectedRange) {
-        return "green";
+        return "rgb(30, 30, 197)";
       } else {
         return "white";
       }
     } else {
       if (d <= vis.selectedRange) {
-        return "red";
+        return "firebrick";
       } else {
         return "white";
       }

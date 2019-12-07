@@ -1,298 +1,334 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8"/>
-    <meta name="description" content=""/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>CS171 - Final Project</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="css/fullpage.css"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/fullpage.css" />
     <link rel='icon' href='img/favicon.ico' type='image/x-icon'/ >
     <link
-            href="https://fonts.googleapis.com/css?family=Merriweather&display=swap"
-            rel="stylesheet"/>
+      href="https://fonts.googleapis.com/css?family=Merriweather&display=swap"
+      rel="stylesheet"
+    />
     <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css"/>
-    <link rel="stylesheet" href="css/style.css"/>
-</head>
-<body>
-<div id="fullpage">
-    <div class="section active" id="section0" data-anchor="slide0">
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div id="fullpage">
+      <div class="section active" id="section0" data-anchor="slide0">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col">
-                    <h1 class="title">Visualizing Mass Incarceration and The School-To-Prison Pipeline</h1>
-                    <div class="page-credits">
-                        <h5>Christopher Kinyua</h5>
-                        <h5>Nikhil Vanderklaauw</h5>
-                        <h5>Shruthi Venkata</h5>
-                        <h5>Simon Warchol</h5>
-                    </div>
-                </div>
-                <div class="col">
-                    <img id="prison-bars" src="img/prison_bars.svg">
-                </div>
-
+          <div class="row">
+            <div class="col">
+              <h1 class="title">
+                Visualizing Mass Incarceration and The School-To-Prison Pipeline
+              </h1>
+              <div class="page-credits">
+                <h5>Christopher Kinyua</h5>
+                <h5>Nikhil Vanderklaauw</h5>
+                <h5>Shruthi Venkata</h5>
+                <h5>Simon Warchol</h5>
+              </div>
             </div>
+            <div class="col">
+              <img id="prison-bars" src="img/prison_bars.svg" />
+            </div>
+          </div>
         </div>
-    </div>
-    <section class="section" id="section1" data-anchor="slide1">
+      </div>
+      <section class="section" id="section1" data-anchor="slide1">
         <div class="opening-text">
-            <strong>Mass incarceration is one of the most jarring realities of the
-                United States</strong>--the US holds one quarter of the world’s incarcerated
-            population, while it only constitutes 5% of the global population.
-            The practice of imprisoning socioeconomic and racial minorities, as
-            well as other specific groups, stems from a harsh and complex
-            history of racial discrimination unique to the United States, whose
-            infrastructure and economy originally emerged from slavery, and in
-            which under the 13th Amendment, involuntary servitude is only
-            permissible in the context of jail. This history has transformed
-            into an equally complex modern reality, in which demographics are
-            jailed in varying patterns, for varying reasons, across different
-            regions of the US. These visualizations aim to expose trends in
-            incarceration via a number of those factors, and then more
-            specifically address the role of educational institutions and their
-            punitive systems in feeding the prison-industrial complex.
+          <strong
+            >Mass incarceration is one of the most jarring realities of the
+            United States</strong
+          >--the US holds one quarter of the world’s incarcerated population,
+          while it only constitutes 5% of the global population. The practice of
+          imprisoning socioeconomic and racial minorities, as well as other
+          specific groups, stems from a harsh and complex history of racial
+          discrimination unique to the United States, whose infrastructure and
+          economy originally emerged from slavery, and in which under the 13th
+          Amendment, involuntary servitude is only permissible in the context of
+          jail. This history has transformed into an equally complex modern
+          reality, in which demographics are jailed in varying patterns, for
+          varying reasons, across different regions of the US. These
+          visualizations aim to expose trends in incarceration via a number of
+          those factors, and then more specifically address the role of
+          educational institutions and their punitive systems in feeding the
+          prison-industrial complex.
         </div>
-    </section>
+      </section>
 
-    <section class="section" id="section2" data-anchor="slide2">
+      <section class="section" id="section2" data-anchor="slide2">
         <div class="page-credits">
-            <h4>US Incarcerated Population Interactive</h4>
+          <h4>US Incarcerated Population Interactive</h4>
         </div>
         <div class="slide" data-anchor="slide1a">
-            <div class="row matrix-container">
-                <div class="col-md-6 col-lg-6 centered-column">
-                    <div class="call-to-action intro-text" id="intro-text-0">
-                        Each of the dots on the right represents 1% of the US
-                        population(3M individuals). 
-                        <br>
-                        What percent of the US population do you think is currently
-                        incarcerated? 
-                        <br>
-                        <span class="query">Drag and click to make your selection.</span>
-                    </div>
-                    <div class="call-to-action" id="interactive-text-0"></div>
-                </div>
-                <div class="col-md-6 col-lg-6 centered-row">
-                    <div id="dot-matrix"></div>
-                </div>
-
+          <div class="row matrix-header">
+            Total Incarcerated Rate(US)
+          </div>
+          <div class="row matrix-container">
+            <div class="col-md-6 col-lg-6 centered-column">
+              <div class="call-to-action intro-text" id="intro-text-0">
+                Each of the dots on the right represents 1% of the US
+                population(3M individuals).
+                <br />
+                What percent of the US population do you think is currently
+                incarcerated?
+                <br />
+                <span class="query"
+                  >Drag and click to make your selection.</span
+                >
+              </div>
+              <div class="call-to-action" id="interactive-text-0"></div>
             </div>
+            <div class="col-md-6 col-lg-6 centered-row">
+              <div id="dot-matrix"></div>
+            </div>
+          </div>
         </div>
         <div class="slide" data-anchor="slide1b">
-            <div class="row matrix-container">
-                <div class="col-md-6 col-lg-6 centered-column">
-                    <div class="call-to-action intro-text" id="intro-text-1">
-                        Out of the 14M Incarcerated Americans, How many do you think are Black/African American?<br> Each
-                        dot represents 1% of the incarcerated population(Around 140K Individuals). 
-                        <br>
-                        <span class="query">Drag and click to
-                                make your selection.</span>
-                        
-                    </div>
-                    <div class="call-to-action" id="interactive-text-1"></div>
-                </div>
-                <div class="col-md-6 col-lg-6 centered-row">
-                    <div id="dot-matrix-race"></div>
-                </div>
-
+          <div class="row matrix-header">
+            Black/African American Incarceration Rate(US)
+          </div>
+          <div class="row matrix-container">
+            <div class="col-md-6 col-lg-6 centered-column">
+              <div class="call-to-action intro-text" id="intro-text-1">
+                Out of the 14M Incarcerated Americans, How many do you think are
+                Black/African American?<br />
+                Each dot represents 1% of the incarcerated population(Around
+                140K Individuals).
+                <br />
+                <span class="query"
+                  >Drag and click to make your selection.</span
+                >
+              </div>
+              <div class="call-to-action" id="interactive-text-1"></div>
             </div>
+            <div class="col-md-6 col-lg-6 centered-row">
+              <div id="dot-matrix-race"></div>
+            </div>
+          </div>
         </div>
         <div class="slide" data-anchor="slide1c">
-            <div class="row matrix-header">
-                School-Related Arrests
+          <div class="row matrix-header">
+            School-Related Arrests
+          </div>
+          <div class="row matrix-container">
+            <div class="col-md-6 col-lg-6 centered-column">
+              <div class="call-to-action intro-text" id="intro-text-2">
+                Out of all school-related arrests in the US, how many do you
+                think are Black/African American?
+                <br />
+                Each dot represents 1% of school-related arrests(Around 100K
+                Individuals).
+                <br />
+                <span class="query"
+                  >Drag and click to make your selection.</span
+                >
+              </div>
+              <div class="call-to-action" id="interactive-text-2"></div>
             </div>
-            <div class="row matrix-container">
-                <div class="col-md-6 col-lg-6 centered-column">
-                    <div class="call-to-action intro-text" id="intro-text-2">
-                        Out of all school-related arrests in the US, how many do you think are Black/African American?
-                        <br>
-                        Each dot represents 1% of school-related arrests(Around 100K Individuals). 
-                        <br>
-                        <span class="query">Drag and click to
-                                make your selection.</span>
-                    </div>
-                    <div class="call-to-action" id="interactive-text-2"></div>
-                </div>
-                <div class="col-md-6 col-lg-6 centered-row">
-                    <div id="dot-matrix-school"></div>
-                </div>
-
+            <div class="col-md-6 col-lg-6 centered-row">
+              <div id="dot-matrix-school"></div>
             </div>
+          </div>
         </div>
 
         <div class="slide" data-anchor="slide1d">
-                <div class="row matrix-container">
-                    <div class="col-md-6 col-lg-6 centered-column">
-                        <div class="call-to-action intro-text" id="intro-text-3">
-                                If you haven't already noticed, the percentage of incarcerated people who are Black/African American and the percentage of school-related arrests involving black people are almost identical(Around 30-33%). 
-                                <br>
-                                <span class="query">What percentage of the total US population do you think is comprised of Black/African American people?</span>
-                                <br>
-                                <span class="query">Drag and click to make your selection.</span>
-                        </div>
-                        <div class="call-to-action" id="interactive-text-3"></div>
-                    </div>
-                    <div class="col-md-6 col-lg-6 centered-row">
-                        <div id="dot-matrix-black"></div>
-                    </div>
-    
-                </div>
+          <div class="row matrix-container">
+            <div class="col-md-6 col-lg-6 centered-column">
+              <div class="call-to-action intro-text" id="intro-text-3">
+                If you haven't already noticed, the percentage of incarcerated
+                people who are Black/African American and the percentage of
+                school-related arrests involving black people are almost
+                identical(Around 30-33%).
+                <br />
+                <span class="query"
+                  >What percentage of the total US population do you think is
+                  comprised of Black/African American people?</span
+                >
+                <br />
+                <span class="query"
+                  >Drag and click to make your selection.</span
+                >
+              </div>
+              <div class="call-to-action" id="interactive-text-3"></div>
+            </div>
+            <div class="col-md-6 col-lg-6 centered-row">
+              <div id="dot-matrix-black"></div>
+            </div>
+          </div>
         </div>
-
-        
 
         <h3 class="scroll-down-left lead white-text">↓</h3>
         <h3 class="scroll-down-right lead white-text">↓</h3>
-    </section>
+      </section>
 
-    <div class="section" id="section3" data-anchor="slide3">
+      <div class="section" id="section3" data-anchor="slide3">
         <ul class="big-stats">
-            <li>The United States accounts for <b class="bigger-number"><sup>1</sup>/<sub>4</sub></b> of the world's
-                prison population
-            </li>
-            <li>The current US prison population is <b class="bigger-number">7x</b> what it was in 1970</li>
-            <li><b class="bigger-number"><sup>1</sup>/<sub>3</sub></b> of all Black boys born in the US can expect to go
-                to prison in their lifetime
-            </li>
+          <li>
+            The United States accounts for
+            <b class="bigger-number"><sup>1</sup>/<sub>4</sub></b> of the
+            world's prison population
+          </li>
+          <li>
+            The current US prison population is
+            <b class="bigger-number">7x</b> what it was in 1970
+          </li>
+          <li>
+            <b class="bigger-number"><sup>1</sup>/<sub>3</sub></b> of all Black
+            boys born in the US can expect to go to prison in their lifetime
+          </li>
         </ul>
-        <span class="source"><b>Source: </b><a
-                href="https://www.aclu.org/issues/smart-justice/mass-incarceration"><b>ACLU</b></a></span>
-    </div>
+        <span class="source"
+          ><b>Source: </b
+          ><a
+            href="https://www.aclu.org/issues/smart-justice/mass-incarceration"
+            ><b>ACLU</b></a
+          ></span
+        >
+      </div>
 
-    <div class="section" id="section4" data-anchor="slide4">
+      <div class="section" id="section4" data-anchor="slide4">
         <h1>Worldwide Incarceration Totals and Rates</h1>
         <div class="container-fluid">
+          <div class="row">
+            <div class="col" id="us-cartogram"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="section5" data-anchor="slide5">
+        <div class="row">
+          <div class="col content">
+            <h4>School Statistics - Race Breakdown</h4>
+            <br />
+            <p>
+              Here, we investigate the various trends in disciplinary action
+              taken against students across America. We can see some standout
+              trends with Black, Native American and Pacific Islander students
+              having the highest rates for many of the disciplinary measures.
+              Please explore the different rates to further understand
+              inequalities in disciplinary action. You can choose to display the
+              default ordering or sort/unsort the descending order.
+            </p>
+          </div>
+
+          <div class="col content">
+            <form class="form-inline">
+              <div class="form-group input-group-sm btn-group-sm">
+                <label for="view-type"
+                  >See Percent of Students Across USA who</label
+                >
+                <select
+                  class="form-control"
+                  id="view-type"
+                  onchange="updateBar()"
+                >
+                  <option value="ISS"
+                    >Received one-or-more in-school suspensions
+                  </option>
+                  <option value="OOS"
+                    >Received one-or-more out-of-school suspensions
+                  </option>
+                  <option value="EXP">Were Expelled</option>
+                  <option value="EXPZT"
+                    >Were Expelled Under Zero Tolerance Policy
+                  </option>
+                  <option value="REF"
+                    >Referred to a Law Enforcement Agency or Official
+                  </option>
+                  <option value="ARREST"
+                    >Received a School-Related Arrest
+                  </option>
+                  <option value="TRANSF"
+                    >Were Transferred to an Alternative School for Disciplinary
+                    Reasons
+                  </option>
+                </select>
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary"
+                  role="button"
+                  aria-pressed="true"
+                  id="sort-button"
+                  onclick="sortButtonBar()"
+                >
+                  Sort
+                </button>
+              </div>
+            </form>
+            <!-- Parent container for the visualization -->
             <div class="row">
-                <div class="col" id="us-cartogram"></div>
+              <div id="bar-vis"></div>
             </div>
+            <div class="row">
+              <div id="choro-vis"></div>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
 
-    <div class="section" id="section5" data-anchor="slide5">
+      <div class="section" id="section6" data-anchor="slide6">
         <div class="row">
-            <div class="col content">
-                <h4>School Statistics - Race Breakdown</h4>
-                <br/>
-                <p>
-                    Here, we investigate the various trends in disciplinary action
-                    taken against students across America. We can see some standout
-                    trends with Black, Native American and Pacific Islander students
-                    having the highest rates for many of the disciplinary measures.
-                    Please explore the different rates to further understand
-                    inequalities in disciplinary action. You can choose to display the
-                    default ordering or sort/unsort the descending order.
-                </p>
-            </div>
+          <div class="col content">
+            <h4>The School to Prison Pipeline</h4>
 
-            <div class="col content">
-                <form class="form-inline">
-                    <div class="form-group input-group-sm btn-group-sm">
-                        <label for="view-type">See Percent of Students Across USA who</label>
-                        <select
-                                class="form-control"
-                                id="view-type"
-                                onchange="updateBar()">
-                            <option value="ISS">Received one-or-more in-school suspensions
-                            </option>
-                            <option value="OOS">Received one-or-more out-of-school suspensions
-                            </option>
-                            <option value="EXP">Were Expelled</option>
-                            <option value="EXPZT">Were Expelled Under Zero Tolerance Policy
-                            </option>
-                            <option value="REF">Referred to a Law Enforcement Agency or Official
-                            </option>
-                            <option value="ARREST">Received a School-Related Arrest
-                            </option>
-                            <option value="TRANSF">Were Transferred to an Alternative School for Disciplinary
-                                Reasons
-                            </option>
-                        </select>
-                        <button
-                                type="button"
-                                class="btn btn-outline-secondary"
-                                role="button"
-                                aria-pressed="true"
-                                id="sort-button"
-                                onclick="sortButtonBar()">
-                            Sort
-                        </button>
-                    </div>
-                </form>
-                <!-- Parent container for the visualization -->
-                <div class="row">
-                    <div id="bar-vis"></div>
-                </div>
-                <div class="row">
-                    <div id="choro-vis"></div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="section" id="section6" data-anchor="slide6">
-        <div class="row">
-            <div class="col content">
-                <h4>The School to Prison Pipeline</h4>
-
-                <p>
-                    The ACLU describes the “school-to-prison pipeline” as a national
-                    trend in which youth are funneled out of schools into juvenile and
-                    criminal justice systems. Especially affected are students with
-                    learning disabilities, and children from minority and
-                    disadvantaged groups, including racial minorities and children who
-                    grew up in poverty. These scatterplots demonstrate the
-                    correlations between county-wide incarceration rates and
-                    disability, and incarceration rates and punitive or disciplinary
-                    methods used in county schools, including suspension, expulsion,
-                    and corporal punishment. These graphs additionally expose
-                    variation in strength of correlation between races [WILL HAVE
-                    DIFFERENT/ADDITIONAL TEXT AS THESE GRAPHS ARE COMPLETE AND WE KNOW
-                    WHAT THE DATA SHOWS]
-                </p>
-                <p>
-                    “When children attend schools that place a greater value on
-                    discipline and security than on knowledge and intellectual
-                    development, they are attending prep schools for prison”
-                </p>
-                <p>― Angela Y. Davis, Are Prisons Obsolete?</p>
-            </div>
-            <div class="col content">
-                <div id="scatterplot"></div>
-
-            </div>
+            <p>
+              The ACLU describes the “school-to-prison pipeline” as a national
+              trend in which youth are funneled out of schools into juvenile and
+              criminal justice systems. Especially affected are students with
+              learning disabilities, and children from minority and
+              disadvantaged groups, including racial minorities and children who
+              grew up in poverty. These scatterplots demonstrate the
+              correlations between county-wide incarceration rates and
+              disability, and incarceration rates and punitive or disciplinary
+              methods used in county schools, including suspension, expulsion,
+              and corporal punishment. These graphs additionally expose
+              variation in strength of correlation between races [WILL HAVE
+              DIFFERENT/ADDITIONAL TEXT AS THESE GRAPHS ARE COMPLETE AND WE KNOW
+              WHAT THE DATA SHOWS]
+            </p>
+            <p>
+              “When children attend schools that place a greater value on
+              discipline and security than on knowledge and intellectual
+              development, they are attending prep schools for prison”
+            </p>
+            <p>― Angela Y. Davis, Are Prisons Obsolete?</p>
+          </div>
+          <div class="col content">
+            <div id="scatterplot"></div>
+          </div>
         </div>
         <h1 class="scroll-down-left lead">↓</h1>
         <h1 class="scroll-down-right lead">↓</h1>
+      </div>
     </div>
-</div>
-
 
     <!-- Load JS libraries -->
 
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
     <script type="text/javascript" src="js/fullpage.js"></script>
     <script type="text/javascript">
-        var myFullpage = new fullpage("#fullpage", {
-            sectionsColor: [
-                "#f2f2f2",
-                "#f1f1f1",
-                "#ffffff",
-                "#f1f1f1",
-                "#ffffff",
-                "#ffffff",
-
-
-            ],
-            navigation: true,
-            navigationPosition: "right",
-            licenseKey: "ABB0465B-FA524899-995F79FD-B0187797",
-            anchors: ["slide0", "slide1", "slide2", "slide3", "slide4"],
-            normalScrollElements: "#world-circles-svg"
-        });
+      var myFullpage = new fullpage("#fullpage", {
+        sectionsColor: [
+          "#f2f2f2",
+          "#f1f1f1",
+          "#ffffff",
+          "#f1f1f1",
+          "#ffffff",
+          "#ffffff"
+        ],
+        navigation: true,
+        navigationPosition: "right",
+        licenseKey: "ABB0465B-FA524899-995F79FD-B0187797",
+        anchors: ["slide0", "slide1", "slide2", "slide3", "slide4"],
+        normalScrollElements: "#world-circles-svg"
+      });
     </script>
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
@@ -312,7 +348,6 @@
     <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
 
-
     <script src="js/choropleth.js"></script>
     <script src="js/cartogram.js"></script>
     <script src="js/stackedbar.js"></script>
@@ -320,5 +355,5 @@
     <script src="js/scatterplot.js"></script>
 
     <script src="js/main.js"></script>
-</body>
+  </body>
 </html>
