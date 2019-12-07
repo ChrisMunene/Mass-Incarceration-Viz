@@ -12,10 +12,10 @@ BarVis = function(_parentElement, _data, _eventHandler ){
 BarVis.prototype.initVis = function() {
 	var vis = this;
 
-	vis.margin = {top: 60, right: 60, bottom: 60, left: 80};
+	vis.margin = {top: 30, right: 150, bottom: 30, left: 150};
 
-	vis.width = 1000 - vis.margin.left - vis.margin.right;
-	vis.height = 432 - vis.margin.top - vis.margin.bottom;
+	vis.width = $(window).width()*(0.75) - vis.margin.left - vis.margin.right;
+	vis.height = ($(window).height()-$('#view-type').height())*(0.35) - vis.margin.top - vis.margin.bottom;
 
 	vis.svg = d3.select("#bar-vis").append("svg")
 		.attr("width", vis.width + vis.margin.left + vis.margin.right)
@@ -32,7 +32,7 @@ BarVis.prototype.initVis = function() {
 		.range([vis.height, 0]);
 
 	vis.xAxisBar = d3.axisBottom().scale(vis.x);
-	vis.yAxisBar = d3.axisLeft().scale(vis.y).tickFormat(d => d + "%");
+	vis.yAxisBar = d3.axisLeft().scale(vis.y).tickFormat(d => d + "%").ticks(5);
 
 
 	vis.my_xaxis = vis.svg.append("g")
@@ -46,7 +46,7 @@ BarVis.prototype.initVis = function() {
 	vis.svg.append("text")
 		.attr("class", "axis x-axis")
 		.attr("transform", "rotate(-90) translate(0, -35)")
-		.attr("y", -29)
+		.attr("y", -35)
 		.attr("x",0 - (vis.height / 2))
 		.attr("dy", "1em")
 		.style("text-anchor", "middle")
@@ -54,8 +54,8 @@ BarVis.prototype.initVis = function() {
 
 
 	vis.legendx = 10;
-	vis.legendy = -60;
-	vis.blockdim = 40;
+	vis.legendy = -29;
+	vis.blockdim = vis.height*(0.12);
 
 	vis.legend = vis.svg.selectAll("rect").data(["#60B394", "#BD634F"]);
 
@@ -80,9 +80,9 @@ BarVis.prototype.initVis = function() {
 		.attr("text-anchor", "left")
 		.attr("fill", "black")
 		.attr("x", vis.legendx)
-		.attr("y", vis.legendy + 25)
+		.attr("y", vis.legendy + vis.blockdim - 6)
 		.attr("transform", function (d, idx) {
-			return 'translate(' + ((idx * 100) + 65) + ',0)';
+			return 'translate(' + ((idx * 100) + 48) + ',0)';
 		})
 		.text(function (d, idx) {
 			return d;
@@ -114,6 +114,7 @@ BarVis.prototype.sortButton = function (){
 BarVis.prototype.dropdownChanged = function () {
 	vis=this;
 	vis.clicked=false
+	$(vis.eventHandler).trigger("selectionChanged", [0, vis.selected, vis.clicked]);
 	vis.updateVisualization()
 }
 

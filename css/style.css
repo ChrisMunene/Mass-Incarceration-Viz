@@ -22,7 +22,7 @@ body {
 }
 
 .similar-countries-inner-box {
-  fill: rgb(158, 158, 158);
+  fill: darkgrey;
 }
 
 .carousel-control-next,
@@ -71,12 +71,8 @@ body {
 }
 
 .opening-text {
-  /*opacity: 0;*/
-  color: white;
-  margin-bottom: 2em;
-  margin-left: 2em;
-  margin-right: 2em;
-  margin-top: 10em;
+  margin: 100px;
+  font-size: 1.6rem;
 }
 
 .next-button {
@@ -100,7 +96,7 @@ body {
 }
 
 .page-credits {
-  margin-top: 300px;
+  margin-top: 150px;
   margin-left: 10px;
 }
 
@@ -156,12 +152,12 @@ table {
 }
 
 .big-stats {
-  font-size: 2.5rem;
+  font-size: 2.3rem;
   margin: 100px;
 }
 
 .bigger-number {
-  font-size: 4rem;
+  font-size: 3.5rem;
 }
 
 .source {
@@ -170,9 +166,11 @@ table {
 
 .country-titles {
   text-anchor: start;
-  font-size: 7pt;
-  fill: #929292;
   font-weight: bolder;
+}
+
+.similar-countries-label {
+  font-size: 6pt;
 }
 
 .similar-countries-legend {
@@ -191,14 +189,17 @@ table {
 }
 
 .content {
-  margin: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 10px;
+  margin-bottom: 0px;
 }
 
 .white-text {
   color: white;
 }
 
-.legend-label {
+.legend_labels {
   font-size: 10pt;
 }
 
@@ -417,4 +418,12 @@ h5 {
   flex-direction: row;
   justify-content: center;
   width: 100%;
+}
+
+.form-control {
+  font-size: 12px;
+}
+
+.form-group {
+  font-size: 12px;
 }
