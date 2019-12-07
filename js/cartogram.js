@@ -141,8 +141,8 @@ Cartogram.prototype.initVis = function () {
     vis.similarCountriesDataGroup = vis.similarCountriesSvg.append("g");
 
     vis.axisGroup = vis.similarCountriesDataGroup.append("g")
-        .attr("transform", "translate(3,43)")
-        .attr("class", "similar-countries-legend")
+        .attr("transform", "translate(6,43)")
+        .attr("class", "similar-countries-legend");
 
 
     vis.similarCountriesEmptyLabel.append("text")
@@ -532,9 +532,9 @@ Cartogram.prototype.drawSimilarCountries = function (state) {
             }
             return "world-circles"
         })
-        .attr("x", 3)
+        .attr("x", 5)
         .attr("y", (d, i) => {
-            return i * 36 + 63;
+            return i * 36 + 65;
         })
         .attr("height", 30)
         .attr("width", d => {
@@ -556,9 +556,9 @@ Cartogram.prototype.drawSimilarCountries = function (state) {
         .duration(1500)
         .ease(d3.easeCubic)
         .attr("class", "country-titles")
-        .attr("x", 6)
+        .attr("x", 10)
         .attr("y", (d, i) => {
-            return i * 36 + 83;
+            return i * 36 + 85;
         })
         .text(d => {
             return d.countryName || d.stateName;
