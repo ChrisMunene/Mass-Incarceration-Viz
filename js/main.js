@@ -6,6 +6,7 @@ queue()
     .defer(d3.json, "data/bardata.json")
     .defer(d3.json, "data/choro.json")
     .defer(d3.json, "data/fipsToState.json")
+    .defer(d3.json, "data/fipsToStateName.json")
     .defer(d3.csv, "data/World_Stats.csv")
     // .defer(d3.csv, "data/State_Data.csv")
     .defer(d3.csv, "data/2016StateData.csv")
@@ -26,6 +27,7 @@ function createVis(
     bardata,
     choro,
     fipstostate,
+    fipsToStateName,
     world_data,
     state_data2016,
     schoolData,
@@ -56,7 +58,7 @@ function createVis(
         state: state_data2016,
         us: us,
         world: world,
-        fipsToState: fipsToState,
+        fipsToState: fipsToStateName,
         countryNames: countryNames
     });
 
@@ -126,3 +128,8 @@ function sortButtonBar() {
 $(".fp-controlArrow").click(() => {
     console.log(window.location.hash.split("/"));
 });
+
+function numberWithCommas(x) {
+    let string = _.toString(x)
+    return _.replace(string, /\B(?=(\d{3})+(?!\d))/g, ",");
+}

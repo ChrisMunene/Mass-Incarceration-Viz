@@ -23,7 +23,7 @@ body {
 }
 
 .similar-countries-inner-box {
-    fill: rgb(158, 158, 158);
+    fill: darkgrey;
 }
 
 .carousel-control-next,
@@ -101,7 +101,7 @@ body {
 }
 
 .page-credits{
-    margin-top:300px;
+    margin-top:150px;
     margin-left: 10px;
 }
 
@@ -171,9 +171,11 @@ table {
 
 .country-titles {
     text-anchor: start;
-    font-size: 7pt;
-    fill: #929292;
     font-weight: bolder;
+}
+
+.similar-countries-label{
+    font-size:6pt;
 }
 
 .similar-countries-legend {

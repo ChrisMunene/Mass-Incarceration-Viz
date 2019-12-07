@@ -27,12 +27,9 @@ Cartogram = function (_parentElements, _data, _eventHandler) {
 Cartogram.prototype.initVis = function () {
 
     const vis = this;
-
     vis.margin = {top: 40, right: 0, bottom: 60, left: 60};
-
     vis.colorScale = d3.scaleSequential(d3.interpolateReds)
         .domain([0, 800]);
-
 
     vis.width = $(window).width() - vis.margin.left - vis.margin.right,
         vis.height = $(window).height() - vis.margin.top - vis.margin.bottom - 100;
@@ -59,8 +56,6 @@ Cartogram.prototype.initVis = function () {
     let axis = d3.axisTop() // v4
         .scale(vis.scale);
     axisGroup.call(axis);
-
-
 
 
     let next = vis.svg.append("g")
@@ -94,13 +89,13 @@ Cartogram.prototype.initVis = function () {
                       <tbody>
                         <tr>
                           <td>In Prison/Jail</td>
-                          <td>${_.get(d, 'countryData["Prison Population Total"]') ||
-            _.get(d, 'stateData["Total"]') || ''}</td>
+                          <td>${numberWithCommas(_.get(d, 'countryData["Prison Population Total"]') ||
+                _.get(d, 'stateData["Total"]') || '')}</td>
                         </tr> 
                         <tr>
                           <td>Incarceration Rate per 100,000</td>
-                          <td>${_.get(d, 'countryData["Prison Population Rate"]') ||
-            _.get(d, 'stateData["Rate Per 100000 All Ages"]') || ''}</td>
+                          <td>${numberWithCommas(_.get(d, 'countryData["Prison Population Rate"]') ||
+                _.get(d, 'stateData["Rate Per 100000 All Ages"]') || '')}</td>
                         </tr>
                         </tbody>
                         </table>
@@ -116,9 +111,18 @@ Cartogram.prototype.initVis = function () {
 
     vis.similarCountriesSvg.append("text")
         .attr("x", 150)
-        .attr("y", 15)
+        .attr("y", 0)
         .attr("class", "similar-countries-title")
         .text("Countries w/ comparable prison populations");
+
+    vis.similarCountriesSvg.append("text")
+        .attr("x", 0)
+        .attr("y", 35)
+        .attr("class", "similar-countries-label")
+        .text("Total Prison Population");
+
+    $('.similar-countries-label').hide()
+
 
     vis.similarCountriesSvg
         .append("rect")
@@ -137,9 +141,8 @@ Cartogram.prototype.initVis = function () {
     vis.similarCountriesDataGroup = vis.similarCountriesSvg.append("g");
 
     vis.axisGroup = vis.similarCountriesDataGroup.append("g")
-        .attr("transform" ,"translate(3,43)")
+        .attr("transform", "translate(3,43)")
         .attr("class", "similar-countries-legend")
-
 
 
     vis.similarCountriesEmptyLabel.append("text")
@@ -163,7 +166,7 @@ Cartogram.prototype.initVis = function () {
     vis.countries = topojson.feature(vis.data.world, vis.data.world.objects.countries).features;
 
     vis.worldProjection = d3.geoEckert4()
-        .scale(220)
+        .scale(200)
         .translate([vis.width / 2 - 100, vis.height / 2 + 50]);
 
     vis.worldPath = d3.geoPath()
@@ -213,7 +216,6 @@ Cartogram.prototype.initVis = function () {
 };
 
 
-
 Cartogram.prototype.worldMap = function () {
     const vis = this;
 
@@ -236,14 +238,15 @@ Cartogram.prototype.worldMap = function () {
         .attr("transform", `translate(0,${vis.height / 2 - vis.margin.top + 102}) scale(0.0) rotate(180)`);
 
 
-
-
-
     if (vis.similarCountriesEmptyLabel) {
         vis.similarCountriesEmptyLabel.transition()
             .duration(0)
             .attr("transform", "scale(1)");
     }
+
+    $('.similar-countries-label').hide();
+    $('.similar-countries-title').hide();
+
 
     if (vis.similarCountriesDataGroup) {
         vis.similarCountriesDataGroup.transition()
@@ -283,8 +286,6 @@ Cartogram.prototype.worldMap = function () {
     });
 
 
-
-
     vis.updateVis();
 };
 
@@ -309,9 +310,6 @@ Cartogram.prototype.usMap = function () {
     vis.svg.select(".prev-button-group").transition()
         .duration(0)
         .attr("transform", `translate(0,${vis.height / 2 - vis.margin.top + 102}) scale(0.1) rotate(180)`);
-
-
-
 
 
     vis.populationScaleVals = [50000, 100000, 200000, 300000];
@@ -464,10 +462,12 @@ Cartogram.prototype.drawSimilarCountries = function (state) {
     const vis = this;
 
 
-
     vis.similarCountriesDataGroup.transition()
         .duration(0)
         .attr("transform", "scale(1)");
+
+    $('.similar-countries-label').show()
+    $('.similar-countries-title').show()
 
 
     vis.similarCountriesEmptyLabel.transition()
@@ -506,7 +506,7 @@ Cartogram.prototype.drawSimilarCountries = function (state) {
         .merge(stateTitle)
         .transition()
         .attr("x", 150)
-        .attr("y", 35)
+        .attr("y", 20)
         .attr("class", "state-title")
         .text(d => {
             return `to ${d}`
@@ -525,18 +525,18 @@ Cartogram.prototype.drawSimilarCountries = function (state) {
         .transition()
         .duration(1500)
         .ease(d3.easeCubic)
-        .attr("class", d=>{
-            if(d.stateName){
+        .attr("class", d => {
+            if (d.stateName) {
                 return "world-circles selected-state"
             }
             return "world-circles"
         })
         .attr("x", 3)
-        .attr("y", (d,i)=>{
+        .attr("y", (d, i) => {
             return i * 36 + 63;
         })
         .attr("height", 30)
-        .attr("width", d=>{
+        .attr("width", d => {
             let totalPop = _.get(d, "stateData['Total']") || _.get(d, "countryData['Prison Population Total']");
             return barchartScale(totalPop)
         })
@@ -556,12 +556,27 @@ Cartogram.prototype.drawSimilarCountries = function (state) {
         .ease(d3.easeCubic)
         .attr("class", "country-titles")
         .attr("x", 6)
-        .attr("y", (d,i)=>{
+        .attr("y", (d, i) => {
             return i * 36 + 83;
         })
         .text(d => {
             return d.countryName || d.stateName;
         })
+        .attr("fill", d => {
+            if (d.stateName && _.get(d, 'stateData["Rate Per 100000 All Ages"]', 0) > 500) {
+                return "white"
+            }
+            return "black"
+        })
+        .attr("font-size", d => {
+            if (d.stateName) {
+                return "10pt";
+            }
+            return "7pt";
+        });
+
+
+    similarCircleTitles.exit().remove()
 
 
 };
