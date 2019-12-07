@@ -323,8 +323,6 @@ Cartogram.prototype.usMap = function () {
     vis.nodes = _.map(vis.states, elem => {
         let node = {};
         node.centroid = vis.usPath.centroid(elem);
-        // node.x = node.x0 = node.centroid[0] * 0.7;
-        // node.y = node.y0 = node.centroid[1] * 0.7;
         node.x = node.x0 = node.centroid[0] * 0.6 + 15;
         node.y = node.y0 = node.centroid[1] * 0.6 + 40;
         node.centroid = [node.x, node.y];
@@ -333,7 +331,7 @@ Cartogram.prototype.usMap = function () {
         let stateName = vis.data.fipsToState[elem.id];
 
         let stateData = _.find(vis.data.state, state => {
-            return _.trim(stateName) == _.trim(state['State'])
+            return _.trim(stateName) === _.trim(state['State'])
         });
 
         node.stateName = stateName;
