@@ -389,7 +389,8 @@ Cartogram.prototype.updateVis = function () {
             return 0 - Math.sqrt(vis.x(d) / Math.PI) - 3
         })
         .text(d => {
-            return _.toString(d)
+
+            return numberWithCommas(d);
         });
     populationScaleLabels.exit().remove();
 

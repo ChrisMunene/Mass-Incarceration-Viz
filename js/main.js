@@ -104,8 +104,6 @@ function createVis(
         $(handler).bind(tag, function (event, value) {
             matrix.svg.setSelectedRange(value);
         });
-
-        // d3.select("#cartogram-button").on("click", cartogram.simulate())
     });
 
 }
