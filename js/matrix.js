@@ -241,10 +241,11 @@ Matrix.prototype.setSelectedRange = function(value) {
     ["UK", 0.001]
   ];
 
+  //Race, % in Population, % in Incarcerated, % in School Arrests, % in School Population
   const races = [
-    ["Black", 12, 33],
-    ["Latinx", 16, 23],
-    ["White", 64, 24]
+    ["Black", 12, 33, 36.1, 16],
+    ["Latinx", 16, 23, 26.1, 26.8],
+    ["White", 64, 24, 34.1, 50.8]
   ];
 
   if (vis.index == 0) {

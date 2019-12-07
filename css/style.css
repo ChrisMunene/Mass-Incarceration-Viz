@@ -96,8 +96,8 @@ body {
 }
 
 .page-credits {
-  margin-top: 300px;
-  margin-left: 10px;
+  margin-top: 150px;
+  margin-left: 20px;
 }
 
 #click-to-view-state-data {
@@ -168,6 +168,10 @@ table {
 
 .bigger-number {
   font-size: 3.5rem;
+}
+
+.less-big-big-number {
+  font-size: 1.5rem;
 }
 
 .source {
@@ -452,4 +456,8 @@ h4 {
 
 .form-group {
   font-size: 12px;
+}
+
+#trendline {
+  padding-right: 30px;
 }
