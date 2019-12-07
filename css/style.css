@@ -442,3 +442,7 @@ h1, h2, h4 {
 .form-group {
     font-size: 12px;
 }
+
+#trendline {
+    padding-right: 30px;
+}
