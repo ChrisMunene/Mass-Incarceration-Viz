@@ -107,7 +107,7 @@ Cartogram.prototype.initVis = function () {
         .attr("transform", "translate(" + (vis.margin.left + 100) + "," + (vis.height + vis.margin.bottom) + ")");
 
     vis.similarCountriesSvg = vis.svg.append("g")
-        .attr("transform", "translate(750,0) scale(0)")
+        .attr("transform", "translate(750,0) scale(0)");
 
     vis.similarCountriesSvg.append("text")
         .attr("x", 150)
@@ -166,7 +166,7 @@ Cartogram.prototype.initVis = function () {
     vis.countries = topojson.feature(vis.data.world, vis.data.world.objects.countries).features;
 
     vis.worldProjection = d3.geoEckert4()
-        .scale(200)
+        .scale(180)
         .translate([vis.width / 2 - 100, vis.height / 2 + 50]);
 
     vis.worldPath = d3.geoPath()
@@ -298,7 +298,7 @@ Cartogram.prototype.usMap = function () {
 
     vis.usMapBackground.transition()
         .delay(1000)
-        .attr("transform", " translate(15,40) scale(0.7)");
+        .attr("transform", " translate(15,40) scale(0.6)");
 
     vis.worldMapBackground.transition().duration(0)
         .attr("transform", "scale(0.0)");
@@ -325,8 +325,8 @@ Cartogram.prototype.usMap = function () {
         node.centroid = vis.usPath.centroid(elem);
         // node.x = node.x0 = node.centroid[0] * 0.7;
         // node.y = node.y0 = node.centroid[1] * 0.7;
-        node.x = node.x0 = node.centroid[0] * 0.7 + 15;
-        node.y = node.y0 = node.centroid[1] * 0.7 + 40;
+        node.x = node.x0 = node.centroid[0] * 0.6 + 15;
+        node.y = node.y0 = node.centroid[1] * 0.6 + 40;
         node.centroid = [node.x, node.y];
         node.geoJson = elem;
 
