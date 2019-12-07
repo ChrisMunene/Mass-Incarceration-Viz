@@ -113,9 +113,7 @@ function nextPage() {
 }
 
 function updateBar() {
-
     barchart.dropdownChanged();
-
 
 }
 

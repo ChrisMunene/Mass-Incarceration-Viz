@@ -199,7 +199,7 @@ table {
     color: white;
 }
 
-.legend-label {
+.legend_labels {
     font-size: 10pt;
 }
 
@@ -405,4 +405,12 @@ h5 {
     width: 0;
     border-width: 38.5px 34px 38.5px 0;
     border-color: transparent gray transparent transparent;
+}
+
+.form-control{
+    font-size: 12px;
+}
+
+.form-group {
+    font-size: 12px;
 }
