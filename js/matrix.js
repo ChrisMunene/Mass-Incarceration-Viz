@@ -13,8 +13,8 @@ Matrix = function(_parentElement, _data, _size, _eventHandler, _tag, _index) {
   this.selectedRange = null;
   this.eventHandler = _eventHandler;
   this.tag = _tag;
-  this.actual_value = [4, 33, 31];
-  this.total = [327.2, 14, 10];
+  this.actual_value = [4, 33, 31, 12];
+  this.total = [327.2, 14, 10, 327.2];
   this.index = _index;
   this.displayData = [];
 
@@ -137,7 +137,13 @@ Matrix.prototype.updateVis = function() {
     vis.circles.on("mouseover", val => {
       var num_selected = ((val / 100) * vis.total[vis.index]).toFixed(2);
       $(`#interactive-text-${vis.index}`).html(
-        `<p class='intro-text'>You have selected <span class='green'>${num_selected}M</span> individuals (<span class="green">${val}%</span>) of the population</p>`
+        `<div class="card details-card">
+        <div class="card-body">
+          <p class="card-text intro-text">
+          You have selected <span class='green'>${num_selected}M</span> individuals (<span class="green">${val}%</span>) of the population
+          </p>
+        </div>
+      </div>`
       );
       d3.selectAll(`.row${vis.index}`)
         .selectAll(`.circle${vis.index}`)
@@ -195,7 +201,7 @@ Matrix.prototype.setSelectedRange = function(value) {
       } ${vis.index == 2 ? "" : "population"}(<span class=" bold red">${
         vis.total[vis.index]
       }M</span> indiviuals) in the US are ${
-        vis.index == 1 || vis.index == 2
+        vis.index == 1 || vis.index == 2 || vis.index == 3
           ? "Black/African American"
           : "currently incarcerated"
       }.</p>${
@@ -204,14 +210,18 @@ Matrix.prototype.setSelectedRange = function(value) {
               diff > 0 ? "overestimated" : "underestimated"
             }</span> the real value by <span class="red">${Math.abs(
               diff.toFixed(2)
-            )}%</span>.</p>`
+            )}%</span>.</p>${
+              vis.index == 3
+                ? `<p><strong>The proportion of black people in the US who are currently incarcerated is <span class="red">3X</span> as big as their proportion in the total population of the US.</strong></p>`
+                : ""
+            }`
           : `<p>You got it right!!</p>`
       }`
     }
   ];
   let detailsDiv = document.querySelector(`#interactive-text-${vis.index}`);
   details.forEach(detail => {
-    const html = `<div class="card details-card">
+    let html = `<div class="card details-card">
     <div class="card-body">
       <h5 class="card-title">${detail.title}</h5>
       <p class="card-text">
@@ -219,8 +229,20 @@ Matrix.prototype.setSelectedRange = function(value) {
       </p>
     </div>
   </div>`;
+
     detailsDiv.innerHTML += html;
   });
+
+  if (vis.index == 0) {
+    detailsDiv.innerHTML += `<div class="card details-card">
+    <div class="card-body">
+      <h5 class="card-title">Compared with similar countries:</h5>
+      <p class="card-text">
+      <p><strong>US: <span class='red'>4.4%</span></strong></p><p><strong>Canada: <span class='red'>0.001%</span> </strong></p><p><strong>UK: <span class='red'>0.001%</span></strong></p>
+      </p>
+    </div>
+  </div>`;
+  }
 
   d3.selectAll(`.row${vis.index}`)
     .selectAll(`.circle${vis.index}`)
