@@ -2,14 +2,15 @@ body {
     font-family: "Merriweather", serif;
 }
 
+#section0 {
+    background-image: url("../img/aswin-deth-jy7_yN68ZbU-unsplash.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
 
 .background {
     stroke: none;
     fill: #eee;
-}
-
-#prison-bars {
-    width: 600px;
 }
 
 .boundary {
@@ -100,9 +101,12 @@ body {
     font-size: 16pt;
 }
 
-.page-credits{
-    margin-top:300px;
-    margin-left: 10px;
+.page-credits {
+    text-align: left;
+    padding: 25px 100px 0px 25px;
+    margin-top: 0px;
+    margin-left: 30px;
+    top: 0px;
 }
 
 .world-circles {
@@ -160,13 +164,11 @@ table {
     font-size: 2.5rem;
     margin: 100px;
 }
-
-.bigger-number {
-    font-size: 4rem;
+.bigger-number{
+  font-size:4rem;
 }
-
-.source {
-    margin: 100px;
+.source{
+  margin:100px;
 }
 
 .country-titles {
@@ -314,21 +316,6 @@ table {
     pointer-events: none;
 }
 
-.tooltipchoro {
-    position: absolute;
-    text-align: center;
-    padding: 2px;
-    font: 12px sans-serif;
-    background: lightsteelblue;
-    border: 0px;
-    border-radius: 2px;
-    pointer-events: none;
-}
-
-.state.path {
-    fill: cornflowerblue;
-}
-
 h1,
 h2,
 h3,
@@ -339,9 +326,7 @@ h5 {
 }
 
 .title {
-    font-size: 2.5rem;
-    margin-left: 10px;
-    margin-top:40px;
+    margin-top: 120px;
 }
 
 .matrix-container {
