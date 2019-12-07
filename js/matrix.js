@@ -235,6 +235,7 @@ Matrix.prototype.setSelectedRange = function(value) {
     detailsDiv.innerHTML += html;
   });
 
+  // Country, % Incarcerated
   const countries = [
     ["US", 4.4],
     ["Canada", 0.001],
@@ -328,6 +329,38 @@ Matrix.prototype.setSelectedRange = function(value) {
             <td>${race[1]}</td>
             <td>${race[2]}</td>
             <td class='matrix-secondary-color'>${(race[2] / race[1]).toFixed(
+              2
+            )}X</td>
+            </tr>`;
+    });
+    html += `</tbody>
+      </table>
+    </p>
+    </div>
+  </div>`;
+
+    detailsDiv.innerHTML += html;
+  } else if (vis.index == 2) {
+    let html = `<div class="card details-card">
+    <div class="card-body">
+      <h5 class="card-title">Compared with other races:</h5>
+      <p class="card-text">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Race</th>
+            <th scope="col">% in School Population</th>
+            <th scope="col">% in School Arrests</th>
+            <th scope="col">Ratio</th>
+          </tr>
+        </thead>
+        <tbody>`;
+    races.forEach(race => {
+      html += `<tr>
+            <th scope="row">${race[0]}</th>
+            <td>${race[4]}</td>
+            <td>${race[3]}</td>
+            <td class='matrix-secondary-color'>${(race[3] / race[4]).toFixed(
               2
             )}X</td>
             </tr>`;

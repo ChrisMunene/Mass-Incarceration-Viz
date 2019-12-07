@@ -395,6 +395,14 @@ h4 {
   height: 100%;
 }
 
+.dot-matrix {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
 .details-card {
   margin: 10px;
 }
@@ -441,13 +449,12 @@ h4 {
 
 .matrix-header {
   display: flex;
-  font-size: 25px;
+  font-size: 28px;
   font-weight: bold;
   flex-direction: row;
   justify-content: center;
   width: 100%;
   margin-bottom: 20px;
-  text-decoration: underline;
 }
 
 .form-control {
