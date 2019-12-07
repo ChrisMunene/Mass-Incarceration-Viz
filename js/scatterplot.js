@@ -23,10 +23,10 @@ Scatterplot.prototype.initVis = function() {
     var vis = this;
     // * TO-DO *
 
-    vis.margin = {top: 40, right: 0, bottom: 60, left: 80};
+    vis.margin = {top: 40, right: 30, bottom: 60, left: 80};
 
-    vis.width = 700 - vis.margin.left - vis.margin.right,
-        vis.height = 600 - vis.margin.top - vis.margin.bottom;
+    vis.width = 650 - vis.margin.left - vis.margin.right,
+        vis.height = 500 - vis.margin.top - vis.margin.bottom;
 
     // SVG drawing area
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -80,7 +80,15 @@ Scatterplot.prototype.initVis = function() {
 
     vis.svg.append("g")
         .attr("class", "y-axis axis")
-        .call(vis.yAxis);
+        .call(vis.yAxis)
+        .call(g => g.select(".domain").remove());
+
+    vis.svg.append("text")
+        .attr("class", "title-text")
+        .attr("x", (vis.width / 2))
+        .attr("y", 0 - (vis.margin.top / 2))
+        .attr("text-anchor", "middle")
+        .text("Incarceration Correlates with School Suspension Rates per County");
 
     //define trendline
     vis.linearRegression = d3.regressionLinear()
