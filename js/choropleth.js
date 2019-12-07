@@ -41,7 +41,7 @@ Choropleth.prototype.initVis = function () {
 
 
     vis.width = $(window).width()*(0.75) - vis.margin.left - vis.margin.right;
-    vis.height = ($(window).height()-$('#view-type').height())*(0.65) - vis.margin.top - vis.margin.bottom;
+    vis.height = ($(window).height()-$('#view-type').height())*(0.5) - vis.margin.top - vis.margin.bottom;
 
 
 // Define path generator
