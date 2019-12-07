@@ -91,7 +91,7 @@ function createVis(
     tag: `selectionChanged${0}`,
     size: 10,
     svg: {},
-    parent: "dot-matrix"
+    parent: "dot-matrix-total"
   });
 
   matrices.set(1, {
