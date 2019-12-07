@@ -26,7 +26,7 @@ Scatterplot.prototype.initVis = function() {
     var vis = this;
     // * TO-DO *
 
-    vis.margin = {top: 40, right: 0, bottom: 60, left: 60};
+    vis.margin = {top: 40, right: 0, bottom: 60, left: 80};
 
     vis.width = 700 - vis.margin.left - vis.margin.right,
         vis.height = 600 - vis.margin.top - vis.margin.bottom;
@@ -80,7 +80,7 @@ Scatterplot.prototype.initVis = function() {
 
     // vis.rotateTranslate = d3.svg.transform().rotate(-90).translate(-20, 0);
     vis.svg.append("text")
-        .attr("transform", "rotate(-90) translate(0, -35)")
+        .attr("transform", "translate(-75, 0) rotate(-90)")
         .attr("y", 0)
         .attr("x",0 - (vis.height / 2))
         .attr("dy", "1em")
@@ -146,7 +146,8 @@ Scatterplot.prototype.initVis = function() {
     vis.tooltip = d3.tip()
         .attr('class', 'tooltip')
         .html(function(d) {
-            return "<span>Percent suspended: " + d3.format(",.2f")(d.pct_suspended*100) + "%</span><br><span>Percent incarcerated: " + d3.format(",.2f")(d.pct_incarcerated*100) + "%</span>";}
+            return "<span>Percent suspended: " + d3.format(",.2f")(d.pct_suspended*100)
+                + "%</span><br><span>Percent incarcerated: " + d3.format(",.2f")(d.pct_incarcerated*100) + "%</span>";}
             );
 
     vis.svg.call(vis.tooltip);
