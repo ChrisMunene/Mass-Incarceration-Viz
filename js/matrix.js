@@ -214,7 +214,7 @@ Matrix.prototype.setSelectedRange = function(value) {
               diff.toFixed(2)
             )}%</span>.</p>${
               vis.index == 3
-                ? `<p><strong>The proportion of black people in the US who are currently incarcerated is <span class="matrix-secondary-color">3X</span> as big as their proportion in the total population of the US.</strong></p>`
+                ? `<p><strong>The proportion of black people in the US who are currently incarcerated is almost <span class="matrix-secondary-color">3X</span> as big as their proportion in the total population of the US.</strong></p>`
                 : ""
             }`
           : `<p>You got it right!!</p>`
@@ -235,22 +235,109 @@ Matrix.prototype.setSelectedRange = function(value) {
     detailsDiv.innerHTML += html;
   });
 
-  //   const comparison_data = [{
-  //     'countries':
-  //     [['US',4.4],['Canada', 0.001], ['UK', 0.001]]
-  // },{
-  //   'races':[['Black/African American', 33],['Latin',],['Native American',], ['Asian',], ['White', ]]
-  // }]
+  const countries = [
+    ["US", 4.4],
+    ["Canada", 0.001],
+    ["UK", 0.001]
+  ];
+
+  const races = [
+    ["Black", 12, 33],
+    ["Latinx", 16, 23],
+    ["White", 64, 24]
+  ];
 
   if (vis.index == 0) {
-    detailsDiv.innerHTML += `<div class="card details-card">
+    let html = `<div class="card details-card">
     <div class="card-body">
       <h5 class="card-title">Compared with similar countries:</h5>
       <p class="card-text">
-      <p><strong>US: <span class='matrix-secondary-color'>4.4%</span></strong></p><p><strong>Canada: <span class='matrix-secondary-color'>0.001%</span> </strong></p><p><strong>UK: <span class='matrix-secondary-color'>0.001%</span></strong></p>
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Country</th>
+            <th scope="col">% of Population Incarcerated</th>
+          </tr>
+        </thead>
+        <tbody>`;
+
+    countries.forEach(country => {
+      console.log(country);
+      html += `<tr>
+                <th scope="row">${country[0]}</th>
+                <td class='matrix-secondary-color'>${country[1]}</td>
+                </tr>`;
+    });
+
+    html += `</tbody>
+      </table>
+      
       </p>
     </div>
   </div>`;
+
+    detailsDiv.innerHTML += html;
+  } else if (vis.index == 1) {
+    let html = `<div class="card details-card">
+    <div class="card-body">
+      <h5 class="card-title">Compared with other races:</h5>
+      <p class="card-text">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Race</th>
+            
+            <th scope="col">Incarceration Rate</th>
+          </tr>
+        </thead>
+        <tbody>`;
+    races.forEach(race => {
+      html += `<tr>
+            <th scope="row">${race[0]}</th>
+           
+            <td class='matrix-secondary-color'>${race[2]}%</td>
+           
+            </tr>`;
+    });
+    html += `</tbody>
+      </table>
+    </p>
+    </div>
+  </div>`;
+
+    detailsDiv.innerHTML += html;
+  } else if (vis.index == 3) {
+    let html = `<div class="card details-card">
+    <div class="card-body">
+      <h5 class="card-title">Compared with other races:</h5>
+      <p class="card-text">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Race</th>
+            <th scope="col">% in Population</th>
+            <th scope="col">% Incarcerated</th>
+            <th scope="col">Ratio</th>
+          </tr>
+        </thead>
+        <tbody>`;
+    races.forEach(race => {
+      html += `<tr>
+            <th scope="row">${race[0]}</th>
+            <td>${race[1]}</td>
+            <td>${race[2]}</td>
+            <td class='matrix-secondary-color'>${(race[2] / race[1]).toFixed(
+              2
+            )}X</td>
+            </tr>`;
+    });
+    html += `</tbody>
+      </table>
+    </p>
+    </div>
+  </div>`;
+
+    detailsDiv.innerHTML += html;
   }
 
   d3.selectAll(`.row${vis.index}`)
