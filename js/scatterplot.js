@@ -146,7 +146,7 @@ Scatterplot.prototype.initVis = function() {
     vis.tooltip = d3.tip()
         .attr('class', 'tooltip')
         .html(function(d) {
-            return "<span>Percent suspended: " + d3.format(",.2f")(d.pct_suspended*100)
+            return "<span>County name:" + d.county_name + "</span><span>Percent suspended: " + d3.format(",.2f")(d.pct_suspended*100)
                 + "%</span><br><span>Percent incarcerated: " + d3.format(",.2f")(d.pct_incarcerated*100) + "%</span>";}
             );
 
