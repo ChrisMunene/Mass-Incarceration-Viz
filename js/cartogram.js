@@ -68,6 +68,11 @@ Cartogram.prototype.initVis = function () {
         .on("click", d => {
             return vis.usMap()
         });
+    next.append("text")
+        .attr("x", -400)
+        .attr("y", 100)
+        .attr("id", "click-to-view-state-data")
+        .text("View state data");
 
     let prev = vis.svg.append("g")
         .attr("class", "prev-button-group")
@@ -77,6 +82,7 @@ Cartogram.prototype.initVis = function () {
         .attr("d", "M128 192L0 320l192 192L0 704l128 128 320-320L128 192z")
         .attr("class", "prev-button")
         .on("click", d => {
+            $('#click-to-view-state-data').hide();
             return vis.worldMap()
         });
 

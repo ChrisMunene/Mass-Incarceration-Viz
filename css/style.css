@@ -97,8 +97,15 @@ body {
 }
 
 .page-credits {
-    margin-top: 150px;
+    margin-top: 300px;
     margin-left: 10px;
+}
+
+#click-to-view-state-data{
+    font-size: 8rem;
+}
+.page-title{
+    margin-left:10px;
 }
 
 .world-circles {
@@ -139,7 +146,7 @@ table {
 
 .legend-text {
     text-anchor: middle;
-    font-size: 8pt;
+    font-size: 6pt;
 }
 
 .legend-scale-title {
