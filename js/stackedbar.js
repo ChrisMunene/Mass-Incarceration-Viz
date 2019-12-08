@@ -8,6 +8,10 @@ BarVis = function(_parentElement, _data, _eventHandler ){
 	this.initVis();
 }
 
+// References
+// https://observablehq.com/@d3/stacked-bar-chart
+// https://bl.ocks.org/romsson/8aea86fddcf01380eb96a341509f394f
+// https://bl.ocks.org/LemoNode/5a64865728c6059ed89388b5f83d6b67
 
 BarVis.prototype.initVis = function() {
 	var vis = this;
@@ -57,7 +61,7 @@ BarVis.prototype.initVis = function() {
 	vis.legendy = -29;
 	vis.blockdim = vis.height*(0.12);
 
-	vis.legend = vis.svg.selectAll("rect").data(["#60B394", "#BD634F"]);
+	vis.legend = vis.svg.selectAll("rect").data(["#1E1EC5", "firebrick"]);
 
 	vis.legend.enter().append("rect")
 		.attr("class", "legend")
@@ -149,10 +153,10 @@ BarVis.prototype.updateVisualization = function (){
 		.attr("class", "layer")
 		.attr("fill", function(d) {
 			if(d.key=="Male") {
-				return "#BD634F";
+				return "#1E1EC5";
 			}
 			else{
-				return "#60B394";
+				return "firebrick";
 			}})
 
 
@@ -203,9 +207,9 @@ BarVis.prototype.updateVisualization = function (){
 		.merge(vis.sections)
 		.transition()
 		.duration(800)
-		.attr("x", function(d) { return vis.x(d.data.Race); })
+		.attr("x", function(d) { return vis.x(d.data.Race)+10; })
 		.attr("y", function(d) { return vis.y(d[1]); })
-		.attr("width", vis.x.bandwidth())
+		.attr("width", vis.x.bandwidth()-20)
 		.attr("height", function(d) { return vis.y(d[0]) - vis.y(d[1]); })
 
 	vis.sections.exit().remove();
