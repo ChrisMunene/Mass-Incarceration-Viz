@@ -506,3 +506,7 @@ h4 {
     /*align-items: center;*/
     justify-contents: center;
 }
+
+.schoolstats p{
+    font-size: 10pt;
+}
