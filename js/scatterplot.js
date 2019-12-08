@@ -54,19 +54,19 @@ Scatterplot.prototype.initVis = function() {
         })/2]);
 
     vis.svg.append("text")
-        .attr("transform", "translate(" + (vis.width/2) + "," + (vis.height + 35) + ")")
+        .attr("transform", "translate(" + (vis.width/2) + "," + (vis.height + 50) + ")")
         .style("text-anchor", "middle")
         .text("Suspension rate per county");
 
     vis.yAxis = d3.axisLeft()
-        .scale(vis.y);
+        .scale(vis.y).tickFormat(d => d + "%");
 
     vis.xAxis = d3.axisBottom()
-        .scale(vis.x);
+        .scale(vis.x).tickFormat(d => d + "%");
 
 
     vis.svg.append("text")
-        .attr("transform", "translate(-75, 0) rotate(-90)")
+        .attr("transform", "translate(-87, 0) rotate(-90)")
         .attr("y", 0)
         .attr("x",0 - (vis.height / 2))
         .attr("dy", "1em")
