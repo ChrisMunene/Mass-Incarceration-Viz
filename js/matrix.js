@@ -172,7 +172,7 @@ Matrix.prototype.setSelectedRange = function(value) {
   );
   var diff = vis.selectedRange - vis.actual_value[vis.index];
   $(`#intro-text-${vis.index}`).text(
-    "Thanks for selecting. Here's how you did: "
+    "Here's how you did: "
   );
 
   const details = [
@@ -204,7 +204,7 @@ Matrix.prototype.setSelectedRange = function(value) {
         vis.total[vis.index]
       }M</span> indiviuals) in the US are ${
         vis.index == 1 || vis.index == 2 || vis.index == 3
-          ? "Black/African American"
+          ? "Black"
           : "currently incarcerated"
       }.</p>${
         diff != 0
