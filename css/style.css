@@ -22,7 +22,7 @@ body {
 }
 
 .similar-countries-inner-box {
-    fill: darkgrey;
+    fill: #bdbdbd;
 }
 
 .carousel-control-next,
@@ -53,12 +53,15 @@ body {
 }
 
 .card-body {
-    padding: 0.25rem;
+    padding: 0.4rem;
 }
 
 .card-title {
     margin-left: 0.25rem;
     margin-bottom: 0.25rem;
+}
+.details-card p{
+    margin-bottom:0.25rem;
 }
 
 .page-header {
@@ -123,7 +126,7 @@ body {
 
 .world-circles {
     stroke: #565656;
-    stroke-width: 2px;
+    stroke-width: 1px;
 }
 
 .selected-state {
