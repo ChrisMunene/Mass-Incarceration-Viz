@@ -59,8 +59,7 @@ Scatterplot.prototype.initVis = function() {
         .text("Suspension rate per county");
 
     vis.yAxis = d3.axisLeft()
-        .scale(vis.y)
-        .tickFormat(formatPercent);
+        .scale(vis.y);
 
     vis.xAxis = d3.axisBottom()
         .scale(vis.x);

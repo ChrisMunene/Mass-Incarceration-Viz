@@ -1,248 +1,260 @@
 body {
-  font-family: "Merriweather", serif;
-}
-
-p {
-  margin-top: 20px;
+    font-family: "Merriweather", serif;
 }
 
 .background {
-  stroke: none;
-  fill: #eee;
+    stroke: none;
+    fill: #eee;
 }
 
 #prison-bars {
-  width: 725px;
+    width: 725px;
 }
 
 .boundary {
-  fill: none;
-  stroke: rgba(149, 149, 149, 0.29);
-  stroke-width: 1px;
+    fill: none;
+    stroke: rgba(149, 149, 149, 0.29);
+    stroke-width: 1px;
 }
 
 .similar-countries-box {
-  fill: rgb(200, 200, 200);
+    fill: rgb(200, 200, 200);
 }
 
 .similar-countries-inner-box {
-  fill: darkgrey;
+    fill: #bdbdbd;
 }
 
 .carousel-control-next,
 .carousel-control-prev {
-  width: 5%;
-  height: 65%;
+    width: 5%;
+    height: 65%;
 }
 
 .carousel-control-next-icon {
-  width: 40px;
-  height: 40px;
+    width: 40px;
+    height: 40px;
 }
 
 .carousel-control-next,
 .carousel-control-prev {
-  filter: invert(100%);
+    filter: invert(100%);
 }
 
 #world-circles {
-  height: 600px;
-  width: 400px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  direction: ltr;
+    height: 600px;
+    width: 400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    direction: ltr;
 }
 
 #world-circles svg {
 }
 
+.card-body {
+    padding: 0.4rem;
+}
+
+.card-title {
+    margin-left: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+.details-card p{
+    margin-bottom:0.25rem;
+}
+
 .page-header {
-  text-align: right;
-  padding: 25px 150px 0px 25px;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  left: 0px;
+    text-align: right;
+    padding: 25px 150px 0px 25px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+}
+
+.slide {
+    max-height: 100vh;
 }
 
 .jumbotron {
-  margin-bottom: 2em;
-  margin-left: 10em;
-  margin-right: 10em;
-  margin-top: 0em;
-  background-color: transparent;
-  font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
+    margin-bottom: 2em;
+    margin-left: 10em;
+    margin-right: 10em;
+    margin-top: 0em;
+    background-color: transparent;
+    font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
 }
 
 .opening-text {
-  margin: 100px;
-  font-size: 1.3rem;
+    margin: 100px;
+    font-size: 1.3rem;
 }
 
 .next-button {
-  fill: gray;
+    fill: gray;
 }
 
 .next-button:hover {
-  fill: #3c3c3c;
+    fill: #3c3c3c;
 }
 
 .prev-button {
-  fill: gray;
+    fill: gray;
 }
 
 .prev-button:hover {
-  fill: #3c3c3c;
+    fill: #3c3c3c;
 }
 
 .jumbotron * {
-  font-size: 16pt;
+    font-size: 16pt;
 }
 
 .page-credits {
-  margin-top: 150px;
-  margin-left: 20px;
+    margin-top: 150px;
+    margin-left: 20px;
 }
 
 #click-to-view-state-data {
-  font-size: 8rem;
+    font-size: 8rem;
 }
 
 .page-title {
-  margin-left: 30px;
+    margin-left: 30px;
 }
 
 .world-circles {
-  stroke: #565656;
-  stroke-width: 2px;
+    stroke: #565656;
+    stroke-width: 1px;
 }
 
 .selected-state {
-  stroke: #000000;
-  stroke-width: 3px;
+    stroke: #000000;
+    stroke-width: 3px;
 }
 
 .table td {
-  padding: 0.3rem;
+    padding: 0.3rem;
 }
 
 .tool-tip {
-  background: rgba(255, 255, 255, 0.95);
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-top: 5px;
-  padding-bottom: 0px;
+    background: rgba(255, 255, 255, 0.95);
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 0px;
 }
 
 table {
-  border-collapse: collapse;
+    border-collapse: collapse;
 }
 
 .tool-tip * {
-  font-size: 10pt;
+    font-size: 10pt;
 }
 
 .legend-circle {
-  fill: none;
-  stroke: darkgrey;
-  stroke-width: 3px;
+    fill: none;
+    stroke: darkgrey;
+    stroke-width: 3px;
 }
 
 .legend-text {
-  text-anchor: middle;
-  font-size: 6pt;
-  text-anchor: middle;
-  font-size: 8pt;
+    text-anchor: middle;
+    font-size: 6pt;
+    text-anchor: middle;
+    font-size: 8pt;
 }
 
 .legend-scale-title {
-  text-anchor: middle;
-  font-size: 1rem;
+    text-anchor: middle;
+    font-size: 1rem;
 }
 
 .similar-countries-title {
-  text-anchor: middle;
-  font-size: 10pt;
+    text-anchor: middle;
+    font-size: 10pt;
 }
 
 .big-stats {
-  font-size: 1.7rem;
-  margin: 100px;
+    font-size: 1.7rem;
+    margin: 100px;
 }
 
 .smaller-stats {
-  margin-top: 20px;
-  margin-left: 100px;
-  margin-right: 100px;
-  margin-bottom: 100px;
+    margin-top: 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 100px;
 }
 
 .bigger-number {
-  font-size: 1.3rem;
-  font-size: 3.2rem;
+    font-size: 1.3rem;
+    font-size: 3.2rem;
 }
 
 .less-big-big-number {
-  font-size: 1.5rem;
+    font-size: 1.5rem;
 }
 
 .source {
-  margin: 100px;
+    margin: 100px;
 }
 
 .country-titles {
-  text-anchor: start;
-  font-weight: bolder;
+    text-anchor: start;
+    font-weight: bolder;
 }
 
 .similar-countries-label {
-  font-size: 6pt;
+    font-size: 6pt;
 }
 
 .similar-countries-legend {
-  font-size: 6pt;
+    font-size: 6pt;
 }
 
 .similar-countries-inner {
-  text-anchor: middle;
-  font-weight: bolder;
-  fill: #e0e0e0;
-  font-size: 18pt;
+    text-anchor: middle;
+    font-weight: bolder;
+    fill: #e0e0e0;
+    font-size: 18pt;
 }
 
 .column-image {
-  max-width: 100%;
+    max-width: 100%;
 }
 
 .content {
-  margin-left: 20px;
-  margin-right: 20px;
-  margin-top: 10px;
-  margin-bottom: 0px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
+    margin-bottom: 0px;
 }
 
 .white-text {
-  color: white;
+    color: white;
 }
 
 .legend_labels {
-  font-size: 10pt;
+    font-size: 10pt;
 }
 
 .scroll-down-left {
-  position: absolute;
-  text-align: right;
-  left: 10px;
-  bottom: 0px;
-  font-size: 30pt;
+    position: absolute;
+    text-align: right;
+    left: 10px;
+    bottom: 0px;
+    font-size: 30pt;
 }
 
 .scroll-down-right {
-  position: absolute;
-  text-align: right;
-  right: 30px;
-  bottom: 0px;
-  font-size: 30pt;
+    position: absolute;
+    text-align: right;
+    right: 30px;
+    bottom: 0px;
+    font-size: 30pt;
 }
 
 /*************/
@@ -250,40 +262,40 @@ table {
 /*************/
 
 .form-inline {
-  margin-bottom: 30px;
+    margin-bottom: 30px;
 }
 
 .form-control {
-  border: 1px solid;
-  width: 250px;
+    border: 1px solid;
+    width: 250px;
 }
 
 .form-group label {
-  font-weight: 400;
-  margin-right: 10px;
+    font-weight: 400;
+    margin-right: 10px;
 }
 
 .form-inline button,
 .btn-link:active {
-  border-left: 1px solid #888;
-  margin-left: 15px;
-  padding-left: 15px;
-  color: #333;
-  cursor: pointer;
-  outline: none;
+    border-left: 1px solid #888;
+    margin-left: 15px;
+    padding-left: 15px;
+    color: #333;
+    cursor: pointer;
+    outline: none;
 }
 
 .form-inline button:hover,
 .btn-link:active,
 .btn-link:focus {
-  border-left: 1px solid #888;
-  color: #8e7060;
-  text-decoration: none;
-  outline: none;
+    border-left: 1px solid #888;
+    color: #8e7060;
+    text-decoration: none;
+    outline: none;
 }
 
 .form-inline button .glyphicon {
-  margin-right: 5px;
+    margin-right: 5px;
 }
 
 /***************/
@@ -291,68 +303,68 @@ table {
 /***************/
 
 .axis {
-  font: 10px sans-serif;
-  fill: #333;
+    font: 10px sans-serif;
+    fill: #333;
 }
 
 .axis-title {
-  fill: #9c8b83;
-  font-size: 14px;
+    fill: #9c8b83;
+    font-size: 14px;
 }
 
 .axis path,
 .axis line {
-  fill: none;
-  stroke: #333;
-  shape-rendering: crispEdges;
+    fill: none;
+    stroke: #333;
+    shape-rendering: crispEdges;
 }
 
 .x-axis {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 .y-axis {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 .x-axis path {
-  display: none;
+    display: none;
 }
 
 .call-to-action {
-  width: auto;
+    width: auto;
 }
 
 .state-title {
-  font-size: 10pt;
-  font-weight: bolder;
-  text-anchor: middle;
+    font-size: 10pt;
+    font-weight: bolder;
+    text-anchor: middle;
 }
 
 .tooltip {
-  position: absolute;
-  text-align: center;
-  padding: 2px;
-  font: 12px sans-serif;
-  background: lightsteelblue;
-  border: 0px;
-  border-radius: 2px;
-  pointer-events: none;
+    position: absolute;
+    text-align: center;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 2px;
+    pointer-events: none;
 }
 
 .tooltipchoro {
-  position: absolute;
-  text-align: center;
-  padding: 2px;
-  font: 12px sans-serif;
-  background: lightsteelblue;
-  border: 0px;
-  border-radius: 2px;
-  pointer-events: none;
+    position: absolute;
+    text-align: center;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 2px;
+    pointer-events: none;
 }
 
 .state.path {
-  fill: cornflowerblue;
+    fill: cornflowerblue;
 }
 
 h1,
@@ -360,120 +372,127 @@ h2,
 h3,
 h4,
 h5 {
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
 h1,
 h2,
 h4 {
-  color: #2e4566;
+    color: #2e4566;
 }
 
 .title {
-  font-size: 2.5rem;
-  margin-left: 20px;
-  margin-top: 40px;
+    font-size: 2.5rem;
+    margin-left: 20px;
+    margin-top: 40px;
 }
 
 .matrix-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 100%;
-  padding-right: 10px;
-  padding-left: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.matrix-container p {
+    font-size: 11pt;
+}
+.details-card th,tr{
+    font-size:11pt;
+    padding: 0.5rem;
 }
 
 .centered-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .centered-column {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding-left: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-left: 60px;
 }
 
 .centered-col {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .dot-matrix {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .details-card {
-  margin: 10px;
+    margin: 3px;
 }
 
 .intro-text {
-  font-size: 20px;
-  font-weight: bold;
-  margin: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px;
 }
 
 .fp-controlArrow.fp-next {
-  margin-right: 30px;
-  right: 15px;
-  border-width: 38.5px 0 38.5px 34px;
-  border-color: transparent transparent transparent gray;
+    margin-right: 30px;
+    right: 15px;
+    border-width: 38.5px 0 38.5px 34px;
+    border-color: transparent transparent transparent gray;
 }
 
 .matrix-secondary-color {
-  color: firebrick;
+    color: firebrick;
 }
 
 .matrix-primary-color {
-  color: rgb(30, 30, 197);
+    color: rgb(30, 30, 197);
 }
 
 .bold {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .blue {
-  color: blue;
+    color: blue;
 }
 
 .fp-controlArrow.fp-prev {
-  left: 15px;
-  width: 0;
-  border-width: 38.5px 34px 38.5px 0;
-  border-color: transparent gray transparent transparent;
+    left: 15px;
+    width: 0;
+    border-width: 38.5px 34px 38.5px 0;
+    border-color: transparent gray transparent transparent;
 }
 
 .query {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
 .matrix-header {
-  display: flex;
-  font-size: 28px;
-  font-weight: bold;
-  flex-direction: row;
-  justify-content: center;
-  width: 100%;
-  margin-bottom: 20px;
+    display: flex;
+    font-size: 28px;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 20px;
 }
 
 .form-control {
-  font-size: 12px;
+    font-size: 12px;
 }
 
 .form-group {
-  font-size: 12px;
+    font-size: 12px;
 }
 
 #trendline {
@@ -481,9 +500,9 @@ h4 {
 }
 
 #scatter-text {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  /*align-items: center;*/
-  justify-contents: center;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    /*align-items: center;*/
+    justify-contents: center;
 }
