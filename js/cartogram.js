@@ -130,13 +130,6 @@ Cartogram.prototype.initVis = function () {
     $('.similar-countries-label').hide()
 
 
-    vis.similarCountriesSvg
-        .append("rect")
-        .attr("x", 0)
-        .attr("y", 40)
-        .attr("class", "similar-countries-inner-box")
-        .attr("width", 300)
-        .attr("height", 420);
     vis.similarCountriesEmptyLabel = vis.similarCountriesSvg.append("g");
     vis.similarCountriesEmptyLabel.append("text")
         .attr("x", 150)
