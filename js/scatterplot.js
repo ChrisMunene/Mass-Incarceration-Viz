@@ -66,7 +66,7 @@ Scatterplot.prototype.initVis = function() {
 
 
     vis.svg.append("text")
-        .attr("transform", "translate(-87, 0) rotate(-90)")
+        .attr("transform", "translate(-84, 0) rotate(-90)")
         .attr("y", 0)
         .attr("x",0 - (vis.height / 2))
         .attr("dy", "1em")
