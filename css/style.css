@@ -60,8 +60,9 @@ body {
     margin-left: 0.25rem;
     margin-bottom: 0.25rem;
 }
-.details-card p{
-    margin-bottom:0.25rem;
+
+.details-card p {
+    margin-bottom: 0.25rem;
 }
 
 .page-header {
@@ -399,9 +400,14 @@ h4 {
 .matrix-container p {
     font-size: 11pt;
 }
-.details-card th,tr{
-    font-size:11pt;
+
+.details-card th, tr {
+    font-size: 11pt;
     padding: 0.5rem;
+}
+
+.fp-prev {
+    display: none;
 }
 
 .centered-row {
@@ -507,6 +513,6 @@ h4 {
     justify-contents: center;
 }
 
-.schoolstats p{
+.schoolstats p {
     font-size: 10pt;
 }
