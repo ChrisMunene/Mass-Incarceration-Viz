@@ -1,3 +1,7 @@
+Screencast Video: 
+
+[![Alt text](https://img.youtube.com/vi/mZFJ-PkSebs/0.jpg)](https://www.youtube.com/watch?v=mZFJ-PkSebs)
+
 Our Visualizations:
 
 - Dot Matrix
@@ -6,7 +10,7 @@ Our Visualizations:
 - Scatter Plot
 - Stacked Bar Chart and linked Choropleth
 
-Libraries
+Libraries Used:
 
 - D3 - [https://github.com/d3/d3](https://github.com/d3/d3)
 - Bootstrap - [https://github.com/twbs/bootstrap](https://github.com/twbs/bootstrap)
@@ -25,6 +29,6 @@ Libraries
 
 All other code is ours or extended from course (lab) materials. Specific references listed in js files.
 
-Project Website: [https://cs171-final-project.github.io/Final-Project/](https://cs171-final-project.github.io/Final-Project/)
+Project Website: [https://chrismunene.github.io/Mass-Incarceration-Viz/](https://chrismunene.github.io/Mass-Incarceration-Viz/)
 
-Screencast Video:https://www.youtube.com/watch?v=mZFJ-PkSebs
+
