@@ -1,4 +1,4 @@
-Screencast Video: 
+Screencast Video (Click to view) :
 
 [![Alt text](https://img.youtube.com/vi/mZFJ-PkSebs/0.jpg)](https://www.youtube.com/watch?v=mZFJ-PkSebs)
 
